@@ -1,7 +1,7 @@
 #ifndef TICKET_H
 #define TICKET_H
 #include <QString>
-#include <QDate>
+#include <QDateTime>
 
 class Ticket
 {
@@ -10,8 +10,8 @@ public:
 
     int codigo;
     QString codigo_devolucion;
-    QDate fecha_emision;
-    QDate fecha_devolucion;
+    QDateTime fecha_emision;
+    QDateTime fecha_devolucion;
     double valor;
     double saldo_actual;
 
