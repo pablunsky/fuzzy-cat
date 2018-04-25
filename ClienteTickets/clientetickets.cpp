@@ -6,6 +6,8 @@ ClienteTickets::ClienteTickets(QWidget *parent) :
     ui(new Ui::ClienteTickets)
 {
     ui->setupUi(this);
+    ui->label_3->setAlignment(Qt::AlignCenter);
+
 }
 
 ClienteTickets::~ClienteTickets()

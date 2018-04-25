@@ -24,7 +24,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="page">
      <widget class="QPushButton" name="pushButton">
@@ -115,25 +115,17 @@
  personalizada que solo brinda UrbanEDD</string>
       </property>
      </widget>
-     <widget class="QCommandLinkButton" name="commandLinkButton">
+     <widget class="QPushButton" name="pushButton_5">
       <property name="geometry">
        <rect>
-        <x>130</x>
-        <y>340</y>
-        <width>177</width>
-        <height>41</height>
+        <x>170</x>
+        <y>330</y>
+        <width>131</width>
+        <height>51</height>
        </rect>
       </property>
-      <property name="font">
-       <font>
-        <family>URW Gothic L</family>
-        <pointsize>16</pointsize>
-        <weight>75</weight>
-        <bold>true</bold>
-       </font>
-      </property>
       <property name="text">
-       <string>Descubrir</string>
+       <string>&gt; Descubrir</string>
       </property>
      </widget>
     </widget>
