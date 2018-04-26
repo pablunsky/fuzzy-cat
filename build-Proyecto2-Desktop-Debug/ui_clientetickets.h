@@ -295,11 +295,11 @@ public:
         label_12->setText(QApplication::translate("ClienteTickets", "Tu c\303\263digo:", Q_NULLPTR));
         label_20->setText(QApplication::translate("ClienteTickets", "Por calcular", Q_NULLPTR));
         label_11->setText(QApplication::translate("ClienteTickets", "UrbanEDD", Q_NULLPTR));
-        label_21->setText(QApplication::translate("ClienteTickets", "Sentimos profundamente que desees\n"
-"reembolsar tu ticket. Si en algun momento\n"
-"haz sentido la menor insatisfaccion, no dudes\n"
-"en enviarnos tu queja o sugerencia a\n"
-" urbanedd@support.com", Q_NULLPTR));
+        label_21->setText(QApplication::translate("ClienteTickets", "<font color='black'>Sentimos profundamente que desees<br>\n"
+"reembolsar tu ticket. Si en algun momento<br>\n"
+"haz sentido la menor insatisfaccion, no dudes<br>\n"
+"en enviarnos tu queja o sugerencia a<br>\n"
+" urbanedd@support.com</font>", Q_NULLPTR));
         label_22->setText(QApplication::translate("ClienteTickets", "A veces, no tenemos a donde ir...", Q_NULLPTR));
         pushButton_10->setText(QApplication::translate("ClienteTickets", "Cancelar (Lo sabiamos)", Q_NULLPTR));
         pushButton_11->setText(QApplication::translate("ClienteTickets", "Reembolsar", Q_NULLPTR));

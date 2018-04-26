@@ -11,6 +11,7 @@ ClienteTickets::ClienteTickets(QWidget *parent) :
     ui->label_3->setAlignment(Qt::AlignCenter);
     ui->label_20->setAlignment(Qt::AlignRight);
 
+
     QPixmap bkgnd("/home/pablunsky/Documents/TAREAS/ESTRUCTURAS DE DATOS/Proyecto2/ClienteTickets/Welcome.jpeg");
     bkgnd = bkgnd.scaled(this->size(), Qt::IgnoreAspectRatio);
     QPalette palette;

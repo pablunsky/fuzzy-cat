@@ -24,7 +24,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>2</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="page">
      <widget class="QPushButton" name="pushButton">
@@ -484,11 +484,11 @@ Q100.00</string>
        </font>
       </property>
       <property name="text">
-       <string>Sentimos profundamente que desees
-reembolsar tu ticket. Si en algun momento
-haz sentido la menor insatisfaccion, no dudes
-en enviarnos tu queja o sugerencia a
- urbanedd@support.com</string>
+       <string>&lt;font color='black'&gt;Sentimos profundamente que desees&lt;br&gt;
+reembolsar tu ticket. Si en algun momento&lt;br&gt;
+haz sentido la menor insatisfaccion, no dudes&lt;br&gt;
+en enviarnos tu queja o sugerencia a&lt;br&gt;
+ urbanedd@support.com&lt;/font&gt;</string>
       </property>
      </widget>
      <widget class="QLabel" name="label_22">
