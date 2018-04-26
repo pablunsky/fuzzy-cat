@@ -25,10 +25,12 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
         main.cpp \
-        clientetickets.cpp
+        clientetickets.cpp \
+    ticket.cpp
 
 HEADERS += \
-        clientetickets.h
+        clientetickets.h \
+    ticket.h
 
 FORMS += \
         clientetickets.ui
