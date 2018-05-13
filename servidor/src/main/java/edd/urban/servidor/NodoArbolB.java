@@ -11,12 +11,12 @@ package edd.urban.servidor;
  */
 public class NodoArbolB {
     private NodoArbolB[] enlaces;
-    private Object[] contenidos;
+    private Ticket[] contenidos;
     private int contenidosllenos;
     private int enlacesllenos;
     
     public NodoArbolB(int orden){
-        contenidos = new Object[orden];
+        contenidos = new Ticket[orden];
         enlaces = new NodoArbolB[orden];
         contenidosllenos = 0;
         enlacesllenos = 0;
@@ -27,8 +27,8 @@ public class NodoArbolB {
         contenidosllenos++;
     }
     
-    public boolean AddValor(Object valor){
-        for(Object o : contenidos){
+    public boolean AddValor(Ticket valor){
+        for(Ticket o : contenidos){
             if(o==null){
                 o = valor;
                 return true;
@@ -49,7 +49,7 @@ public class NodoArbolB {
         return contenidos;
     }
 
-    public void setContenidos(Object[] contenidos) {
+    public void setContenidos(Ticket[] contenidos) {
         this.contenidos = contenidos;
     }
 

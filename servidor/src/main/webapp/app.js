@@ -6,28 +6,9 @@
 
 var app = angular.module("UrbanEDD", []);
 
-app.controller('CompraTickets', function CompraTickets($scope,$window) {
-  $scope.tickets = [
-		{
-			nombre: 'Standard',
-			codigo: 'STD'
-		},
-		{ 
-			nombre: 'Premium',
-			codigo: 'PRM'
-		},
-		{ 
-			nombre: 'Full',
-			codigo: 'FLL'
-		},
-		{ 
-			nombre: 'Endless',
-			codigo: 'NSS'
-		}
-  	];
-
-	$scope.redireccionTickets = () => {
-            $window.location.href = '/Tickets.html';
+app.controller('CompraTickets', function($scope,$window) {
+  	$scope.redireccionTickets = function(){
+            $window.location.href="Tickets.html";
 	};
     }
 );

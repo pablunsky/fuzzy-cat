@@ -20,15 +20,17 @@ public class ArbolB {
         this.raiz = null;
     }
     
-    public void AddNodo(Object valor){
+    public void AddTicket(Ticket nuevo){
         if(raiz == null){
             raiz = new NodoArbolB(orden);
-            raiz.AddValor(valor);
+            raiz.AddValor(nuevo);
             return;
         }
         NodoArbolB aux = raiz;
-        if(aux.AddValor(valor))
+        if(aux.AddValor(nuevo))
             return;
+        
+        
         
         
     
