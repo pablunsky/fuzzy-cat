@@ -1,7 +1,10 @@
 #include "clientetickets.h"
 #include "ui_clientetickets.h"
-#include "ticket.h"
 #include <QDateTime>
+#include <QtNetwork>
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QJsonValue>
 
 ClienteTickets::ClienteTickets(QWidget *parent) :
     QMainWindow(parent),
@@ -88,15 +91,32 @@ void ClienteTickets::on_pushButton_9_clicked()
 
 void ClienteTickets::on_pushButton_3_clicked()
 {
-    Ticket* ticket = new Ticket();
-    ticket->codigo = ui->label_17->text().toInt();
-    ticket->codigo_devolucion = ui->label_18->text();
-    ticket->fecha_emision = QDateTime::currentDateTime();
 
-    ticket->valor = valor;
-    ticket->saldo_actual = ticket->saldo_actual + ticket->valor;
+    QString json = tr("{\"valor\":%1,\"codigo\":\"\"}").arg(valor);
 
-    //ENVIAR TICKET AL SERVIDOR
+    QEventLoop eventLoop;
+
+    QNetworkAccessManager mgr;
+    QObject::connect(&mgr, SIGNAL(finished(QNetworkReply*)), &eventLoop, SLOT(quit()));
+    QNetworkRequest req( QUrl( BASE+QString("/ticket") ) );
+    req.setRawHeader("Content-Type", "application/json");
+    QNetworkReply *reply = mgr.post(req, json.toUtf8());
+    eventLoop.exec();
+
+    if (reply->error() == QNetworkReply::NoError) {
+        QByteArray response = reply->readAll();
+        QJsonDocument document = QJsonDocument::fromJson(response);
+        QJsonObject obj = document.object();
+
+        ui->label_17->setText(QString::number(obj["codigo"].toInt()));
+        ui->label_18->setText(obj["codigo_devolucion"].toString());
+
+        qDebug() << "Success\n" << response;
+        delete reply;
+    } else {
+        qDebug() << "Failure" <<reply->errorString();
+        delete reply;
+    }
 }
 
 void ClienteTickets::on_pushButton_10_clicked()
@@ -112,5 +132,30 @@ void ClienteTickets::on_pushButton_10_clicked()
 
 void ClienteTickets::on_pushButton_11_clicked()
 {
-    //BORRAR TICKET
+
+    QString json = tr("{\"valor\":0,\"codigo\":\""+ui->lineEdit->text()+"\"}");
+
+    QEventLoop eventLoop;
+
+    QNetworkAccessManager mgr;
+    QObject::connect(&mgr, SIGNAL(finished(QNetworkReply*)), &eventLoop, SLOT(quit()));
+    QNetworkRequest req( QUrl( BASE+QString("/ticket") ) );
+    req.setRawHeader("Content-Type", "application/json");
+    QNetworkReply *reply = mgr.put(req, json.toUtf8());
+    eventLoop.exec();
+
+    if (reply->error() == QNetworkReply::NoError) {
+        QByteArray response = reply->readAll();
+        QJsonDocument document = QJsonDocument::fromJson(response);
+        QJsonObject obj = document.object();
+
+        ui->label_17->setText(QString::number(obj["codigo"].toInt()));
+        ui->label_18->setText(obj["codigo_devolucion"].toString());
+
+        qDebug() << "Success\n" << response;
+        delete reply;
+    } else {
+        qDebug() << "Failure" <<reply->errorString();
+        delete reply;
+    }
 }

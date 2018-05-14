@@ -10,10 +10,21 @@ package edd.urban.servidor;
  * @author pablunsky
  */
 public class ArbolB {
+    
     private NodoArbolB raiz;
     private int orden;
     private int tamano;
 
+    private static ArbolB singletonArbolTickets;
+    
+    public synchronized static ArbolB getArbolTickets(){
+        if(singletonArbolTickets == null)
+            singletonArbolTickets = new ArbolB();
+        return singletonArbolTickets;
+    }
+    
+    public ArbolB(){}
+    
     public ArbolB(int orden, int tamano){
         this.orden = orden;
         this.tamano = tamano;

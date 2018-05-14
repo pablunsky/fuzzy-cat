@@ -7,6 +7,11 @@
 var app = angular.module("UrbanEDD", []);
 
 app.controller('CompraTickets', function($scope,$window) {
+        $scope.countstd = 0;
+        $scope.countprm = 0;
+        $scope.countfll = 0;
+        $scope.countnls = 0;
+        
   	$scope.redireccionTickets = function(){
             $window.location.href="Tickets.html";
 	};

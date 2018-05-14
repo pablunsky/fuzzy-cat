@@ -3,8 +3,7 @@
 # Project created by QtCreator 2018-04-23T22:31:48
 #
 #-------------------------------------------------
-
-QT       += core gui
+QT += network core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -25,12 +24,10 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
         main.cpp \
-        clientetickets.cpp \
-    ticket.cpp
+        clientetickets.cpp
 
 HEADERS += \
-        clientetickets.h \
-    ticket.h
+        clientetickets.h
 
 FORMS += \
         clientetickets.ui

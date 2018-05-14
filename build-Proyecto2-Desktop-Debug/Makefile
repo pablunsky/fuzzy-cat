@@ -12,10 +12,10 @@ MAKEFILE      = Makefile
 
 CC            = gcc
 CXX           = g++
-DEFINES       = -DQT_DEPRECATED_WARNINGS -DQT_QML_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB
+DEFINES       = -DQT_DEPRECATED_WARNINGS -DQT_QML_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB
 CFLAGS        = -pipe -g -Wall -W -D_REENTRANT -fPIC $(DEFINES)
 CXXFLAGS      = -pipe -g -Wall -W -D_REENTRANT -fPIC $(DEFINES)
-INCPATH       = -I../ClienteTickets -I. -isystem /usr/include/qt5 -isystem /usr/include/qt5/QtWidgets -isystem /usr/include/qt5/QtGui -isystem /usr/include/qt5/QtCore -I. -isystem /usr/include/libdrm -I. -I/usr/lib64/qt5/mkspecs/linux-g++
+INCPATH       = -I../ClienteTickets -I. -isystem /usr/include/qt5 -isystem /usr/include/qt5/QtWidgets -isystem /usr/include/qt5/QtGui -isystem /usr/include/qt5/QtNetwork -isystem /usr/include/qt5/QtCore -I. -isystem /usr/include/libdrm -I. -I/usr/lib64/qt5/mkspecs/linux-g++
 QMAKE         = /usr/bin/qmake-qt5
 DEL_FILE      = rm -f
 CHK_DIR_EXISTS= test -d
@@ -38,7 +38,7 @@ DISTNAME      = Proyecto21.0.0
 DISTDIR = /home/pablunsky/Documents/TAREAS/ESTRUCTURAS\ DE\ DATOS/Proyecto2/build-Proyecto2-Desktop-Debug/.tmp/Proyecto21.0.0
 LINK          = g++
 LFLAGS        = 
-LIBS          = $(SUBLIBS) -lQt5Widgets -lQt5Gui -lQt5Core -lGL -lpthread 
+LIBS          = $(SUBLIBS) -lQt5Widgets -lQt5Gui -lQt5Network -lQt5Core -lGL -lpthread 
 AR            = ar cqs
 RANLIB        = 
 SED           = sed
@@ -51,11 +51,9 @@ OBJECTS_DIR   = ./
 ####### Files
 
 SOURCES       = ../ClienteTickets/main.cpp \
-		../ClienteTickets/clientetickets.cpp \
-		../ClienteTickets/ticket.cpp moc_clientetickets.cpp
+		../ClienteTickets/clientetickets.cpp moc_clientetickets.cpp
 OBJECTS       = main.o \
 		clientetickets.o \
-		ticket.o \
 		moc_clientetickets.o
 DIST          = /usr/lib64/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib64/qt5/mkspecs/common/unix.conf \
@@ -242,10 +240,8 @@ DIST          = /usr/lib64/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib64/qt5/mkspecs/features/exceptions.prf \
 		/usr/lib64/qt5/mkspecs/features/yacc.prf \
 		/usr/lib64/qt5/mkspecs/features/lex.prf \
-		../ClienteTickets/Proyecto2.pro ../ClienteTickets/clientetickets.h \
-		../ClienteTickets/ticket.h ../ClienteTickets/main.cpp \
-		../ClienteTickets/clientetickets.cpp \
-		../ClienteTickets/ticket.cpp
+		../ClienteTickets/Proyecto2.pro ../ClienteTickets/clientetickets.h ../ClienteTickets/main.cpp \
+		../ClienteTickets/clientetickets.cpp
 QMAKE_TARGET  = Proyecto2
 DESTDIR       = 
 TARGET        = Proyecto2
@@ -445,6 +441,7 @@ Makefile: ../ClienteTickets/Proyecto2.pro /usr/lib64/qt5/mkspecs/linux-g++/qmake
 		../ClienteTickets/Proyecto2.pro \
 		/usr/lib64/libQt5Widgets.prl \
 		/usr/lib64/libQt5Gui.prl \
+		/usr/lib64/libQt5Network.prl \
 		/usr/lib64/libQt5Core.prl
 	$(QMAKE) -o Makefile ../ClienteTickets/Proyecto2.pro -spec linux-g++ CONFIG+=debug CONFIG+=qml_debug
 /usr/lib64/qt5/mkspecs/features/spec_pre.prf:
@@ -635,6 +632,7 @@ Makefile: ../ClienteTickets/Proyecto2.pro /usr/lib64/qt5/mkspecs/linux-g++/qmake
 ../ClienteTickets/Proyecto2.pro:
 /usr/lib64/libQt5Widgets.prl:
 /usr/lib64/libQt5Gui.prl:
+/usr/lib64/libQt5Network.prl:
 /usr/lib64/libQt5Core.prl:
 qmake: FORCE
 	@$(QMAKE) -o Makefile ../ClienteTickets/Proyecto2.pro -spec linux-g++ CONFIG+=debug CONFIG+=qml_debug
@@ -651,8 +649,8 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib64/qt5/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../ClienteTickets/clientetickets.h ../ClienteTickets/ticket.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../ClienteTickets/main.cpp ../ClienteTickets/clientetickets.cpp ../ClienteTickets/ticket.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../ClienteTickets/clientetickets.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../ClienteTickets/main.cpp ../ClienteTickets/clientetickets.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../ClienteTickets/clientetickets.ui $(DISTDIR)/
 
 
@@ -691,7 +689,7 @@ compiler_moc_header_clean:
 moc_clientetickets.cpp: ../ClienteTickets/clientetickets.h \
 		moc_predefs.h \
 		/usr/lib64/qt5/bin/moc
-	/usr/lib64/qt5/bin/moc $(DEFINES) --include ./moc_predefs.h -I/usr/lib64/qt5/mkspecs/linux-g++ -I'/home/pablunsky/Documents/TAREAS/ESTRUCTURAS DE DATOS/Proyecto2/ClienteTickets' -I/usr/include/qt5 -I/usr/include/qt5/QtWidgets -I/usr/include/qt5/QtGui -I/usr/include/qt5/QtCore -I. -I/usr/include/c++/7 -I/usr/include/c++/7/x86_64-redhat-linux -I/usr/include/c++/7/backward -I/usr/lib/gcc/x86_64-redhat-linux/7/include -I/usr/local/include -I/usr/include ../ClienteTickets/clientetickets.h -o moc_clientetickets.cpp
+	/usr/lib64/qt5/bin/moc $(DEFINES) --include ./moc_predefs.h -I/usr/lib64/qt5/mkspecs/linux-g++ -I'/home/pablunsky/Documents/TAREAS/ESTRUCTURAS DE DATOS/Proyecto2/ClienteTickets' -I/usr/include/qt5 -I/usr/include/qt5/QtWidgets -I/usr/include/qt5/QtGui -I/usr/include/qt5/QtNetwork -I/usr/include/qt5/QtCore -I. -I/usr/include/c++/7 -I/usr/include/c++/7/x86_64-redhat-linux -I/usr/include/c++/7/backward -I/usr/lib/gcc/x86_64-redhat-linux/7/include -I/usr/local/include -I/usr/include ../ClienteTickets/clientetickets.h -o moc_clientetickets.cpp
 
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
@@ -718,9 +716,6 @@ main.o: ../ClienteTickets/main.cpp ../ClienteTickets/clientetickets.h
 clientetickets.o: ../ClienteTickets/clientetickets.cpp ../ClienteTickets/clientetickets.h \
 		ui_clientetickets.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o clientetickets.o ../ClienteTickets/clientetickets.cpp
-
-ticket.o: ../ClienteTickets/ticket.cpp ../ClienteTickets/ticket.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ticket.o ../ClienteTickets/ticket.cpp
 
 moc_clientetickets.o: moc_clientetickets.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_clientetickets.o moc_clientetickets.cpp

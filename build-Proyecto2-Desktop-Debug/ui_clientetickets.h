@@ -176,16 +176,16 @@ public:
         label_19->setGeometry(QRect(80, 90, 181, 20));
         label_16 = new QLabel(groupBox);
         label_16->setObjectName(QStringLiteral("label_16"));
-        label_16->setGeometry(QRect(197, 50, 16, 16));
+        label_16->setGeometry(QRect(180, 50, 16, 16));
         label_18 = new QLabel(groupBox);
         label_18->setObjectName(QStringLiteral("label_18"));
-        label_18->setGeometry(QRect(217, 70, 41, 16));
+        label_18->setGeometry(QRect(180, 70, 71, 16));
         label_14 = new QLabel(groupBox);
         label_14->setObjectName(QStringLiteral("label_14"));
         label_14->setGeometry(QRect(7, 90, 51, 16));
         label_17 = new QLabel(groupBox);
         label_17->setObjectName(QStringLiteral("label_17"));
-        label_17->setGeometry(QRect(217, 50, 41, 16));
+        label_17->setGeometry(QRect(207, 50, 51, 20));
         label_15 = new QLabel(groupBox);
         label_15->setObjectName(QStringLiteral("label_15"));
         label_15->setGeometry(QRect(7, 110, 64, 15));
@@ -245,7 +245,7 @@ public:
 
         retranslateUi(ClienteTickets);
 
-        stackedWidget->setCurrentIndex(2);
+        stackedWidget->setCurrentIndex(1);
 
 
         QMetaObject::connectSlotsByName(ClienteTickets);
@@ -287,7 +287,7 @@ public:
         groupBox->setTitle(QApplication::translate("ClienteTickets", "Cuenta", Q_NULLPTR));
         label_19->setText(QApplication::translate("ClienteTickets", "Fecha", Q_NULLPTR));
         label_16->setText(QApplication::translate("ClienteTickets", "#", Q_NULLPTR));
-        label_18->setText(QApplication::translate("ClienteTickets", "AAAA", Q_NULLPTR));
+        label_18->setText(QApplication::translate("ClienteTickets", "AAAAAAA", Q_NULLPTR));
         label_14->setText(QApplication::translate("ClienteTickets", "Fecha:", Q_NULLPTR));
         label_17->setText(QApplication::translate("ClienteTickets", "0000", Q_NULLPTR));
         label_15->setText(QApplication::translate("ClienteTickets", "Total:", Q_NULLPTR));
