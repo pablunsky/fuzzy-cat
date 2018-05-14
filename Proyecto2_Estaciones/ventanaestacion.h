@@ -12,7 +12,7 @@ class VentanaEstacion : public QWidget
     Q_OBJECT
 
 public:
-    explicit VentanaEstacion(QString codigo,ListaRutas *rutas, QWidget *parent = 0);
+    explicit VentanaEstacion(QString codigo, ListaRutas *rutas, QWidget *parent = 0);
     ~VentanaEstacion();
 
 private slots:

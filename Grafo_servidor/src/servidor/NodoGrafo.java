@@ -12,16 +12,14 @@ package servidor;
 public class NodoGrafo {
     private String nombre;
     private String codigo;
-    private Double precio;
     private Double latitud;
     private Double longitud;
     ListaAristas aristas;
     
-    public NodoGrafo(String nombre,String codigo,Double precio,Double latitud,Double longitud)
+    public NodoGrafo(String nombre,String codigo,Double latitud,Double longitud)
     {
         this.nombre = nombre;
         this.codigo = codigo;
-        this.precio = precio;
         this.latitud = latitud;
         this.longitud = longitud;
         aristas = new ListaAristas();
@@ -33,10 +31,6 @@ public class NodoGrafo {
 
     public String getCodigo() {
         return codigo;
-    }
-
-    public Double getPrecio() {
-        return precio;
     }
 
     public Double getLatitud() {
@@ -53,10 +47,6 @@ public class NodoGrafo {
 
     public void setCodigo(String codigo) {
         this.codigo = codigo;
-    }
-
-    public void setPrecio(Double precio) {
-        this.precio = precio;
     }
 
     public void setLatitud(Double latitud) {

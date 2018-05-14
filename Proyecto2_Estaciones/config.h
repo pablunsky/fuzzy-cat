@@ -23,7 +23,7 @@ private:
     Ui::Config *ui;
     bool exist(QString codEstacion);
     ListaRutas *rutas;
-    ListaRutas* getRutas(QString codigo);
+    ListaRutas* getRutas(QString codigoEstacion);
 };
 
 #endif // CONFIG_H

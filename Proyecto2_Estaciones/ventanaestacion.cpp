@@ -5,27 +5,30 @@
 #include <QStyle>
 #include <QDesktopWidget>
 #include <QDebug>
-
+#include <QDir>
 VentanaEstacion::VentanaEstacion(QString codigo, ListaRutas *rutas, QWidget *parent) :
     QWidget(parent),
     ui(new Ui::VentanaEstacion)
 {
 
     ui->setupUi(this);
-    this->setWindowTitle("Estación "+codigo);
+    this->setWindowTitle("Estación " + codigo);
     this->setGeometry(QStyle::alignedRect(Qt::LeftToRight,Qt::AlignCenter,this->size(),qApp->desktop()->availableGeometry()));
+
+    QString path = QDir::currentPath();
     //****************botones**************************************
-    QIcon iconCorrect = QIcon::fromTheme("/home/ciberveliz/Qt Projects/Proyecto2_Estaciones/images/correct.png");
+    QIcon iconCorrect = QIcon::fromTheme(path + "/images/correct.png");
     ui->label_correct->setPixmap(iconCorrect.pixmap(50,50));
     ui->label_correct->setEnabled(false);
 
-    QIcon iconIncorrect = QIcon::fromTheme("/home/ciberveliz/Qt Projects/Proyecto2_Estaciones/images/incorrect.png");
+    QIcon iconIncorrect = QIcon::fromTheme(path + "/images/incorrect.png");
     ui->label_incorrect->setPixmap(iconIncorrect.pixmap(50,50));
     ui->label_incorrect->setEnabled(false);
+
     //**************************************************************
     ui->label_error->setText("");
 
-    ui->pushButton_back->setIcon(QIcon("/home/ciberveliz/Qt Projects/Proyecto2_Estaciones/images/back.png"));
+    ui->pushButton_back->setIcon(QIcon(path + "/images/back.png"));
     ui->pushButton_back->setIconSize(QSize(30,30));
 
     agregarRutas(rutas);
@@ -50,7 +53,7 @@ void VentanaEstacion::agregarRutas(ListaRutas *rutas)
     int j = 0;
     while(temp != nullptr)
     {
-        QPushButton *btn = new QPushButton("Ruta "+temp->ruta->codigo);
+        QPushButton *btn = new QPushButton("Ruta "+QString::number(temp->ruta->codigo));
         btn->setFixedSize(70,35);
         connect(btn,SIGNAL(clicked()),this,SLOT(verificarRuta()));
         layout->addWidget(btn,j,i);
@@ -83,7 +86,7 @@ void VentanaEstacion::verificarRuta()
     QString codRuta = button->text().replace("Ruta ","");
 
     //verificar la validez del ticket respecto a la ruta seleccionada
-    if(codRuta == "204")
+    if(codRuta.toInt() == 204)
     {
         ui->label_correct->setEnabled(true);
         ui->groupBox->setEnabled(false);
