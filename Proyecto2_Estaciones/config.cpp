@@ -13,6 +13,7 @@ Config::Config(QWidget *parent) :
     this->setGeometry(QStyle::alignedRect(Qt::LeftToRight,Qt::AlignCenter,this->size(),qApp->desktop()->availableGeometry()));
 
     this->rutas = nullptr;
+
 }
 
 Config::~Config()
@@ -41,20 +42,21 @@ void Config::on_pushButton_clicked()
 
 bool Config::exist(QString codEstacion)
 {
-    if(codEstacion == "GTM01")return true;
+    //Verificar si la estacion existe
+    if(codEstacion == "GTM01") return true;
     else return false;
 }
 
-ListaRutas* Config::getRutas(QString codigo)
+ListaRutas* Config::getRutas(QString codigoEstacion)
 {
     //buscarRutas disponibles para el codigo de estacion
     //leer el json obtenido mediante el servidor
-    //JsonReader::obtenerRutas(temp,jsonRutas)
     ListaRutas* temp = new ListaRutas();
-    temp->insertarRuta(new Ruta("204","USAC","azul"));
-    temp->insertarRuta(new Ruta("37","TERMINAL","rojo"));
-    temp->insertarRuta(new Ruta("203","USAC","azul"));
-    temp->insertarRuta(new Ruta("36","TERMINAL","rojo"));
-    temp->insertarRuta(new Ruta("1","TERMINAL","rojo"));
+    //JsonReader::obtenerRutas(temp,jsonRutas)
+    temp->insertarRuta(new Ruta(204,"USAC","azul"));
+    temp->insertarRuta(new Ruta(37,"TERMINAL","rojo"));
+    temp->insertarRuta(new Ruta(203,"USAC","azul"));
+    temp->insertarRuta(new Ruta(36,"TERMINAL","rojo"));
+    temp->insertarRuta(new Ruta(1,"TERMINAL","rojo"));
     return temp;
 }
