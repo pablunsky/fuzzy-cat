@@ -31,18 +31,19 @@ import javax.ws.rs.core.Response;
 
 public class TicketResource {
     
-    private ArbolB tickets = new ArbolB(5,6);
+    private ArbolB tickets = ArbolB.getArbolTickets();
     
     
     @GET
-    public Response getJson() {
-        return Response.ok().build();
+    public Response getCount() {
+        return Response.ok(tickets.getCounts()).build();
     }
     
     @POST
     public Response crearTicket(SolicitudTicket req){
         Ticket t = new Ticket();
         t.setValor(req.getValor());
+        tickets.AddTicket(t);
         return Response.ok(t).build();
     }
     

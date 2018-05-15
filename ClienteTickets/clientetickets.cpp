@@ -133,7 +133,7 @@ void ClienteTickets::on_pushButton_10_clicked()
 void ClienteTickets::on_pushButton_11_clicked()
 {
 
-    QString json = tr("{\"valor\":0,\"codigo\":\""+ui->lineEdit->text()+"\"}");
+    QString json = "{\"valor\":0,\"codigo\":\""+ui->lineEdit->text()+"\"}";
 
     QEventLoop eventLoop;
 

@@ -14,7 +14,26 @@ public class ArbolB {
     private NodoArbolB raiz;
     private int orden;
     private int tamano;
-
+    
+    private int countstd;
+    private int countprm;
+    private int countfll;
+    private int countnls;
+    
+    public String getCounts(){
+        StringBuilder sb = new StringBuilder();
+        sb.append("{\"countstd\":");
+        sb.append(countstd);
+        sb.append(",\"countprm\":");
+        sb.append(countprm);
+        sb.append(",\"countfll\":");
+        sb.append(countfll);
+        sb.append(",\"countnls\":");
+        sb.append(countnls);
+        sb.append("}");
+        return sb.toString();
+    }
+    
     private static ArbolB singletonArbolTickets;
     
     public synchronized static ArbolB getArbolTickets(){
@@ -29,9 +48,31 @@ public class ArbolB {
         this.orden = orden;
         this.tamano = tamano;
         this.raiz = null;
+        countstd = 0;
+        countprm = 0;
+        countfll = 0;
+        countnls = 0;
+    }
+    
+    private void checkout(Ticket t){
+        switch((int)t.getValor()){
+            case 3:
+                countstd++;
+                break;
+            case 5:
+                countprm++;
+                break;
+            case 50:
+                countfll++;
+                break;
+            default:
+                countnls++;
+                break;
+        }
     }
     
     public void AddTicket(Ticket nuevo){
+        checkout(nuevo);
         if(raiz == null){
             raiz = new NodoArbolB(orden);
             raiz.AddValor(nuevo);
@@ -40,9 +81,6 @@ public class ArbolB {
         NodoArbolB aux = raiz;
         if(aux.AddValor(nuevo))
             return;
-        
-        
-        
         
     
     }
