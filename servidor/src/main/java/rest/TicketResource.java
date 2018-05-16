@@ -43,7 +43,7 @@ public class TicketResource {
     public Response crearTicket(SolicitudTicket req){
         Ticket t = new Ticket();
         t.setValor(req.getValor());
-        tickets.AddTicket(t);
+        tickets.Add(t);
         return Response.ok(t).build();
     }
     

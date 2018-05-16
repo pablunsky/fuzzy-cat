@@ -19,12 +19,15 @@ public class Ticket {
     private double saldo_actual;
     private Date fecha_emision;
     private Date fecha_devolucion;
+    private static int count = 0;
     
     public Ticket(){
         int cod = (int)(Math.random()*1000);
         this.codigo_devolucion = rndChar()+""+rndChar()+""+rndChar()+""+cod;
         this.fecha_emision = new Date();
-        this.codigo = (int) (Math.random() * 5000);
+        //this.codigo = (int) (Math.random() * 5000);
+        codigo = count;
+        count ++;
     }
 
     public int getCodigo() {
