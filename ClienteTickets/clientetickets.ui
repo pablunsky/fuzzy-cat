@@ -561,6 +561,19 @@ en enviarnos tu queja o sugerencia a&lt;br&gt;
        <string>Codigo de verificacion:</string>
       </property>
      </widget>
+     <widget class="QLabel" name="label_24">
+      <property name="geometry">
+       <rect>
+        <x>450</x>
+        <y>290</y>
+        <width>251</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
     </widget>
    </widget>
   </widget>

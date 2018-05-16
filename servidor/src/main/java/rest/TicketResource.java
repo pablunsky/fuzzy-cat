@@ -49,8 +49,12 @@ public class TicketResource {
     
     @PUT
     public Response reembolsoTicket(SolicitudTicket content) {
-        //ELIMINAR SALDO DE TICKET
-        return Response.ok("{\"mensaje\":\"ok\"}").build();
+        Ticket t = tickets.Buscar(content.getCodigo());
+        if(t!=null){
+            t.setSaldo_actual(0);
+            return Response.ok("{\"mensaje\":\"El valor del ticket ha sido compensado.\"}").build();
+        }
+        return Response.ok("{\"mensaje\":\"Error, el ticket solicitado no existe.\"}").build();
     }
     
     

@@ -59,51 +59,97 @@ public class ArbolB {
         countnls = 0;
     }
     
-    public String recorrer(String nodopadre,NodoArbolB actual,int pos,String concat){
-        String grafico="";
+    public String graficar(String padre,NodoArbolB actual,String previo){
         
-        while(pos<orden*2-1){
-            if(actual.getContenidos()[pos]!=null){
-                grafico+=actual.getContenidos()[pos].getCodigo();
+        String grafico="<<TABLE CELLSPACING=\"0\"><TR>";
+        
+        for(int i = 0; i<orden*2-1; i++){
+            if(actual.getContenidos()[i]!=null){
+                Ticket t = actual.getContenidos()[i];
+                if(t.getValor() == 3)
+                    grafico+= "<TD BGCOLOR =\"#f44336\"><FONT COLOR=\"white\">"+t.getCodigo()+"</FONT></TD>";
+                else if(t.getValor()==5)
+                    grafico+= "<TD BGCOLOR =\"#2196F3\"><FONT COLOR=\"white\">"+t.getCodigo()+"</FONT></TD>";
+                else if(t.getValor() == 50)
+                    grafico+= "<TD BGCOLOR =\"#009688\"><FONT COLOR=\"white\">"+t.getCodigo()+"</FONT></TD>";
+                else
+                    grafico+= "<TD BGCOLOR =\"#ff9800\"><FONT COLOR=\"white\">"+t.getCodigo()+"</FONT></TD>";
             }
-            grafico+=" | ";
-            pos=pos+1;
+            else
+                grafico+="<TD></TD>";
         }
         
-        concat+=actual.getContenidos().hashCode()+" [shape=record,label=\""+grafico+"}\"];\n";
-        concat+=nodopadre+" -> "+actual.getContenidos().hashCode()+";\n";
+        previo += actual.getContenidos().hashCode()+" [shape=none, fontname=\"Raleway\",label="+grafico+"</TR></TABLE>>];\n";
+        previo += padre+" -> "+actual.getContenidos().hashCode()+";\n";
         grafico="";
         
-        pos=0;
-        while(pos<orden*2){
-            if(actual.getHijos()[pos]!=null){
-                concat+=recorrer(actual.getContenidos().hashCode()+"",actual.getHijos()[pos],0,"");
+        for(int i = 0; i<orden*2; i++){
+            if(actual.getHijos()[i]!=null){
+                previo += graficar(actual.getContenidos().hashCode()+"",actual.getHijos()[i],"");
             }
-            pos=pos+1;
         }
         
-        if(concat.contains("| }")){
-            concat=concat.replace("| }","");
-        }
-        return concat;
+        return previo;
     }
     
     private void Graficar(){
-        String grafo="digraph arbol{\n";
-        String aux="";
-        grafo+= recorrer("Tickets",raiz,0,aux);
-        grafo+="}";
+        String grafica="digraph arbol{\nArbolB [shape=record, fontname=\"Raleway\", label=ArbolB]";
+        grafica += graficar("ArbolB",raiz,"");
+        grafica += "}";
         
         try{
-            
-            String path = new File("").getCanonicalPath();
-            File file = new File(path+"/arbol.dot");
+            String path = "/home/pablunsky/Documents/TAREAS/ESTRUCTURAS DE DATOS/Proyecto2/servidor/src/main/webapp/W3.CSS Template_files/";
+            File file = new File(path+"arbol.dot");
             FileWriter escribir=new FileWriter(file);
-            escribir.write(grafo);
+            escribir.write(grafica);
             escribir.close();
-            
+            String[] cmd = {"dot","-Tpng",path+"arbol.dot","-o",path+"arbol.jpg"};
+            Runtime.getRuntime().exec(cmd);
         }catch(IOException e){
+            e.printStackTrace();
         }
+    }
+    
+    public Ticket Buscar(String codigo){
+        NodoArbolB actual = raiz;
+        for(int i = 0; i<orden*2-1; i++){
+            if(actual.getContenidos()[i]!=null){
+                Ticket t = actual.getContenidos()[i];
+                if(t.getCodigo_devolucion().equals(codigo))
+                    return t;
+            }
+        }
+        
+        for(int i = 0; i<orden*2; i++){
+            if(actual.getHijos()[i]!=null){
+                Ticket t = Buscar(codigo, actual.getHijos()[i]);
+                if(t!=null)
+                    return t;
+            }
+        }
+        
+        return null;
+    }
+    
+    public Ticket Buscar(String codigo, NodoArbolB hijo){
+        NodoArbolB actual = raiz;
+        for(int i = 0; i<orden*2-1; i++){
+            if(actual.getContenidos()[i]!=null){
+                Ticket t = actual.getContenidos()[i];
+                if(t.getCodigo_devolucion().equals(codigo))
+                    return t;
+            }
+        }
+        
+        for(int i = 0; i<orden*2; i++){
+            if(actual.getHijos()[i]!=null){
+                Ticket t = Buscar(codigo, actual.getHijos()[i]);
+                if(t!=null)
+                    return t;
+            }
+        }
+        
+        return null;
     }
     
     public void Add(Ticket t){
@@ -137,14 +183,18 @@ public class ArbolB {
             hijoder.getHijos()[i-centro-1] = raiz.getHijos()[i];
             hijoder.getContenidos()[i-centro-1] = raiz.getContenidos()[i];
         }
+        
         hijoder.getHijos()[centro] = raiz.getHijos()[raiz.getLlenos()];
         Ticket aux = raiz.getContenidos()[centro];
+        
         raiz.setContenidos(new Ticket[2*orden-1]);
         raiz.getContenidos()[0] = aux;
         raiz.setLlenos(1);
         raiz.setHijos(new NodoArbolB[2*orden]);
+        
         raiz.getHijos()[0]=hijoizq;
         raiz.getHijos()[1]=hijoder;
+        
         raiz.eshoja = false;
     }
     

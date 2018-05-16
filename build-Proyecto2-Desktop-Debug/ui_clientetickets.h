@@ -71,6 +71,7 @@ public:
     QLineEdit *lineEdit;
     QPushButton *pushButton_11;
     QLabel *label_23;
+    QLabel *label_24;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
@@ -230,6 +231,9 @@ public:
         label_23 = new QLabel(page_3);
         label_23->setObjectName(QStringLiteral("label_23"));
         label_23->setGeometry(QRect(460, 150, 161, 16));
+        label_24 = new QLabel(page_3);
+        label_24->setObjectName(QStringLiteral("label_24"));
+        label_24->setGeometry(QRect(450, 290, 251, 20));
         stackedWidget->addWidget(page_3);
         ClienteTickets->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(ClienteTickets);
@@ -304,6 +308,7 @@ public:
         pushButton_10->setText(QApplication::translate("ClienteTickets", "Cancelar (Lo sabiamos)", Q_NULLPTR));
         pushButton_11->setText(QApplication::translate("ClienteTickets", "Reembolsar", Q_NULLPTR));
         label_23->setText(QApplication::translate("ClienteTickets", "Codigo de verificacion:", Q_NULLPTR));
+        label_24->setText(QString());
     } // retranslateUi
 
 };

@@ -39,7 +39,9 @@ public class NodoArbolB {
             while((i>=0) && (nuevo.getCodigo()<contenidos[i].getCodigo())){
                 i--;
             }
+            
             int hijoainsertar = i+1;
+            
             if(hijos[hijoainsertar].Llena()){
                 
                 llenos++;
@@ -59,6 +61,7 @@ public class NodoArbolB {
                 for(k = 0; k<t-1;k++){
                     nuevoNodo.getHijos()[k] = hijos[hijoainsertar].getHijos()[k+t];
                     nuevoNodo.getContenidos()[k] = hijos[hijoainsertar].getContenidos()[k+t];
+                    hijos[hijoainsertar].getHijos()[k+t] = null; 
                     hijos[hijoainsertar].getContenidos()[k+t-1] = null;
                 }
                 
@@ -75,6 +78,8 @@ public class NodoArbolB {
                 else{
                     hijos[hijoainsertar+1].insertarTicket(nuevo);
                 }
+                hijos[hijoainsertar].getHijos()[k+t] = null;
+                
             }
             else{
                 hijos[hijoainsertar].insertarTicket(nuevo);
@@ -84,7 +89,7 @@ public class NodoArbolB {
     }
     
     public boolean Llena(){
-        return llenos == 2*t-1;
+        return llenos == contenidos.length;
     }
     
     public NodoArbolB[] getHijos() {
