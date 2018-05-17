@@ -61,6 +61,8 @@ void ClienteTickets::on_pushButton_4_clicked()
     QPalette palette;
     palette.setBrush(QPalette::Background, bkgnd);
     this->setPalette(palette);
+    ui->label_17->setText("0000");
+    ui->label_18->setText("AAAAAA");
 
     ui->stackedWidget->setCurrentIndex(0);
 }
@@ -98,7 +100,7 @@ void ClienteTickets::on_pushButton_3_clicked()
 
     QNetworkAccessManager mgr;
     QObject::connect(&mgr, SIGNAL(finished(QNetworkReply*)), &eventLoop, SLOT(quit()));
-    QNetworkRequest req( QUrl( BASE+QString("/ticket") ) );
+    QNetworkRequest req( QUrl( BASE + QString("/ticket") ) );
     req.setRawHeader("Content-Type", "application/json");
     QNetworkReply *reply = mgr.post(req, json.toUtf8());
     eventLoop.exec();
@@ -127,6 +129,9 @@ void ClienteTickets::on_pushButton_10_clicked()
     palette.setBrush(QPalette::Background, bkgnd);
     this->setPalette(palette);
 
+    ui->label_24->setText("");
+    ui->lineEdit->setText("");
+
     ui->stackedWidget->setCurrentIndex(0);
 }
 
@@ -149,8 +154,7 @@ void ClienteTickets::on_pushButton_11_clicked()
         QJsonDocument document = QJsonDocument::fromJson(response);
         QJsonObject obj = document.object();
 
-        ui->label_17->setText(QString::number(obj["codigo"].toInt()));
-        ui->label_18->setText(obj["codigo_devolucion"].toString());
+        ui->label_24->setText(obj["mensaje"].toString());
 
         qDebug() << "Success\n" << response;
         delete reply;

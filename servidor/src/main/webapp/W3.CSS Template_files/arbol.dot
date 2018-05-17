@@ -1,0 +1,4 @@
+digraph arbol{
+ArbolB [shape=record, fontname="Raleway", label=ArbolB]600745675 [shape=none, fontname="Raleway",label=<<TABLE CELLSPACING="0"><TR><TD BGCOLOR ="#2196F3"><FONT COLOR="white">0</FONT></TD><TD BGCOLOR ="#f44336"><FONT COLOR="white">1</FONT></TD><TD BGCOLOR ="#009688"><FONT COLOR="white">2</FONT></TD><TD BGCOLOR ="#ff9800"><FONT COLOR="white">3</FONT></TD><TD></TD></TR></TABLE>>];
+ArbolB -> 600745675;
+}

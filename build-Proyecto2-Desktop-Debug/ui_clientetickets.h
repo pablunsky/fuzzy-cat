@@ -71,6 +71,7 @@ public:
     QLineEdit *lineEdit;
     QPushButton *pushButton_11;
     QLabel *label_23;
+    QLabel *label_24;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
@@ -179,7 +180,7 @@ public:
         label_16->setGeometry(QRect(180, 50, 16, 16));
         label_18 = new QLabel(groupBox);
         label_18->setObjectName(QStringLiteral("label_18"));
-        label_18->setGeometry(QRect(180, 70, 71, 16));
+        label_18->setGeometry(QRect(190, 70, 61, 16));
         label_14 = new QLabel(groupBox);
         label_14->setObjectName(QStringLiteral("label_14"));
         label_14->setGeometry(QRect(7, 90, 51, 16));
@@ -230,6 +231,9 @@ public:
         label_23 = new QLabel(page_3);
         label_23->setObjectName(QStringLiteral("label_23"));
         label_23->setGeometry(QRect(460, 150, 161, 16));
+        label_24 = new QLabel(page_3);
+        label_24->setObjectName(QStringLiteral("label_24"));
+        label_24->setGeometry(QRect(450, 290, 251, 20));
         stackedWidget->addWidget(page_3);
         ClienteTickets->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(ClienteTickets);
@@ -245,7 +249,7 @@ public:
 
         retranslateUi(ClienteTickets);
 
-        stackedWidget->setCurrentIndex(1);
+        stackedWidget->setCurrentIndex(0);
 
 
         QMetaObject::connectSlotsByName(ClienteTickets);
@@ -287,7 +291,7 @@ public:
         groupBox->setTitle(QApplication::translate("ClienteTickets", "Cuenta", Q_NULLPTR));
         label_19->setText(QApplication::translate("ClienteTickets", "Fecha", Q_NULLPTR));
         label_16->setText(QApplication::translate("ClienteTickets", "#", Q_NULLPTR));
-        label_18->setText(QApplication::translate("ClienteTickets", "AAAAAAA", Q_NULLPTR));
+        label_18->setText(QApplication::translate("ClienteTickets", "AAAAAA", Q_NULLPTR));
         label_14->setText(QApplication::translate("ClienteTickets", "Fecha:", Q_NULLPTR));
         label_17->setText(QApplication::translate("ClienteTickets", "0000", Q_NULLPTR));
         label_15->setText(QApplication::translate("ClienteTickets", "Total:", Q_NULLPTR));
@@ -304,6 +308,7 @@ public:
         pushButton_10->setText(QApplication::translate("ClienteTickets", "Cancelar (Lo sabiamos)", Q_NULLPTR));
         pushButton_11->setText(QApplication::translate("ClienteTickets", "Reembolsar", Q_NULLPTR));
         label_23->setText(QApplication::translate("ClienteTickets", "Codigo de verificacion:", Q_NULLPTR));
+        label_24->setText(QString());
     } // retranslateUi
 
 };
