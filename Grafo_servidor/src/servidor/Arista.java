@@ -14,12 +14,14 @@ public class Arista {
     private NodoGrafo destino;
     private Double distancia;
     private Double trafico;
-
-    public Arista(NodoGrafo origen, NodoGrafo destino, Double distancia, Double trafico) {
+    private String color;
+            
+    public Arista(NodoGrafo origen, NodoGrafo destino, Double distancia, Double trafico, String color) {
         this.origen = origen;
         this.destino = destino;
         this.distancia = distancia;
         this.trafico = trafico;
+        this.color = color;
     }
     
 
@@ -53,5 +55,14 @@ public class Arista {
 
     public void setTrafico(Double trafico) {
         this.trafico = trafico;
+    }
+    
+    public String getColor(){
+        return color;
+    }
+    
+    public void setColor(String color)
+    {
+        this.color = color;
     }
 }

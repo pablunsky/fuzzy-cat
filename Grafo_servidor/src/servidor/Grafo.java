@@ -31,7 +31,7 @@ public class Grafo {
         }
     }
     
-    public void agregarRuta(String codEstacionInicial,String codEstacionFinal,Double distancia,Double trafico)
+    public void agregarRuta(String codEstacionInicial,String codEstacionFinal,Double distancia,Double trafico, String color)
     {
         NodoGrafo origen = this.vertices.getNodoEstacion(codEstacionInicial);
         NodoGrafo destino = this.vertices.getNodoEstacion(codEstacionFinal);
@@ -45,7 +45,7 @@ public class Grafo {
             JOptionPane.showMessageDialog(null,"Esta ruta ya ha sido registrada.");
             return;
         }
-        Arista ruta = new Arista(origen,destino,distancia,trafico);
+        Arista ruta = new Arista(origen, destino, distancia, trafico, color);
         origen.aristas.agregarArista(ruta);
         JOptionPane.showMessageDialog(null,"Ruta registrada.");
     }
