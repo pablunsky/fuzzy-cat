@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html ng-app="UrbanEDD"><head>
-<meta http-equiv="content-type" content="text/html; charset=UTF-8"><title>Compra de tickets</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"><title>Vista de Rutas</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="W3.CSS%20Template_files/w3.css">
 <link rel="stylesheet" href="W3.CSS%20Template_files/css.css">
 <link rel="stylesheet" href="W3.CSS%20Template_files/font-awesome.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
 <style>
 html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
 </style>
@@ -14,7 +15,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
 <!-- Top container -->
 <div class="w3-bar w3-top w3-black w3-large" style="z-index:4">
   <button class="w3-bar-item w3-button w3-hide-large w3-hover-none w3-hover-text-light-grey" onclick="w3_open();"><i class="fa fa-bars"></i> &nbsp;Menu</button>
-  <span class="w3-bar-item w3-right">Logo</span>
+  <span class="w3-bar-item w3-right">USAC</span>
 </div>
 
 <!-- Sidebar/menu -->
@@ -35,13 +36,12 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
     <h5>Opciones</h5>
   </div>
   <div class="w3-bar-block" ng-controller="ControlPrincipal">
-    <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>&nbsp; Close Menu</a>
     <a class="w3-bar-item w3-button w3-padding" ng-click="redireccionHome()"><i class="fa fa-globe fa-fw"></i>&nbsp; Vista general</a>
-    <a class="w3-bar-item w3-button w3-padding w3-blue" ng-click="redireccionTickets()"><i class="fa fa-ticket fa-fw"></i>&nbsp; Tickets</a>
-    <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-subway fa-fw"></i>&nbsp; Estaciones</a>
-    <a href="#" class="w3-bar-item w3-button w3-padding" ng-click="redireccionRutas()"><i class="fa fa-code-fork fa-fw"></i>&nbsp; Rutas</a>
-    <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-eraser fa-fw"></i>&nbsp; Reembolso</a>
-    <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-info fa-fw"></i>&nbsp; Acerca de...</a>
+    <a class="w3-bar-item w3-button w3-padding" ng-click="redireccionTickets()"><i class="fa fa-ticket fa-fw"></i>&nbsp; Tickets</a>
+    <a class="w3-bar-item w3-button w3-padding" ng-click="redireccionEstaciones()"><i class="fa fa-subway fa-fw"></i>&nbsp; Estaciones</a>
+    <a class="w3-bar-item w3-button w3-padding w3-blue" ng-click="redireccionRutas()"><i class="fa fa-code-fork fa-fw"></i>&nbsp; Rutas</a>
+    <a class="w3-bar-item w3-button w3-padding"><i class="fa fa-eraser fa-fw"></i>&nbsp; Reembolso</a>
+    <a class="w3-bar-item w3-button w3-padding"><i class="fa fa-info fa-fw"></i>&nbsp; Acerca de...</a>
   </div>
 </nav>
 
@@ -54,7 +54,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
 
   <!-- Header -->
   <header class="w3-container" style="padding-top:22px">
-    <h2><b><i class="fa fa-ticket"></i> Tickets</b></h2>
+    <h2><b><i class="fa fa-code-fork fa-fw"></i>Rutas</b></h2>
   </header>
 
   <div class="w3-row-padding w3-margin-bottom" ng-controller="ControlPrincipal">
@@ -100,53 +100,82 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
     </div>
   </div>
   
+<!--Body-->
 <header class="w3-container" style="padding-top:22px">
-    <h3><b><i class="fa fa-eye"></i> Vista de almacenamiento</b></h3>
+    <h3><b><i class="fas fa-plus-square"></i> Creacion de Rutas</b></h3>
 </header>
 
-<div ng-controller="ControlPrincipal">
-    
-</div>
-  
-  <!-- Footer -->
-  <footer class="w3-container w3-padding-16 w3-light-grey">
-    <h4>FOOTER</h4>
-    <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
-  </footer>
+<div ng-controller="ControlRutas" style="text-align: center;">
+    <div style="display: inline-block; position: relative; margin-left: 30px;">
+      <h5>Código de la Ruta:</h5>
+      <input type="text" ng-model="inputCodRuta">  
+    </div>
 
-  <!-- End page content -->
+    <div style="display: inline-block; position: relative; margin-left: 30px;">
+      <h5>Nombre de la Ruta:</h5>
+      <input type="text" ng-model="inputNomRuta">  
+    </div>
+
+    <div style="display: inline-block; position: relative; margin-left: 30px;">
+      <h5>Color de la Ruta:</h5>
+      <input type="color" ng-model="inputColorRuta">  
+    </div>
+
+      <br>
+      <br>
+    <button class="btn btn-primary" ng-click="agregarRuta(inputCodRuta,inputNomRuta,inputColorRuta)">Agregar Ruta</button>
+      <br>
+      <br>
+    <h3><b><i class="fas fa-plus-square"></i> Agregar Recorrido</b></h3>
+    
+    <div style="display: inline-block; position: relative; margin-left: 30px;">
+      <h5>Cod. Estación origen:</h5>
+      <input type="text" ng-model="inputCodOrigen">  
+    </div>
+    
+    <div style="display: inline-block; position: relative; margin-left: 30px;"> 
+     <h5>Cod. Estación destino:</h5>
+     <input type="text" ng-model="inputCodDestino">
+    </div>    
+
+    <div style="display: inline-block; position: relative; margin-left: 30px;">
+      <h5>Distancia(m):</h5>
+      <input type="number" ng-model="inputDistancia">
+    </div>
+
+    <div style="display: inline-block; position: relative; margin-left: 30px;">
+      <h5>Tráfico:</h5>
+      <input type="number" min="1" max="5" ng-model="inputTrafico">
+    </div>
+    <br>
+    <br>
+    <button class="btn btn-primary" ng-click="agregarRecorrido(inputCodOrigen,inputCodDestino,inputDistancia,inputTrafico)">Agregar Recorrido</button>
+</div>
+    <br>
+    <br>
+    <div ng-controller="ControlRutas">
+    <h5 style="position: relative; left: 10px">Rutas Disponibles:</h5>
+    <table style="border-spacing: 40px">
+      <tr>
+        <th>Código</th>
+        <th>Nombre</th>
+        <th>Opción</th>
+      </tr>
+      <tr ng-repeat="ruta in rutasD">
+        <td>{{ruta.codigo}}</td>
+        <td>{{ruta.nombre}}</td>
+        <td><button class="btn btn-primary" ng-click="verRuta(ruta.codigo)">Ver</button></td>
+      </tr>
+    </table>
+</div>
+  <!--End-->
 </div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="app.js"></script>
-<!--
-<script>
-    
-// Get the Sidebar
-var mySidebar = document.getElementById("mySidebar");
 
-// Get the DIV with overlay effect
-var overlayBg = document.getElementById("myOverlay");
 
-// Toggle between showing and hiding the sidebar, and add overlay effect
-function w3_open() {
-    if (mySidebar.style.display === 'block') {
-        mySidebar.style.display = 'none';
-        overlayBg.style.display = "none";
-    } else {
-        mySidebar.style.display = 'block';
-        overlayBg.style.display = "block";
-    }
-}
-
-// Close the sidebar with the close button
-function w3_close() {
-    mySidebar.style.display = "none";
-    overlayBg.style.display = "none";
-}
-</script>
--->
-
-</body></html>
+</body>
+</html>
