@@ -57,14 +57,37 @@ public class ArbolB {
             File f = new File(pathofJSON);
             String json = "[";
             
+            json += ToJSon(raiz,"");
+            
             json += "]";
+            
             FileWriter fw = new FileWriter(f);
             fw.write(json);
             fw.close();
+            
         }
         catch(Exception e){
             e.printStackTrace();
         }
+    }
+    
+    private String ToJSon(NodoArbolB actual, String previo){
+        
+        for(int i = 0; i<orden*2-1; i++){
+            if(actual.getContenidos()[i]!=null){
+                previo += actual.getContenidos()[i].toString();
+            }
+            if(i+1 != orden*2-1 && actual.getContenidos()[i+1] != null)
+                previo+=",\n";
+        }
+        
+        for(int i = 0; i<orden*2; i++){
+            if(actual.getHijos()[i]!=null){
+                previo += ",\n"+ToJSon(actual.getHijos()[i], "");
+            }
+        }
+        
+        return previo;
     }
     
     private static ArbolB singletonArbolTickets;
@@ -191,6 +214,7 @@ public class ArbolB {
         }
         raiz.insertarTicket(t);
         checkout(t);
+        Save();
         Graficar();
     }
     

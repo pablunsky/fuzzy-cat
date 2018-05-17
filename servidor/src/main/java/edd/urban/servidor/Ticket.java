@@ -7,6 +7,8 @@ package edd.urban.servidor;
 
 import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import java.text.Format;
+import java.text.SimpleDateFormat;
 
 
 /**
@@ -32,6 +34,7 @@ public class Ticket {
         int cod = (int)(Math.random()*1000);
         this.codigo_devolucion = rndChar()+""+rndChar()+""+rndChar()+""+cod;
         this.fecha_emision = new Date();
+        this.fecha_devolucion = null;
         //this.codigo = (int) (Math.random() * 5000);
         codigo = count;
         count ++;
@@ -93,7 +96,13 @@ public class Ticket {
     
     @Override
     public String toString(){
-        String json = "{\"codigo\":\""+codigo+"\",\"codigo_devolucion\":\""+codigo_devolucion+"\",\"valor\":\""+valor+"\",\"saldo_actual\":\""+saldo_actual+"\",\"fecha_emision\":\""+fecha_emision+"\",\"fecha_devolucion\":\"\"}";
+        Format f = new SimpleDateFormat("yyyy-MM-dd");
+        String json;
+        if(fecha_devolucion == null)
+            json = "{\"codigo\":\""+codigo+"\",\"codigo_devolucion\":\""+codigo_devolucion+"\",\"valor\":\""+valor+"\",\"saldo_actual\":\""+saldo_actual+"\",\"fecha_emision\":\""+f.format(fecha_emision)+"\",\"fecha_devolucion\":\"\"}";
+        else
+            json = "{\"codigo\":\""+codigo+"\",\"codigo_devolucion\":\""+codigo_devolucion+"\",\"valor\":\""+valor+"\",\"saldo_actual\":\""+saldo_actual+"\",\"fecha_emision\":\""+f.format(fecha_emision)+"\",\"fecha_devolucion\":\""+f.format(fecha_devolucion)+"\"}";
+        
         return json;
     }
     

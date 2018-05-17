@@ -1,4 +1,22 @@
 digraph arbol{
-ArbolB [shape=record, fontname="Raleway", label=ArbolB]600745675 [shape=none, fontname="Raleway",label=<<TABLE CELLSPACING="0"><TR><TD BGCOLOR ="#2196F3"><FONT COLOR="white">0</FONT></TD><TD BGCOLOR ="#f44336"><FONT COLOR="white">1</FONT></TD><TD BGCOLOR ="#009688"><FONT COLOR="white">2</FONT></TD><TD BGCOLOR ="#ff9800"><FONT COLOR="white">3</FONT></TD><TD></TD></TR></TABLE>>];
-ArbolB -> 600745675;
+ArbolB [shape=record, fontname="Raleway", label=ArbolB]548191450 [shape=none, fontname="Raleway",label=<<TABLE CELLSPACING="0"><TR><TD BGCOLOR ="#ff9800"><FONT COLOR="white">11</FONT></TD><TD></TD><TD></TD><TD></TD><TD></TD></TR></TABLE>>];
+ArbolB -> 548191450;
+499187313 [shape=none, fontname="Raleway",label=<<TABLE CELLSPACING="0"><TR><TD BGCOLOR ="#f44336"><FONT COLOR="white">2</FONT></TD><TD BGCOLOR ="#ff9800"><FONT COLOR="white">8</FONT></TD><TD></TD><TD></TD><TD></TD></TR></TABLE>>];
+548191450 -> 499187313;
+1660127809 [shape=none, fontname="Raleway",label=<<TABLE CELLSPACING="0"><TR><TD BGCOLOR ="#f44336"><FONT COLOR="white">0</FONT></TD><TD BGCOLOR ="#f44336"><FONT COLOR="white">1</FONT></TD><TD></TD><TD></TD><TD></TD></TR></TABLE>>];
+499187313 -> 1660127809;
+106792168 [shape=none, fontname="Raleway",label=<<TABLE CELLSPACING="0"><TR><TD BGCOLOR ="#f44336"><FONT COLOR="white">3</FONT></TD><TD BGCOLOR ="#f44336"><FONT COLOR="white">4</FONT></TD><TD BGCOLOR ="#ff9800"><FONT COLOR="white">5</FONT></TD><TD BGCOLOR ="#ff9800"><FONT COLOR="white">6</FONT></TD><TD BGCOLOR ="#ff9800"><FONT COLOR="white">7</FONT></TD></TR></TABLE>>];
+499187313 -> 106792168;
+294097615 [shape=none, fontname="Raleway",label=<<TABLE CELLSPACING="0"><TR><TD BGCOLOR ="#ff9800"><FONT COLOR="white">9</FONT></TD><TD BGCOLOR ="#ff9800"><FONT COLOR="white">10</FONT></TD><TD></TD><TD></TD><TD></TD></TR></TABLE>>];
+499187313 -> 294097615;
+520235310 [shape=none, fontname="Raleway",label=<<TABLE CELLSPACING="0"><TR><TD BGCOLOR ="#009688"><FONT COLOR="white">14</FONT></TD><TD BGCOLOR ="#2196F3"><FONT COLOR="white">17</FONT></TD><TD BGCOLOR ="#f44336"><FONT COLOR="white">20</FONT></TD><TD></TD><TD></TD></TR></TABLE>>];
+548191450 -> 520235310;
+1503789849 [shape=none, fontname="Raleway",label=<<TABLE CELLSPACING="0"><TR><TD BGCOLOR ="#009688"><FONT COLOR="white">12</FONT></TD><TD BGCOLOR ="#009688"><FONT COLOR="white">13</FONT></TD><TD></TD><TD></TD><TD></TD></TR></TABLE>>];
+520235310 -> 1503789849;
+908980012 [shape=none, fontname="Raleway",label=<<TABLE CELLSPACING="0"><TR><TD BGCOLOR ="#2196F3"><FONT COLOR="white">15</FONT></TD><TD BGCOLOR ="#2196F3"><FONT COLOR="white">16</FONT></TD><TD></TD><TD></TD><TD></TD></TR></TABLE>>];
+520235310 -> 908980012;
+27212609 [shape=none, fontname="Raleway",label=<<TABLE CELLSPACING="0"><TR><TD BGCOLOR ="#f44336"><FONT COLOR="white">18</FONT></TD><TD BGCOLOR ="#f44336"><FONT COLOR="white">19</FONT></TD><TD></TD><TD></TD><TD></TD></TR></TABLE>>];
+520235310 -> 27212609;
+573597437 [shape=none, fontname="Raleway",label=<<TABLE CELLSPACING="0"><TR><TD BGCOLOR ="#009688"><FONT COLOR="white">21</FONT></TD><TD BGCOLOR ="#009688"><FONT COLOR="white">22</FONT></TD><TD BGCOLOR ="#009688"><FONT COLOR="white">23</FONT></TD><TD></TD><TD></TD></TR></TABLE>>];
+520235310 -> 573597437;
 }
