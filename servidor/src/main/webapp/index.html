@@ -6,6 +6,7 @@
 <link rel="stylesheet" href="W3.CSS%20Template_files/w3.css">
 <link rel="stylesheet" href="W3.CSS%20Template_files/css.css">
 <link rel="stylesheet" href="W3.CSS%20Template_files/font-awesome.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
 <style>
 html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
 </style>
@@ -14,7 +15,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
 <!-- Top container -->
 <div class="w3-bar w3-top w3-black w3-large" style="z-index:4">
   <button class="w3-bar-item w3-button w3-hide-large w3-hover-none w3-hover-text-light-grey" onclick="w3_open();"><i class="fa fa-bars"></i> &nbsp;Menu</button>
-  <span class="w3-bar-item w3-right">Logo</span>
+  <span class="w3-bar-item w3-right">USAC</span>
 </div>
 
 <!-- Sidebar/menu -->
@@ -38,8 +39,8 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
     <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>&nbsp; Close Menu</a>
     <a class="w3-bar-item w3-button w3-padding w3-blue" ng-click="redireccionHome()"><i class="fa fa-globe fa-fw"></i>&nbsp; Vista general</a>
     <a class="w3-bar-item w3-button w3-padding" ng-click="redireccionTickets()"><i class="fa fa-ticket fa-fw"></i>&nbsp; Tickets</a>
-    <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-subway fa-fw"></i>&nbsp; Estaciones</a>
-    <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-code-fork fa-fw"></i>&nbsp; Rutas</a>
+    <a href="#" class="w3-bar-item w3-button w3-padding" ng-click="redireccionEstaciones()"><i class="fa fa-subway fa-fw"></i>&nbsp; Estaciones</a>
+    <a href="#" class="w3-bar-item w3-button w3-padding" ng-click="redireccionRutas()"><i class="fa fa-code-fork fa-fw"></i>&nbsp; Rutas</a>
     <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-eraser fa-fw"></i>&nbsp; Reembolso</a>
     <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-info fa-fw"></i>&nbsp; Acerca de...</a>
   </div>
@@ -57,7 +58,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
     <h2><b><i class="fa fa-ticket"></i> Tickets</b></h2>
   </header>
 
-  <div class="w3-row-padding w3-margin-bottom"  ng-controller="ControlPrincipal">
+  <div class="w3-row-padding w3-margin-bottom" ng-controller="ControlPrincipal">
     <div class="w3-quarter">
       <div class="w3-container w3-red w3-padding-16">
         <div class="w3-left"><i class="fa fa-star-half-empty w3-xxxlarge"></i></div>
@@ -100,7 +101,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
     </div>
   </div>
 
-  <div class="w3-panel">
+  <div class="w3-panel" ng-controller="ControlRutas">
     <div class="w3-row-padding" style="margin:0 -16px">
       <div class="w3-third">
         <h2>Mapa general</h2>
@@ -109,12 +110,18 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
       <div class="w3-twothird">
         <h2>Rutas disponibles</h2>
         <table class="w3-table w3-striped w3-white">
-          <tbody><tr>
-            <td><i class="fa fa-code-fork w3-text-blue w3-large"></i></td>
-            <td>Ruta 203.</td>
+          <tbody ng-repeat="ruta in rutasD">
+          <tr ng-if="ruta.nombre == 'Ruta 2'">
+            <td><i class="fa fa-code-fork w3-text-red w3-large"></i></td>
+            <td>{{ruta.nombre}}</td>
             <td><i>10 mins</i></td>
           </tr>
-          <tr>
+          <tr ng-if="ruta.nombre == 'Ruta 1'">
+            <td><i class="fa fa-code-fork w3-text-blue w3-large"></i></td>
+            <td>{{ruta.nombre}}</td>
+            <td><i>10 mins</i></td>
+          </tr>
+          <!--<tr>
             <td><i class="fa fa-code-fork w3-text-red w3-large"></i></td>
             <td>Ruta 101.</td>
             <td><i>15 mins</i></td>
@@ -143,7 +150,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
             <td><i class="fa fa-code-fork w3-text-green w3-large"></i></td>
             <td>Ruta 666.</td>
             <td><i>39 mins</i></td>
-          </tr>
+          </tr>-->
         </tbody></table>
       </div>
     </div>
