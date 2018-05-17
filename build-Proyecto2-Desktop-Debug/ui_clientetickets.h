@@ -180,7 +180,7 @@ public:
         label_16->setGeometry(QRect(180, 50, 16, 16));
         label_18 = new QLabel(groupBox);
         label_18->setObjectName(QStringLiteral("label_18"));
-        label_18->setGeometry(QRect(180, 70, 71, 16));
+        label_18->setGeometry(QRect(190, 70, 61, 16));
         label_14 = new QLabel(groupBox);
         label_14->setObjectName(QStringLiteral("label_14"));
         label_14->setGeometry(QRect(7, 90, 51, 16));
@@ -291,7 +291,7 @@ public:
         groupBox->setTitle(QApplication::translate("ClienteTickets", "Cuenta", Q_NULLPTR));
         label_19->setText(QApplication::translate("ClienteTickets", "Fecha", Q_NULLPTR));
         label_16->setText(QApplication::translate("ClienteTickets", "#", Q_NULLPTR));
-        label_18->setText(QApplication::translate("ClienteTickets", "AAAAAAA", Q_NULLPTR));
+        label_18->setText(QApplication::translate("ClienteTickets", "AAAAAA", Q_NULLPTR));
         label_14->setText(QApplication::translate("ClienteTickets", "Fecha:", Q_NULLPTR));
         label_17->setText(QApplication::translate("ClienteTickets", "0000", Q_NULLPTR));
         label_15->setText(QApplication::translate("ClienteTickets", "Total:", Q_NULLPTR));

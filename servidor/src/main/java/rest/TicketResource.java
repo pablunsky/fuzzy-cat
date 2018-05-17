@@ -33,7 +33,6 @@ public class TicketResource {
     
     private ArbolB tickets = ArbolB.getArbolTickets();
     
-    
     @GET
     public Response getCount() {
         return Response.ok(tickets.getCounts()).build();

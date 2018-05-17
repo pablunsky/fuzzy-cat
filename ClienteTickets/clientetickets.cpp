@@ -61,6 +61,8 @@ void ClienteTickets::on_pushButton_4_clicked()
     QPalette palette;
     palette.setBrush(QPalette::Background, bkgnd);
     this->setPalette(palette);
+    ui->label_17->setText("0000");
+    ui->label_18->setText("AAAAAA");
 
     ui->stackedWidget->setCurrentIndex(0);
 }
@@ -126,6 +128,9 @@ void ClienteTickets::on_pushButton_10_clicked()
     QPalette palette;
     palette.setBrush(QPalette::Background, bkgnd);
     this->setPalette(palette);
+
+    ui->label_24->setText("");
+    ui->lineEdit->setText("");
 
     ui->stackedWidget->setCurrentIndex(0);
 }

@@ -5,6 +5,7 @@
  */
 package edd.urban.servidor;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -18,7 +19,7 @@ public class ArbolB {
     private NodoArbolB raiz;
     private int orden;
     private int tamano;
-    
+    private String pathofJSON = "/home/pablunsky/Documents/TAREAS/ESTRUCTURAS DE DATOS/Proyecto2/servidor/src/main/java/edd/urban/servidor/Tickets.json";
     private int countstd;
     private int countprm;
     private int countfll;
@@ -38,11 +39,41 @@ public class ArbolB {
         return sb.toString();
     }
     
+    private void Load(){
+        ObjectMapper mapper = new ObjectMapper();
+        try{
+            Ticket[] tickets = mapper.readValue(new File(pathofJSON),Ticket[].class);
+            for(Ticket t : tickets){
+                Add(t);
+            }
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+    
+    private void Save(){
+        try{
+            File f = new File(pathofJSON);
+            String json = "[";
+            
+            json += "]";
+            FileWriter fw = new FileWriter(f);
+            fw.write(json);
+            fw.close();
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+    
     private static ArbolB singletonArbolTickets;
     
     public synchronized static ArbolB getArbolTickets(){
-        if(singletonArbolTickets == null)
+        if(singletonArbolTickets == null){
             singletonArbolTickets = new ArbolB(3);
+            singletonArbolTickets.Load();
+        }
         return singletonArbolTickets;
     }
     
@@ -100,9 +131,9 @@ public class ArbolB {
         try{
             String path = "/home/pablunsky/Documents/TAREAS/ESTRUCTURAS DE DATOS/Proyecto2/servidor/src/main/webapp/W3.CSS Template_files/";
             File file = new File(path+"arbol.dot");
-            FileWriter escribir=new FileWriter(file);
-            escribir.write(grafica);
-            escribir.close();
+            FileWriter fw = new FileWriter(file);
+            fw.write(grafica);
+            fw.close();
             String[] cmd = {"dot","-Tpng",path+"arbol.dot","-o",path+"arbol.jpg"};
             Runtime.getRuntime().exec(cmd);
         }catch(IOException e){
@@ -112,6 +143,7 @@ public class ArbolB {
     
     public Ticket Buscar(String codigo){
         NodoArbolB actual = raiz;
+        
         for(int i = 0; i<orden*2-1; i++){
             if(actual.getContenidos()[i]!=null){
                 Ticket t = actual.getContenidos()[i];
@@ -132,7 +164,7 @@ public class ArbolB {
     }
     
     public Ticket Buscar(String codigo, NodoArbolB hijo){
-        NodoArbolB actual = raiz;
+        NodoArbolB actual = hijo;
         for(int i = 0; i<orden*2-1; i++){
             if(actual.getContenidos()[i]!=null){
                 Ticket t = actual.getContenidos()[i];

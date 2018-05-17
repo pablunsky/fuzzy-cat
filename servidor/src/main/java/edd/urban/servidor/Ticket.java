@@ -6,6 +6,8 @@
 package edd.urban.servidor;
 
 import java.util.Date;
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 
 /**
  *
@@ -17,8 +19,13 @@ public class Ticket {
     private String codigo_devolucion;
     private double valor;
     private double saldo_actual;
+    
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date fecha_emision;
+    
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date fecha_devolucion;
+    
     private static int count = 0;
     
     public Ticket(){
