@@ -5,8 +5,12 @@
  */
 package rest;
 
+
+import edd.urban.servidor.Abordaje;
 import edd.urban.servidor.ArbolB;
+import edd.urban.servidor.ListaAbordajes;
 import edd.urban.servidor.ListaReembolsos;
+import edd.urban.servidor.NodoAbordaje;
 import edd.urban.servidor.NodoReembolso;
 import edd.urban.servidor.Reembolso;
 import edd.urban.servidor.SolicitudTicket;
@@ -38,6 +42,7 @@ public class TicketResource {
     
     private ArbolB tickets = ArbolB.getArbolTickets();
     private ListaReembolsos reembolsos = ListaReembolsos.getListaIncial();
+    private ListaAbordajes abordajes = ListaAbordajes.getListaIncial();
     
     @GET
     public Response getCount() {
@@ -51,7 +56,33 @@ public class TicketResource {
         t.setSaldo_actual(req.getValor());
         
         tickets.Add(t);
+        tickets.Graficar();
+        tickets.Save();
         return Response.ok(t).build();
+    }
+    
+    @Path("abordajes")
+    @PUT
+    public Response solicitudAbordaje(Abordaje req){
+        Ticket t = tickets.Buscar(req.getCod_ticket());
+        if(t == null){
+            return Response.ok("{\"mensaje\":\"Error, el ticket solicitado no existe.\"}").build();
+        }
+        else if(t.getSaldo_actual() < req.getValor_abordaje()){
+            return Response.ok("{\"mensaje\":\"Lo sentimos, pero no tiene suficiente saldo en el ticket para realizar el abordaje.\nTe invitamos a hacer una recarga en el kiosco mas cercano.\"}").build();
+        }
+        t.setSaldo_actual(t.getSaldo_actual()-req.getValor_abordaje());
+        req.setFecha_abordaje(new Date());
+        NodoAbordaje n = new NodoAbordaje().setValor(req.toString());
+        abordajes.agregarAbordaje(n);
+        tickets.Save();
+        return Response.ok("{\"mensaje\":\"Solicitud validada. Saldo actual: "+t.getSaldo_actual()+". Feliz viaje\"}").build();
+    }
+    
+    @Path("abordajes")
+    @GET
+    public Response getAbordajes(){
+        return Response.ok(abordajes.toString()).build();
     }
     
     @PUT
@@ -71,9 +102,8 @@ public class TicketResource {
             
             return Response.ok("{\"mensaje\":\"El valor del ticket ha sido compensado.\"}").build();
         }
+        tickets.Save();
         return Response.ok("{\"mensaje\":\"Error, el ticket solicitado no existe.\"}").build();
     }
-    
-    
     
 }

@@ -13,20 +13,20 @@ import java.io.FileWriter;
  *
  * @author pablunsky
  */
-public class ListaReembolsos {
+public class ListaAbordajes {
     
-    private NodoReembolso primero;
-    private NodoReembolso ultimo;
+    private NodoAbordaje primero;
+    private NodoAbordaje ultimo;
     int size;
-    private String pathofJSON = "/home/pablunsky/Documents/TAREAS/ESTRUCTURAS DE DATOS/Proyecto2/servidor/src/main/java/edd/urban/servidor/Reembolsos.json";
+    private String pathofJSON = "/home/pablunsky/Documents/TAREAS/ESTRUCTURAS DE DATOS/Proyecto2/servidor/src/main/java/edd/urban/servidor/Abordajes.json";
     
     
-    private static ListaReembolsos listaST;
+    private static ListaAbordajes listaST;
     
-    public synchronized static ListaReembolsos getListaIncial()
+    public synchronized static ListaAbordajes getListaIncial()
     {
         if(listaST == null){
-            listaST = new ListaReembolsos();
+            listaST = new ListaAbordajes();
             listaST.Load();
         }
         return listaST;
@@ -35,10 +35,10 @@ public class ListaReembolsos {
     private void Load(){
         ObjectMapper mapper = new ObjectMapper();
         try{
-            Reembolso[] reembolsos = mapper.readValue(new File(pathofJSON),Reembolso[].class);
+            Abordaje[] abordajes = mapper.readValue(new File(pathofJSON),Abordaje[].class);
             
-            for(Reembolso r : reembolsos){
-                agregarReembolso(new NodoReembolso().setValor(r.toString()));
+            for(Abordaje r : abordajes){
+                agregarAbordaje(new NodoAbordaje().setValor(r.toString()));
             }
         }
         catch(Exception e){
@@ -60,7 +60,7 @@ public class ListaReembolsos {
         }
     }
     
-    private ListaReembolsos()
+    private ListaAbordajes()
     {
         this.primero = null;
         this.ultimo = null;
@@ -79,17 +79,17 @@ public class ListaReembolsos {
         return this.primero == null || this.size == 0;
     }
     
-    public void agregarReembolso(NodoReembolso reembolso)
+    public void agregarAbordaje(NodoAbordaje abordaje)
     {
         if(this.isEmpty())
         {
-            this.primero = reembolso;
-            this.ultimo = reembolso;
+            this.primero = abordaje;
+            this.ultimo = abordaje;
         }
         else
         {
-            this.ultimo.sig = reembolso;
-            this.ultimo = reembolso;
+            this.ultimo.sig = abordaje;
+            this.ultimo = abordaje;
         }
         Save();
         this.size++;
@@ -98,9 +98,9 @@ public class ListaReembolsos {
     public String toString(){
         StringBuilder sb = new StringBuilder();
         sb.append("[");
-        NodoReembolso aux = primero;
+        NodoAbordaje aux = primero;
         while(aux!=null){
-            sb.append(aux.reembolso);
+            sb.append(aux.abordaje);
             aux = aux.sig;
             if(aux!=null)
                 sb.append(",\n");

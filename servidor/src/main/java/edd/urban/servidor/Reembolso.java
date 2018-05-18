@@ -30,7 +30,6 @@ public class Reembolso {
     @Override
     public String toString(){
         return "{\"saldo_debitado\":\""+saldo_debitado+"\",\"valor_original\":\""+valor_original+"\",\"codigo\":\""+codigo+"\",\"fecha_devolucion\":\""+fecha_devolucion+"\",\"codigo_devolucion\":\""+codigo_devolucion+"\"}";
-            
     }   
     
     public double getSaldo_debitado() {

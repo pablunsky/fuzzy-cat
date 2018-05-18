@@ -52,7 +52,7 @@ public class ArbolB {
         }
     }
     
-    private void Save(){
+    public void Save(){
         try{
             File f = new File(pathofJSON);
             String json = "[";
@@ -146,7 +146,7 @@ public class ArbolB {
         return previo;
     }
     
-    private void Graficar(){
+    public void Graficar(){
         String grafica="digraph arbol{\nArbolB [shape=record, fontname=\"Raleway\", label=ArbolB]";
         grafica += graficar("ArbolB",raiz,"");
         grafica += "}";
@@ -207,6 +207,50 @@ public class ArbolB {
         return null;
     }
     
+    
+    public Ticket Buscar(int codigo){
+        NodoArbolB actual = raiz;
+        
+        for(int i = 0; i<orden*2-1; i++){
+            if(actual.getContenidos()[i]!=null){
+                Ticket t = actual.getContenidos()[i];
+                if(t.getCodigo()==codigo)
+                    return t;
+            }
+        }
+        
+        for(int i = 0; i<orden*2; i++){
+            if(actual.getHijos()[i]!=null){
+                Ticket t = Buscar(codigo, actual.getHijos()[i]);
+                if(t!=null)
+                    return t;
+            }
+        }
+        
+        return null;
+    }
+    
+    public Ticket Buscar(int codigo, NodoArbolB hijo){
+        NodoArbolB actual = hijo;
+        for(int i = 0; i<orden*2-1; i++){
+            if(actual.getContenidos()[i]!=null){
+                Ticket t = actual.getContenidos()[i];
+                if(t.getCodigo()==codigo)
+                    return t;
+            }
+        }
+        
+        for(int i = 0; i<orden*2; i++){
+            if(actual.getHijos()[i]!=null){
+                Ticket t = Buscar(codigo, actual.getHijos()[i]);
+                if(t!=null)
+                    return t;
+            }
+        }
+        
+        return null;
+    }
+    
     public void Add(Ticket t){
         if(raiz.Llena()){
             dividirRaiz();
@@ -214,8 +258,6 @@ public class ArbolB {
         }
         raiz.insertarTicket(t);
         checkout(t);
-        Save();
-        Graficar();
     }
     
     private void dividirRaiz(){

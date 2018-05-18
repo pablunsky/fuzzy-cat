@@ -37,11 +37,11 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
   <div class="w3-bar-block" ng-controller="ControlPrincipal">
     <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>&nbsp; Close Menu</a>
     <a class="w3-bar-item w3-button w3-padding" ng-click="redireccionHome()"><i class="fa fa-globe fa-fw"></i>&nbsp; Vista general</a>
-    <a class="w3-bar-item w3-button w3-padding w3-blue" ng-click="redireccionTickets()"><i class="fa fa-ticket fa-fw"></i>&nbsp; Tickets</a>
+    <a class="w3-bar-item w3-button w3-padding" ng-click="redireccionTickets()"><i class="fa fa-ticket fa-fw"></i>&nbsp; Tickets</a>
     <a class="w3-bar-item w3-button w3-padding" ng-click="redireccionEstaciones()"><i class="fa fa-subway fa-fw"></i>&nbsp; Estaciones</a>
     <a class="w3-bar-item w3-button w3-padding" ng-click="redireccionRutas()"><i class="fa fa-code-fork fa-fw"></i>&nbsp; Rutas</a>
     <a class="w3-bar-item w3-button w3-padding" ng-click="redireccionReembolsos()"><i class="fa fa-eraser fa-fw"></i>&nbsp; Reembolsos</a>
-    <a class="w3-bar-item w3-button w3-padding" ng-click="redireccionAbordajes()"><i class="fa fa-bus fa-fw"></i>&nbsp; Abordajes</a>
+    <a class="w3-bar-item w3-button w3-padding w3-blue" ng-click="redireccionAbordajes()"><i class="fa fa-bus fa-fw"></i>&nbsp; Abordajes</a>
     <a class="w3-bar-item w3-button w3-padding"><i class="fa fa-info fa-fw"></i>&nbsp; Acerca de...</a>
   </div>
 </nav>
@@ -55,59 +55,20 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
 
   <!-- Header -->
   <header class="w3-container" style="padding-top:22px">
-    <h2><b><i class="fa fa-ticket"></i> Tickets</b></h2>
+    <h2><b><i class="fa fa-bus"></i> Abordajes</b></h2>
   </header>
 
-  <div class="w3-row-padding w3-margin-bottom" ng-controller="ControlPrincipal">
-    <div class="w3-quarter">
-      <div class="w3-container w3-red w3-padding-16">
-        <div class="w3-left"><i class="fa fa-star-half-empty w3-xxxlarge"></i></div>
-        <div class="w3-right">
-          <h3>{{countstd}}</h3>
-        </div>
-        <div class="w3-clear"></div>
-        <h4>Standard</h4>
-      </div>
-    </div>
-    <div class="w3-quarter">
-      <div class="w3-container w3-blue w3-padding-16">
-        <div class="w3-left"><i class="fa fa-star-half-full w3-xxxlarge"></i></div>
-        <div class="w3-right">
-          <h3>{{countprm}}</h3>
-        </div>
-        <div class="w3-clear"></div>
-        <h4>Premium</h4>
-      </div>
-    </div>
-    <div class="w3-quarter">
-      <div class="w3-container w3-teal w3-padding-16">
-        <div class="w3-left"><i class="fa fa-star-o w3-xxxlarge"></i></div>
-        <div class="w3-right">
-          <h3>{{countfll}}</h3>
-        </div>
-        <div class="w3-clear"></div>
-        <h4>Full</h4>
-      </div>
-    </div>
-    <div class="w3-quarter">
-      <div class="w3-container w3-orange w3-text-white w3-padding-16">
-        <div class="w3-left"><i class="fa fa-star w3-xxxlarge"></i></div>
-        <div class="w3-right">
-          <h3>{{countnls}}</h3>
-        </div>
-        <div class="w3-clear"></div>
-        <h4>Endless</h4>
-      </div>
-    </div>
-  </div>
   
-<header class="w3-container" style="padding-top:22px">
-    <h3><b><i class="fa fa-eye"></i> Vista de almacenamiento</b></h3>
-</header>
-
-<div class="ex1">
-    <img src="W3.CSS%20Template_files/arbol.jpg" alt="arbol">
-</div>
+  <div class="w3-container" ng-controller="ControlAbordajes">
+    <h5>Ultimos abordajes</h5>
+    <ul class="w3-ul w3-card-4 w3-white" ng-repeat="a in abordajes">
+      <li class="w3-padding-16">
+        <img src="W3.CSS%20Template_files/avatar2.png" class="w3-left w3-circle w3-margin-right" style="width:35px">
+        <span class="w3-xlarge">Codigo de ticket: {{a.cod_ticket}} | Estacion: {{a.nombre_estacion}} | Hora: {{a.fecha_abordaje}} | Valor: Q.{{a.valor_abordaje}}</span><br>
+      </li>
+    </ul>
+  </div>
+  <hr>
   
   <!-- Footer -->
   <footer class="w3-container w3-padding-16 w3-light-grey">

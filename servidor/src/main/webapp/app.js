@@ -45,7 +45,11 @@ app.controller('ControlPrincipal', function($scope,$window,$http) {
     $scope.redireccionEstaciones = function(){
         $window.location.href="Estaciones.html";
     };  
-        
+    
+    $scope.redireccionAbordajes = function(){
+        $window.location.href="Abordajes.html";
+    };
+    
     }
 );
 
@@ -53,6 +57,14 @@ app.controller('ControlReembolsos',function($scope,$http,$log){
     $scope.reembolsos = [];
     $http.get(base+'/Reembolsos').then(function(response){
             $scope.reembolsos = response.data;
+         });
+    }
+);
+
+app.controller('ControlAbordajes',function($scope,$http,$log){
+    $scope.abordajes = [];
+    $http.get(base+'/ticket/abordajes').then(function(response){
+            $scope.abordajes = response.data;
          });
     }
 );
