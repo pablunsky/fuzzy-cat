@@ -46,86 +46,105 @@ app.controller('ControlPrincipal', function($scope,$window,$http) {
 
 app.controller('ControlEstaciones', function($scope,$http,$log) {
     $scope.estacionesD = [];
-    $http.get(base+'/estaciones').then(function(response)
-    {
-        $scope.estacionesD = response.data;
-        alert(response.data);
-    },function error(response){
-        alert(response.statusText);
-    });
-/*
-    $scope.estacionesD = [
+    $scope.path = "";
+    $scope.getEstaciones = () => {
+        $http.get(base+'/estaciones').then(function(response)
         {
-            nombre: 'Est1',
-            codigo: 'E12S',
-            latitud: '120',
-            longitud: '1200'
-        },
-        {
-            nombre: 'Terminal',
-            codigo: '10',
-            latitud: '100',
-            longitud: '100'
+            $scope.estacionesD = response.data;
         }
-    ];*/
-
+    )};
 
     $scope.registrarEstacion = (codigo,nombre,latitud,longitud) => {
         $log.info("Codigo: "+codigo+"\nNombre: "+nombre+"\nLatitud: "+latitud+"\nLongitud: "+longitud);
         $http.post(
-            base + '/estaciones', 
-            { nombre:codigo }
+            base + '/estaciones',
+            {
+                codEstacion: codigo,
+                nomEstacion: nombre,
+                latitud: latitud,
+                longitud: longitud
+            }
         ).then(
-            (data) => $alert("Estacion Registrada!"), 
-            (error) => $log.error(error)
-        );
-    }   
+            (response) => 
+            {
+                $scope.getEstaciones();
+                alert(response.data);
+            },
+            (error) => alert(error)
+        )
+    };
+
     }
 );
 
+
 app.controller('ControlRutas', function($scope,$http,$log) {
 
-    $scope.rutasD = [
-        {
-            nombre: 'Ruta 1',
-            codigo: 'R11'
-        },
-        { 
-            nombre: 'Ruta 2',
-            codigo: 'R12'
-        }
-    ];
+    $scope.rutasD = [];
 
+    $scope.getRutas = () => {
+        $http.get(base+'/rutas').then(function(response)
+        {
+            $scope.rutasD = response.data;
+            $log.info(response.data);
+        }
+    )};
+        
     $scope.verRuta = (codigo) => {
-        $log.info("Codigo: "+codigo);
+        $log.info("Codigo: " + codigo);
         $http.post(
-            base + '/rutas', 
-            { nombre:codigo }
+            base + '/rutas/generarGrafo', 
+            {
+                codigoRuta: codigo,
+                nombreRuta: "nombre",
+                colorRuta: "color",
+                valorRuta: 0.0,
+                grafo: null
+            }
         ).then(
-            (data) => $alert("Ok"), 
+            (data) => console.log("Grafo generado"), 
             (error) => $log.error(error)
         );
     }
 
 
-    $scope.agregarRuta = (codigo,nombre,color) => {
+    $scope.agregarRuta = (codigo,nombre,color,valor) => {
         $log.info("Codigo: "+codigo+"\nNombre: "+nombre+"\nColor: "+color);
         $http.post(
             base + '/rutas', 
-            { nombre:codigo }
+            { 
+                codigoRuta: codigo,
+                nombreRuta: nombre,
+                colorRuta: color,
+                valorRuta: valor,
+                grafo: null
+            }
         ).then(
-            (data) => $alert("Ruta Agregada!"), 
-            (error) => $log.error(error)
-        );
-    }
+            (response) => 
+            {
+                $scope.getRutas();
+                alert(response.data);
+            }, 
+            (error) => alert(error)
+        )
+    };
 
-    $scope.agregarRecorrido = (codOrigen,codDestino,distancia,trafico) => {
-        $log.info("CodigoOrigen: "+codOrigen+"\nCodigoDestino: "+codDestino+"\nDistancia: "+distancia+"\nTrafico: "+trafico);
+    $scope.agregarRecorrido = (ruta,codOrigen,codDestino,distancia,trafico) => {
+        $log.info("CodigoRuta:"+ruta+"\nCodigoOrigen: "+codOrigen+"\nCodigoDestino: "+codDestino+"\nDistancia: "+distancia+"\nTrafico: "+trafico);
         $http.post(
-            base + '/recorrido', 
-            { nombre:codOrigen }
+            base + '/rutas/recorrido', 
+            { 
+                codRuta: ruta,
+                codOrigen: codOrigen,
+                codDestino: codDestino,
+                distancia: distancia,
+                trafico: trafico 
+            }
         ).then(
-            (data) => alert("Recorrido Agregado"), 
+            (response) => 
+            {
+                alert(response.data);
+            }, 
             (error) => $log.error(error)
         );
     }

@@ -2,6 +2,7 @@
 #define VENTANAESTACION_H
 #include "listarutas.h"
 #include <QWidget>
+#include "transbordo.h"
 
 namespace Ui {
 class VentanaEstacion;
@@ -12,7 +13,7 @@ class VentanaEstacion : public QWidget
     Q_OBJECT
 
 public:
-    explicit VentanaEstacion(QString codigo, ListaRutas *rutas, QWidget *parent = 0);
+    explicit VentanaEstacion(Transbordo *infoTransbordo, ListaRutas *rutas, QWidget *parent = 0);
     ~VentanaEstacion();
 
 private slots:
@@ -22,6 +23,8 @@ private slots:
 private:
     Ui::VentanaEstacion *ui;
     void agregarRutas(ListaRutas *rutas);
+    Transbordo *infoTransbordo;
+    ListaRutas *rutas;
 
 };
 

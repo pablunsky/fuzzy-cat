@@ -6,10 +6,11 @@
 class Ruta
 {
 public:
-    Ruta(int codigo,QString nombre,QString color);
+    Ruta(int codigo,QString nombre,QString color, double precio);
     int codigo;
     QString nombre;
     QString color;
+    double precio;
     //Grafo *recorrido;
 };
 

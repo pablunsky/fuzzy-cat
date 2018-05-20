@@ -1,7 +1,7 @@
 #ifndef CONFIG_H
 #define CONFIG_H
 #include "listarutas.h"
-
+#include "transbordo.h"
 #include <QMainWindow>
 
 namespace Ui {
@@ -24,6 +24,9 @@ private:
     bool exist(QString codEstacion);
     ListaRutas *rutas;
     ListaRutas* getRutas(QString codigoEstacion);
+    const QString BASE = "http://localhost:8080/servidor-1.0-SNAPSHOT/webresources";
+
+    Transbordo *infoTransbordo;
 };
 
 #endif // CONFIG_H
