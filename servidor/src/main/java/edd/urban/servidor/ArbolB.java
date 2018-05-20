@@ -147,6 +147,7 @@ public class ArbolB {
     }
     
     public void Graficar(){
+
         String grafica="digraph arbol{\nArbolB [shape=record, fontname=\"Raleway\", label=ArbolB]";
         grafica += graficar("ArbolB",raiz,"");
         grafica += "}";
@@ -251,6 +252,7 @@ public class ArbolB {
         return null;
     }
     
+
     public void Add(Ticket t){
         if(raiz.Llena()){
             dividirRaiz();

@@ -35,6 +35,7 @@ public class Ticket {
         this.codigo_devolucion = rndChar()+""+rndChar()+""+rndChar()+""+cod;
         this.fecha_emision = new Date();
         this.fecha_devolucion = null;
+
         //this.codigo = (int) (Math.random() * 5000);
         codigo = count;
         count ++;

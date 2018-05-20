@@ -102,7 +102,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
   </div>
 
   <div class="w3-panel" ng-controller="ControlRutas">
-    <div class="w3-row-padding" style="margin:0 -16px">
+    <div class="w3-row-padding" style="margin:0 -16px" ng-init="getRutas()">
       <div class="w3-third">
         <h2>Mapa general</h2>
         <img src="W3.CSS%20Template_files/region.jpg" style="width:100%" alt="Google Regional Map">
@@ -111,47 +111,28 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
         <h2>Rutas disponibles</h2>
         <table class="w3-table w3-striped w3-white">
           <tbody ng-repeat="ruta in rutasD">
-          <tr ng-if="ruta.nombre == 'Ruta 2'">
-            <td><i class="fa fa-code-fork w3-text-red w3-large"></i></td>
-            <td>{{ruta.nombre}}</td>
-            <td><i>10 mins</i></td>
-          </tr>
-          <tr ng-if="ruta.nombre == 'Ruta 1'">
-            <td><i class="fa fa-code-fork w3-text-blue w3-large"></i></td>
-            <td>{{ruta.nombre}}</td>
-            <td><i>10 mins</i></td>
-          </tr>
-          <!--<tr>
-            <td><i class="fa fa-code-fork w3-text-red w3-large"></i></td>
-            <td>Ruta 101.</td>
-            <td><i>15 mins</i></td>
-          </tr>
-          <tr>
-            <td><i class="fa fa-code-fork w3-text-yellow w3-large"></i></td>
-            <td>Ruta 96.</td>
-            <td><i>17 mins</i></td>
-          </tr>
-          <tr>
-            <td><i class="fa fa-code-fork w3-text-red w3-large"></i></td>
-            <td>Ruta 204.</td>
-            <td><i>25 mins</i></td>
-          </tr>
-          <tr>
-            <td><i class="fa fa-code-fork w3-text-blue w3-large"></i></td>
-            <td>Ruta 1.</td>
-            <td><i>28 mins</i></td>
-          </tr>
-          <tr>
-            <td><i class="fa fa-code-fork w3-text-red w3-large"></i></td>
-            <td>Ruta 69.</td>
-            <td><i>35 mins</i></td>
-          </tr>
-          <tr>
+          <tr ng-if="ruta.tiempo < 15.0">
             <td><i class="fa fa-code-fork w3-text-green w3-large"></i></td>
-            <td>Ruta 666.</td>
-            <td><i>39 mins</i></td>
-          </tr>-->
-        </tbody></table>
+            <td>{{ruta.nombre}}</td>
+            <td><i>{{ruta.tiempo}} mins</i></td>
+          </tr>
+          <tr ng-if="ruta.tiempo > 15.0 && ruta.tiempo < 30.0">
+            <td><i class="fa fa-code-fork w3-text-blue w3-large"></i></td>
+            <td>{{ruta.nombre}}</td>
+            <td><i>{{ruta.tiempo}} mins</i></td>
+          </tr>
+          <tr ng-if="ruta.tiempo > 30.0 && ruta.tiempo < 45.0">
+            <td><i class="fa fa-code-fork w3-text-orange w3-large"></i></td>
+            <td>{{ruta.nombre}}</td>
+            <td><i>{{ruta.tiempo}} mins</i></td>
+          </tr>
+          <tr ng-if="ruta.tiempo > 45.0">
+            <td><i class="fa fa-code-fork w3-text-red w3-large"></i></td>
+            <td>{{ruta.nombre}}</td>
+            <td><i>{{ruta.tiempo}} mins</i></td>
+          </tr>
+        </tbody>
+        </table>
       </div>
     </div>
   </div>

@@ -9,7 +9,6 @@
 <style>
 html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
 </style>
-</head><body class="w3-light-grey">
 
 <!-- Top container -->
 <div class="w3-bar w3-top w3-black w3-large" style="z-index:4">
@@ -57,49 +56,6 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
     <h2><b><i class="fa fa-subway fa-fw"></i>Estaciones</b></h2>
   </header>
 
-  <div class="w3-row-padding w3-margin-bottom" ng-controller="ControlPrincipal">
-    <div class="w3-quarter">
-      <div class="w3-container w3-red w3-padding-16">
-        <div class="w3-left"><i class="fa fa-star-half-empty w3-xxxlarge"></i></div>
-        <div class="w3-right">
-          <h3>{{countstd}}</h3>
-        </div>
-        <div class="w3-clear"></div>
-        <h4>Standard</h4>
-      </div>
-    </div>
-    <div class="w3-quarter">
-      <div class="w3-container w3-blue w3-padding-16">
-        <div class="w3-left"><i class="fa fa-star-half-full w3-xxxlarge"></i></div>
-        <div class="w3-right">
-          <h3>{{countprm}}</h3>
-        </div>
-        <div class="w3-clear"></div>
-        <h4>Premium</h4>
-      </div>
-    </div>
-    <div class="w3-quarter">
-      <div class="w3-container w3-teal w3-padding-16">
-        <div class="w3-left"><i class="fa fa-star-o w3-xxxlarge"></i></div>
-        <div class="w3-right">
-          <h3>{{countfll}}</h3>
-        </div>
-        <div class="w3-clear"></div>
-        <h4>Full</h4>
-      </div>
-    </div>
-    <div class="w3-quarter">
-      <div class="w3-container w3-orange w3-text-white w3-padding-16">
-        <div class="w3-left"><i class="fa fa-star w3-xxxlarge"></i></div>
-        <div class="w3-right">
-          <h3>{{countnls}}</h3>
-        </div>
-        <div class="w3-clear"></div>
-        <h4>Endless</h4>
-      </div>
-    </div>
-  </div>
-  
 <!--bodyPage-->
 <header class="w3-container" style="padding-top:22px">
     <h3><b><i class="fa fa-plus-square"></i> Agregar Estaciones</b></h3>
@@ -118,35 +74,43 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
     
     <div style="display: inline-block; position: relative; margin-left: 30px;"> 
      <h5>Latitud(m):</h5>
-     <input type="number" ng-model="inputLatitud">
+     <input type="number" step="0.01" ng-model="inputLatitud">
     </div>    
 
     <div style="display: inline-block; position: relative; margin-left: 30px;">
       <h5>Longitud(m):</h5>
-      <input type="number" ng-model="inputLongitud">
+      <input type="number" step="0.01" ng-model="inputLongitud">
     </div>
     <br>
     <br>
-    <button class="btn btn-primary" ng-click="registrarEstacion(inputCod,inputNom,inputLatitud,inputLongitud)">Registrar Estación</button>
+    <button class="btn btn-primary" ng-click="registrarEstacion(inputCod,inputNom,inputLatitud,inputLongitud);">Registrar Estación</button>
       <br>
       <br>
+      
+      <input type="checkbox" ng-model="checked" ng-init="checked=false"> Visualizar Gráfico<br>
+      
+      <span ng-if="checked">
+        <img ng-src="images/estaciones.png" style="max-width: 950px;">
+      </span>
 </div>
 
-<div ng-controller="ControlEstaciones">
+<div ng-controller = "ControlEstaciones" ng-init="getEstaciones()">
     <h5 style="position: relative; left: 10px">Estaciones Disponibles:</h5>
-    <table style="border-spacing: 40px">
-      <tr>
-        <th>Código</th>
-        <th>Nombre</th>
-        <th>Latitud</th> 
-        <th>Longitud</th>
-      </tr>
-      <tr ng-repeat="estacion in estacionesD" >
-        <td>{{estacion.codigo}}</td>
-        <td>{{estacion.nombre}}</td>
-        <td>{{estacion.latitud}}</td> 
-        <td>{{estacion.longitud}}</td>
-      </tr>
+    <table class="w3-table w3-striped w3-white">
+        <tr>
+          <th></th>
+          <th>Código</th>
+          <th>Nombre</th>
+          <th>Latitud(m)</th> 
+          <th>Longitud(m)</th>
+        </tr>
+        <tr ng-repeat="estacion in estacionesD">
+          <td><i class="fa fa-subway fa-fw"></i></td>
+            <td>{{estacion.codEstacion}}</td>
+            <td>{{estacion.nomEstacion}}</td>
+            <td>{{estacion.latitud}}</td> 
+          <td>{{estacion.longitud}}</td>
+        </tr>
     </table>
 </div>
 

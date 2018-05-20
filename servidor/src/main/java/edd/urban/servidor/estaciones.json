@@ -1,0 +1,80 @@
+[
+	{
+		"codEstacion": "20",
+		"nomEstacion": "Prueba",
+		"latitud": "100.0",
+		"longitud": "1321.0"
+	},
+	{
+		"codEstacion": "21",
+		"nomEstacion": "Terminal",
+		"latitud": "200.0",
+		"longitud": "1012.0"
+	},
+	{
+		"codEstacion": "22",
+		"nomEstacion": "Trebol",
+		"latitud": "100.0",
+		"longitud": "200.0"
+	},
+	{
+		"codEstacion": "100",
+		"nomEstacion": "USAC_Final",
+		"latitud": "2000.0",
+		"longitud": "20000.0"
+	},
+	{
+		"codEstacion": "120",
+		"nomEstacion": "Prueba_Lista",
+		"latitud": "100.0",
+		"longitud": "100.0"
+	},
+	{
+		"codEstacion": "1",
+		"nomEstacion": "012",
+		"latitud": "30.0",
+		"longitud": "10.0"
+	},
+	{
+		"codEstacion": "2",
+		"nomEstacion": "Estacion_Final",
+		"latitud": "10.0",
+		"longitud": "10.0"
+	},
+	{
+		"codEstacion": "a",
+		"nomEstacion": "1",
+		"latitud": "1.0",
+		"longitud": "1.0"
+	},
+	{
+		"codEstacion": "1232",
+		"nomEstacion": "112",
+		"latitud": "1.0",
+		"longitud": "1.0"
+	},
+	{
+		"codEstacion": "c",
+		"nomEstacion": "c",
+		"latitud": "1.0",
+		"longitud": "1.0"
+	},
+	{
+		"codEstacion": "ufff",
+		"nomEstacion": "funka",
+		"latitud": "100.0",
+		"longitud": "110.0"
+	},
+	{
+		"codEstacion": "100",
+		"nomEstacion": "100",
+		"latitud": "10010.0",
+		"longitud": "100.0"
+	},
+	{
+		"codEstacion": "a2",
+		"nomEstacion": "12",
+		"latitud": "12.0",
+		"longitud": "12.0"
+	}
+]

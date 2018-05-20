@@ -58,11 +58,13 @@ public class TicketResource {
         tickets.Add(t);
         tickets.Graficar();
         tickets.Save();
+
         return Response.ok(t).build();
     }
     
     @Path("abordajes")
     @PUT
+
     public Response solicitudAbordaje(Abordaje req){
         Ticket t = tickets.Buscar(req.getCod_ticket());
         if(t == null){
@@ -77,6 +79,7 @@ public class TicketResource {
         abordajes.agregarAbordaje(n);
         tickets.Save();
         return Response.ok("{\"mensaje\":\"Solicitud validada. Saldo actual: "+t.getSaldo_actual()+". Feliz viaje\"}").build();
+
     }
     
     @Path("abordajes")

@@ -36,7 +36,11 @@ void JsonReader::obtenerRutas(ListaRutas *rutas, QByteArray json)
             if(color.isUndefined() || color.isNull())
                 continue;
 
-            Ruta *rutaTemp = new Ruta(codigo.toInt(),nombre.toString(),color.toString());
+            QJsonValue precio = obj["precio"];
+            if(precio.isUndefined() || precio.isNull())
+                continue;
+
+            Ruta *rutaTemp = new Ruta(codigo.toInt(),nombre.toString(),color.toString(),precio.toDouble());
             rutas->insertarRuta(rutaTemp);
         }
 }

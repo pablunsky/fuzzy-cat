@@ -14,7 +14,10 @@ public class NodoEstacion {
     private String nomEstacion;
     private Double latitud;
     private Double longitud;
-    NodoEstacion sig;        
+    public NodoEstacion sig;        
+    
+    public NodoEstacion()
+    {}
     
     public NodoEstacion(String codEstacion, String nomEstacion, Double latitud, Double longitud) {
         this.codEstacion = codEstacion;
