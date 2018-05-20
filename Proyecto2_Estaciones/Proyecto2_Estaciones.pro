@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += network core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -30,7 +30,8 @@ SOURCES += \
     ruta.cpp \
     nodo.cpp \
     listarutas.cpp \
-    jsonreader.cpp
+    jsonreader.cpp \
+    transbordo.cpp
 
 HEADERS += \
         config.h \
@@ -38,7 +39,8 @@ HEADERS += \
     ruta.h \
     nodo.h \
     listarutas.h \
-    jsonreader.h
+    jsonreader.h \
+    transbordo.h
 
 FORMS += \
         config.ui \

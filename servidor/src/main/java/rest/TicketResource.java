@@ -33,7 +33,6 @@ public class TicketResource {
     
     private ArbolB tickets = ArbolB.getArbolTickets();
     
-    
     @GET
     public Response getCount() {
         return Response.ok(tickets.getCounts()).build();
@@ -43,14 +42,18 @@ public class TicketResource {
     public Response crearTicket(SolicitudTicket req){
         Ticket t = new Ticket();
         t.setValor(req.getValor());
-        tickets.AddTicket(t);
+        tickets.Add(t);
         return Response.ok(t).build();
     }
     
     @PUT
     public Response reembolsoTicket(SolicitudTicket content) {
-        //ELIMINAR SALDO DE TICKET
-        return Response.ok("{\"mensaje\":\"ok\"}").build();
+        Ticket t = tickets.Buscar(content.getCodigo());
+        if(t!=null){
+            t.setSaldo_actual(0);
+            return Response.ok("{\"mensaje\":\"El valor del ticket ha sido compensado.\"}").build();
+        }
+        return Response.ok("{\"mensaje\":\"Error, el ticket solicitado no existe.\"}").build();
     }
     
     

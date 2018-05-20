@@ -10,42 +10,97 @@ package edd.urban.servidor;
  * @author pablunsky
  */
 public class NodoArbolB {
-    private NodoArbolB[] enlaces;
+    
+    private NodoArbolB[] hijos;
     private Ticket[] contenidos;
-    private int contenidosllenos;
-    private int enlacesllenos;
+    private int llenos;
+    public boolean eshoja;
+    private int t;
     
     public NodoArbolB(int orden){
-        contenidos = new Ticket[orden];
-        enlaces = new NodoArbolB[orden];
-        contenidosllenos = 0;
-        enlacesllenos = 0;
+        t = orden;
+        contenidos = new Ticket[2*orden-1];
+        hijos = new NodoArbolB[orden*2];
+        llenos = 0;
+        eshoja = true;
     }
     
-    private void increaseLLenos(){
-        enlacesllenos++;
-        contenidosllenos++;
-    }
-    
-    public boolean AddValor(Ticket valor){
-        for(Ticket o : contenidos){
-            if(o==null){
-                o = valor;
-                return true;
-            }    
+    public void insertarTicket(Ticket nuevo){
+        int i = llenos - 1;
+        if(eshoja){
+            while((i>=0)&&(nuevo.getCodigo()<contenidos[i].getCodigo())){
+                contenidos[i+1] = contenidos[i];
+                i--;
+            }
+            llenos++;
+            contenidos[i+1] = nuevo;
         }
-        return false;
+        else{
+            while((i>=0) && (nuevo.getCodigo()<contenidos[i].getCodigo())){
+                i--;
+            }
+            
+            int hijoainsertar = i+1;
+            
+            if(hijos[hijoainsertar].Llena()){
+                
+                llenos++;
+                hijos[llenos] = hijos[llenos-1];
+                
+                for(int j = llenos-1;j>hijoainsertar;j--){
+                    hijos[j] = hijos[j-1];
+                    contenidos[j] = contenidos[j-1];
+                }
+                
+                contenidos[hijoainsertar] = hijos[hijoainsertar].getContenidos()[t-1];
+                hijos[hijoainsertar].setLlenos(t-1);
+
+                NodoArbolB nuevoNodo = new NodoArbolB(t);
+                
+                int k;
+                for(k = 0; k<t-1;k++){
+                    nuevoNodo.getHijos()[k] = hijos[hijoainsertar].getHijos()[k+t];
+                    nuevoNodo.getContenidos()[k] = hijos[hijoainsertar].getContenidos()[k+t];
+                    hijos[hijoainsertar].getHijos()[k+t] = null; 
+                    hijos[hijoainsertar].getContenidos()[k+t-1] = null;
+                }
+                
+                hijos[hijoainsertar].getContenidos()[k+t-1] = null;
+                
+                nuevoNodo.getHijos()[t-1] = hijos[hijoainsertar].getHijos()[2*t-1];
+                nuevoNodo.setLlenos(t-1);
+                nuevoNodo.eshoja = hijos[hijoainsertar].eshoja;
+                hijos[hijoainsertar+1] = nuevoNodo;
+                
+                if(nuevo.getCodigo() < contenidos[hijoainsertar].getCodigo()){
+                    hijos[hijoainsertar].insertarTicket(nuevo);
+                }
+                else{
+                    hijos[hijoainsertar+1].insertarTicket(nuevo);
+                }
+                hijos[hijoainsertar].getHijos()[k+t] = null;
+                
+            }
+            else{
+                hijos[hijoainsertar].insertarTicket(nuevo);
+            }
+        }
+        
     }
     
-    public NodoArbolB[] getEnlaces() {
-        return enlaces;
+    public boolean Llena(){
+        return llenos == contenidos.length;
+    }
+    
+    public NodoArbolB[] getHijos() {
+        return hijos;
     }
 
-    public void setEnlaces(NodoArbolB[] enlaces) {
-        this.enlaces = enlaces;
+    public void setHijos(NodoArbolB[] hijos) {
+        this.hijos = hijos;
     }
 
-    public Object[] getContenidos() {
+    public Ticket[] getContenidos() {
         return contenidos;
     }
 
@@ -53,20 +108,13 @@ public class NodoArbolB {
         this.contenidos = contenidos;
     }
 
-    public int getContenidosllenos() {
-        return contenidosllenos;
+    public int getLlenos() {
+        return llenos;
     }
 
-    public void setContenidosllenos(int contenidosllenos) {
-        this.contenidosllenos = contenidosllenos;
+    public void setLlenos(int llenos) {
+        this.llenos = llenos;
     }
 
-    public int getEnlacesllenos() {
-        return enlacesllenos;
-    }
-
-    public void setEnlacesllenos(int enlacesllenos) {
-        this.enlacesllenos = enlacesllenos;
-    }
     
 }

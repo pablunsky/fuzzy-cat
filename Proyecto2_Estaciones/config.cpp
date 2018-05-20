@@ -4,6 +4,11 @@
 #include <QDesktopWidget>
 #include <QStyle>
 #include "jsonreader.h"
+#include <QtNetwork>
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QJsonValue>
+#include <QMessageBox>
 
 Config::Config(QWidget *parent) :
     QMainWindow(parent),
@@ -14,6 +19,7 @@ Config::Config(QWidget *parent) :
 
     this->rutas = nullptr;
 
+    infoTransbordo = new Transbordo();
 }
 
 Config::~Config()
@@ -30,7 +36,8 @@ void Config::on_pushButton_clicked()
     if(exist(codigo))
     {
         rutas = getRutas(codigo);
-        VentanaEstacion *ventana = new VentanaEstacion(codigo,rutas);
+
+        VentanaEstacion *ventana = new VentanaEstacion(infoTransbordo,rutas);
         ventana->show();
         this->close();
     }
@@ -42,21 +49,62 @@ void Config::on_pushButton_clicked()
 
 bool Config::exist(QString codEstacion)
 {
-    //Verificar si la estacion existe
-    if(codEstacion == "GTM01") return true;
-    else return false;
+    bool res = false;
+    QString json = "{\"codEstacion\":\""+codEstacion+"\",\"nomEstacion\":\"sin\",\"latitud\":0.0,\"longitud\":0.0}";
+
+    QEventLoop eventLoop;
+
+    QNetworkAccessManager mgr;
+    QObject::connect(&mgr, SIGNAL(finished(QNetworkReply*)), &eventLoop, SLOT(quit()));
+    QNetworkRequest req( QUrl( BASE + QString("/rutas/transbordoValido") ) );
+    req.setRawHeader("Content-Type", "application/json");
+    QNetworkReply *reply = mgr.post(req, json.toUtf8());
+    eventLoop.exec();
+
+    if (reply->error() == QNetworkReply::NoError)
+    {
+        QByteArray response = reply->readAll();
+        QString temp = QString::fromUtf8(response);
+        QStringList list = temp.split("$$");
+        delete reply;
+        if(list.at(0) == "true")
+        {
+            res = true;
+            this->infoTransbordo->setCodEstacion(codEstacion); //set del codigo_estacion
+            this->infoTransbordo->setNombre_estacion(list.at(1)); //set del codigo_estacion
+        }
+    }
+    else
+    {
+        res = false;
+        delete reply;
+    }
+    return res;
 }
 
 ListaRutas* Config::getRutas(QString codigoEstacion)
 {
-    //buscarRutas disponibles para el codigo de estacion
-    //leer el json obtenido mediante el servidor
     ListaRutas* temp = new ListaRutas();
-    //JsonReader::obtenerRutas(temp,jsonRutas)
-    temp->insertarRuta(new Ruta(204,"USAC","azul"));
-    temp->insertarRuta(new Ruta(37,"TERMINAL","rojo"));
-    temp->insertarRuta(new Ruta(203,"USAC","azul"));
-    temp->insertarRuta(new Ruta(36,"TERMINAL","rojo"));
-    temp->insertarRuta(new Ruta(1,"TERMINAL","rojo"));
+    QString json = "{\"codEstacion\":\""+codigoEstacion+"\",\"nomEstacion\":\"sin\",\"latitud\":0.0,\"longitud\":0.0}";
+
+    QEventLoop eventLoop;
+
+    QNetworkAccessManager mgr;
+    QObject::connect(&mgr, SIGNAL(finished(QNetworkReply*)), &eventLoop, SLOT(quit()));
+    QNetworkRequest req( QUrl( BASE + QString("/rutas/disponibles") ) );
+    req.setRawHeader("Content-Type", "application/json");
+    QNetworkReply *reply = mgr.post(req, json.toUtf8());
+    eventLoop.exec();
+
+    if (reply->error() == QNetworkReply::NoError)
+    {
+        QByteArray response = reply->readAll();
+        JsonReader::obtenerRutas(temp,response);
+    }
+    else
+    {
+        delete reply;
+    }
+
     return temp;
 }

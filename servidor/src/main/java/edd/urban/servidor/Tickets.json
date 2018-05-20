@@ -1,0 +1,8 @@
+[
+{"codigo":"0","codigo_devolucion":"abc123","valor":"5.00","saldo_actual":"5.00","fecha_emision":"01-01-2018","fecha_devolucion":""},
+{"codigo":"1","codigo_devolucion":"abc124","valor":"3.00","saldo_actual":"3.00","fecha_emision":"02-01-2018","fecha_devolucion":""},
+{"codigo":"2","codigo_devolucion":"abc125","valor":"50.00","saldo_actual":"50.00","fecha_emision":"03-01-2018","fecha_devolucion":""},
+{"codigo":"3","codigo_devolucion":"abc126","valor":"100.00","saldo_actual":"5.00","fecha_emision":"04-01-2018","fecha_devolucion":""}
+]
+
+

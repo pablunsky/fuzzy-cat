@@ -6,13 +6,15 @@
 #include <QDesktopWidget>
 #include <QDebug>
 #include <QDir>
-VentanaEstacion::VentanaEstacion(QString codigo, ListaRutas *rutas, QWidget *parent) :
+VentanaEstacion::VentanaEstacion(Transbordo *infoTransbordo, ListaRutas *rutas, QWidget *parent) :
     QWidget(parent),
     ui(new Ui::VentanaEstacion)
 {
+    this->infoTransbordo  = infoTransbordo;
+    this->rutas = rutas;
 
     ui->setupUi(this);
-    this->setWindowTitle("Estación " + codigo);
+    this->setWindowTitle("Estación " + infoTransbordo->getNombre_estacion());
     this->setGeometry(QStyle::alignedRect(Qt::LeftToRight,Qt::AlignCenter,this->size(),qApp->desktop()->availableGeometry()));
 
     QString path = QDir::currentPath();
@@ -41,7 +43,7 @@ VentanaEstacion::~VentanaEstacion()
 
 void VentanaEstacion::agregarRutas(ListaRutas *rutas)
 {
-    if(rutas == nullptr)
+    if(rutas->isEmpty())
     {
         ui->label_error->setText("Rutas no disponibles");
         ui->groupBox->setEnabled(false);
@@ -53,8 +55,9 @@ void VentanaEstacion::agregarRutas(ListaRutas *rutas)
     int j = 0;
     while(temp != nullptr)
     {
-        QPushButton *btn = new QPushButton("Ruta "+QString::number(temp->ruta->codigo));
+        QPushButton *btn = new QPushButton("Ruta "+QString::number(temp->ruta->codigo)+"\nQ. "+QString::number(temp->ruta->precio,'f',2));
         btn->setFixedSize(70,35);
+        btn->setStyleSheet("background-color:"+temp->ruta->color);
         connect(btn,SIGNAL(clicked()),this,SLOT(verificarRuta()));
         layout->addWidget(btn,j,i);
         i++;
@@ -72,6 +75,7 @@ void VentanaEstacion::agregarRutas(ListaRutas *rutas)
 void VentanaEstacion::on_pushButton_back_clicked()
 {
     Config *config = new Config();
+    this->infoTransbordo->clean();
     config->show();
     this->close();
 }
@@ -82,8 +86,14 @@ void VentanaEstacion::verificarRuta()
     QString codTicket = ui->lineEdit_ticket->text();
     if(codTicket.isEmpty()) return;
 
+    infoTransbordo->setCod_ticket(codTicket.toInt()); //set del cod_ticket
     QPushButton* button = qobject_cast<QPushButton*>(sender());
     QString codRuta = button->text().replace("Ruta ","");
+    Ruta *rutaT = this->rutas->getRuta(codRuta);
+
+    this->infoTransbordo->setCodRuta(codRuta); //set del cod_ruta
+    this->infoTransbordo->setValor_abordaje(rutaT->precio); //set del valor_abordaje
+    this->infoTransbordo->setNombre_ruta(rutaT->nombre); //set del nombre_ruta
 
     //verificar la validez del ticket respecto a la ruta seleccionada
     if(codRuta.toInt() == 204)

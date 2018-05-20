@@ -6,7 +6,7 @@ class JsonReader
 {
 public:
     JsonReader();
-    void obtenerRutas(ListaRutas *rutas,QByteArray json);
+    static void obtenerRutas(ListaRutas *rutas,QByteArray json);
 };
 
 #endif // JSONREADER_H

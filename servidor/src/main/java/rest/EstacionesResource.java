@@ -20,27 +20,29 @@ import javax.ws.rs.core.Response;
  * @author ciberveliz
  */
 @Path("estaciones")
-@Consumes(MediaType.APPLICATION_JSON)
-@Produces(MediaType.APPLICATION_JSON)
+
 
 public class EstacionesResource {
 
-    private ListaEstaciones estaciones = ListaEstaciones.getListaIncial();
-    
+    ListaEstaciones estaciones = ListaEstaciones.getListaInicial();
     
     @GET
-    public ListaEstaciones getEstaciones()
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getEstaciones()
     {
-        return this.estaciones;
+        return Response.ok(this.estaciones.toString()).build();
     }
     
+       
     @POST
-    public Response agregarEstacion(String codEstacion, String nomEstacion, Double latitud, Double longitud)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public String agregarEstacion(NodoEstacion nE)
     {
-        //VERIFICAR SI EL CODIGO ESTA REPETIDO, SI LO ESTA MANDAR MSG DE ERROR
-        NodoEstacion nE = new NodoEstacion(codEstacion, nomEstacion, latitud, longitud);
+        if(this.estaciones.estacionRepetida(nE.getCodEstacion()))
+            return "\"Estación repetida\"";
         this.estaciones.agregarEstacion(nE);
-        
-        return Response.ok(nE).build();
+        return "\"Estación agregada!\"";
     }
+    
+   
 }
