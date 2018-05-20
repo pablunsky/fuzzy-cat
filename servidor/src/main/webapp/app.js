@@ -6,8 +6,7 @@
 
 var app = angular.module("UrbanEDD", []);
 
-const base = 'http://localhost:8080/servidor-1.0-SNAPSHOT/webresources';
-
+const base = 'http://localhost:8080/UrbanEDD/webresources';
 
 app.controller('ControlPrincipal', function($scope,$window,$http) {
     

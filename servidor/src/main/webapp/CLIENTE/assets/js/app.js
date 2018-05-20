@@ -1,6 +1,6 @@
 var app = angular.module("UrbanEDD", []);
 
-const base = 'http://localhost:8080/servidor-1.0-SNAPSHOT/webresources';
+const base = 'http://localhost:8080/UrbanEDD/webresources';
 app.controller('ControlRutas', function($scope,$http,$log) {
 
     $scope.rutasD = [];
