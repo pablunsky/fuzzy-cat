@@ -24,7 +24,7 @@ private:
     bool exist(QString codEstacion);
     ListaRutas *rutas;
     ListaRutas* getRutas(QString codigoEstacion);
-    const QString BASE = "http://localhost:8080/servidor-1.0-SNAPSHOT/webresources";
+    const QString BASE = "http://localhost:8080/UrbanEDD/webresources";
 
     Transbordo *infoTransbordo;
 };

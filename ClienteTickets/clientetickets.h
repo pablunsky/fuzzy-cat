@@ -38,7 +38,7 @@ private slots:
 
 private:
     double valor;
-    const QString BASE = "http://localhost:8080/servidor-1.0-SNAPSHOT/webresources";
+    const QString BASE = "http://localhost:8080/UrbanEDD/webresources";
     Ui::ClienteTickets *ui;
 };
 

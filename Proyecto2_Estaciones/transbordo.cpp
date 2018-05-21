@@ -65,6 +65,18 @@ double Transbordo::getValor_abordaje() const
     return valor_abordaje;
 }
 
+QString Transbordo::json(){
+    QString json = "{";
+    json += "\"cod_estacion\":\""+this->codEstacion+"\"";
+    json += ",\"cod_ruta\":\""+this->codRuta+"\"";
+    json += ",\"nombre_estacion\":\""+this->nombre_estacion+"\"";
+    json += ",\"nombre_ruta\":\""+this->nombre_ruta+"\"";
+    json += ",\"cod_ticket\":"+QString::number(this->cod_ticket);
+    json += ",\"valor_abordaje\":"+QString::number(this->valor_abordaje);
+    json += "}";
+    return json;
+}
+
 void Transbordo::setValor_abordaje(double value)
 {
     valor_abordaje = value;

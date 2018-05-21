@@ -7,8 +7,11 @@ package edd.urban.servidor;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 /**
  *
@@ -42,7 +45,11 @@ public class ArbolB {
     private void Load(){
         ObjectMapper mapper = new ObjectMapper();
         try{
-            Ticket[] tickets = mapper.readValue(new File(pathofJSON),Ticket[].class);
+            
+            String file = new String(Files.readAllBytes(Paths.get(pathofJSON)));
+            String json = Cifrador.cifrar(file);
+            
+            Ticket[] tickets = mapper.readValue(json,Ticket[].class);
             for(Ticket t : tickets){
                 Add(t);
             }
@@ -62,6 +69,9 @@ public class ArbolB {
             json += "]";
             
             FileWriter fw = new FileWriter(f);
+            
+            json = Cifrador.cifrar(json);
+            
             fw.write(json);
             fw.close();
             

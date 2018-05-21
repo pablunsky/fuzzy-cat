@@ -26,6 +26,8 @@ private:
     Transbordo *infoTransbordo;
     ListaRutas *rutas;
 
+    const QString BASE = "http://localhost:8080/UrbanEDD/webresources";
+
 };
 
 #endif // VENTANAESTACION_H

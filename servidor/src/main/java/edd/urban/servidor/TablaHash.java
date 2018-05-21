@@ -25,7 +25,7 @@ public class TablaHash implements Serializable
     int m;
     ListaHash[] tabla;
     
-    private static final String pathTxt = "/home/ciberveliz/NetBeansProjects/servidor/src/main/java/edd/urban/servidor/rutas.dat";
+    private static final String pathTxt = "/home/pablunsky/Documents/TAREAS/ESTRUCTURAS DE DATOS/Proyecto2/servidor/src/main/java/edd/urban/servidor/rutas.dat";
     
     private static TablaHash tablaST;
     private String textDot;
@@ -183,7 +183,7 @@ public class TablaHash implements Serializable
     
     private void graficarTabla()
     {
-        String path = "/home/ciberveliz/NetBeansProjects/servidor/src/main/webapp/images";
+        String path = "/home/pablunsky/Documents/TAREAS/ESTRUCTURAS DE DATOS/Proyecto2/servidor/src/main/webapp/images";
         String fileIn = path+"/tabla.txt";
         String fileOut = path + "/tabla.png";
         File temp = new File(fileIn);

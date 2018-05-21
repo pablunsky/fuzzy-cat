@@ -6,6 +6,11 @@
 #include <QDesktopWidget>
 #include <QDebug>
 #include <QDir>
+#include <QtNetwork>
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QJsonValue>
+
 VentanaEstacion::VentanaEstacion(Transbordo *infoTransbordo, ListaRutas *rutas, QWidget *parent) :
     QWidget(parent),
     ui(new Ui::VentanaEstacion)
@@ -95,12 +100,32 @@ void VentanaEstacion::verificarRuta()
     this->infoTransbordo->setValor_abordaje(rutaT->precio); //set del valor_abordaje
     this->infoTransbordo->setNombre_ruta(rutaT->nombre); //set del nombre_ruta
 
-    //verificar la validez del ticket respecto a la ruta seleccionada
-    if(codRuta.toInt() == 204)
+    QString json = infoTransbordo->json();
+
+    QEventLoop eventLoop;
+
+    QNetworkAccessManager mgr;
+    QObject::connect(&mgr, SIGNAL(finished(QNetworkReply*)), &eventLoop, SLOT(quit()));
+    QNetworkRequest req( QUrl( BASE + QString("/ticket/abordajes") ) );
+    req.setRawHeader("Content-Type", "application/json");
+    QNetworkReply *reply = mgr.post(req, json.toUtf8());
+    eventLoop.exec();
+
+    if (reply->error() == QNetworkReply::NoError)
     {
-        ui->label_correct->setEnabled(true);
-        ui->groupBox->setEnabled(false);
+        QByteArray response = reply->readAll();
+        QString temp = QString::fromUtf8(response);
+        QStringList list = temp.split("$$");
+        delete reply;
+        if(list.at(0) == "true")
+        {
+
+        }
     }
     else
-        ui->label_incorrect->setEnabled(true);
+    {
+        delete reply;
+    }
+
+
 }

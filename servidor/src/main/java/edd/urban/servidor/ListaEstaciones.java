@@ -18,7 +18,7 @@ import java.io.IOException;
 public class ListaEstaciones 
 {
     
-    private final String pathJson = "/home/ciberveliz/NetBeansProjects/servidor/src/main/java/edd/urban/servidor/estaciones.json";
+    private final String pathJson = "/home/pablunsky/Documents/TAREAS/ESTRUCTURAS DE DATOS/Proyecto2/servidor/src/main/java/edd/urban/servidor/estaciones.json";
     
     private String textDot = "";
     
@@ -160,7 +160,7 @@ public class ListaEstaciones
     //---------------------------GRAPHVIZ---------------------------------------
     private void generarGrafico()
     {
-        String path = "/home/ciberveliz/NetBeansProjects/servidor/src/main/webapp/images";
+        String path = "/home/pablunsky/Documents/TAREAS/ESTRUCTURAS DE DATOS/Proyecto2/servidor/src/main/webapp/images";
         String fileIn = path+"/estaciones.txt";
         String fileOut = path + "/estaciones.png";
         File temp = new File(fileIn);

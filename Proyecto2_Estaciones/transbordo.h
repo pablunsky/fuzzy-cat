@@ -28,6 +28,7 @@ public:
 
     void clean();
 
+    QString json();
 private:
     QString codEstacion;
     QString codRuta;
