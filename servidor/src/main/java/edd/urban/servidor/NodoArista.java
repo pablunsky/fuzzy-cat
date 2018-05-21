@@ -5,11 +5,13 @@
  */
 package edd.urban.servidor;
 
+import java.io.Serializable;
+
 /**
  *
  * @author ciberveliz
  */
-public class NodoArista {
+public class NodoArista implements Serializable{
     public Arista arista;
     public NodoArista sig;
     

@@ -5,11 +5,13 @@
  */
 package edd.urban.servidor;
 
+import java.io.Serializable;
+
 /**
  *
  * @author ciberveliz
  */
-public class NodoGrafo {
+public class NodoGrafo implements Serializable{
     private String nombre;
     private String codigo;
     private Double latitud;

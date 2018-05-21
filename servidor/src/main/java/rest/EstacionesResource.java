@@ -22,8 +22,8 @@ import javax.ws.rs.core.Response;
 @Path("estaciones")
 
 
-public class EstacionesResource {
-
+public class EstacionesResource 
+{
     ListaEstaciones estaciones = ListaEstaciones.getListaInicial();
     
     @GET
@@ -44,5 +44,4 @@ public class EstacionesResource {
         return "\"Estación agregada!\"";
     }
     
-   
 }

@@ -5,11 +5,13 @@
  */
 package edd.urban.servidor;
 
+import java.io.Serializable;
+
 /**
  *
  * @author ciberveliz
  */
-public class ListaHash 
+public class ListaHash implements Serializable
 {
     NodoHash primero;
     NodoHash ultimo;

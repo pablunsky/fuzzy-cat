@@ -6,11 +6,15 @@
 package edd.urban.servidor;
 //import org.hibernate.validator.constraints.Empty;
 
+import java.io.Serializable;
+
+
 /**
  *
  * @author ciberveliz
  */
-public class Ruta {
+public class Ruta implements Serializable
+{
     
     private int codigoRuta;
     private String nombreRuta;
@@ -18,7 +22,8 @@ public class Ruta {
     private Double valorRuta;
     private Grafo grafo;
 
-    public Ruta(int codigoRuta, String nombreRuta, String colorRuta, Double valorRuta) {
+    public Ruta(int codigoRuta, String nombreRuta, String colorRuta, Double valorRuta) 
+    {
         this.codigoRuta = codigoRuta;
         this.nombreRuta = nombreRuta;
         this.colorRuta = colorRuta;
@@ -27,47 +32,56 @@ public class Ruta {
     }
     
     public Ruta()
-    {
-        
+    {    
     }
     
-    public int getCodigoRuta() {
+    public int getCodigoRuta() 
+    {
         return codigoRuta;
     }
 
-    public void setCodigoRuta(int codigoRuta) {
+    public void setCodigoRuta(int codigoRuta) 
+    {
         this.codigoRuta = codigoRuta;
     }
 
-    public String getNombreRuta() {
+    public String getNombreRuta() 
+    {
         return nombreRuta;
     }
 
-    public void setNombreRuta(String nombreRuta) {
+    public void setNombreRuta(String nombreRuta) 
+    {
         this.nombreRuta = nombreRuta;
     }
 
-    public String getColorRuta() {
+    public String getColorRuta() 
+    {
         return colorRuta;
     }
 
-    public void setColorRuta(String colorRuta) {
+    public void setColorRuta(String colorRuta) 
+    {
         this.colorRuta = colorRuta;
     }
 
-    public Double getValorRuta() {
+    public Double getValorRuta() 
+    {
         return valorRuta;
     }
 
-    public void setValorRuta(Double valorRuta) {
+    public void setValorRuta(Double valorRuta) 
+    {
         this.valorRuta = valorRuta;
     }
     
-    public Grafo getGrafo() {
+    public Grafo getGrafo() 
+    {
         return grafo;
     }
 
-    public void setGrafo(Grafo grafo) {
+    public void setGrafo(Grafo grafo) 
+    {
         this.grafo = grafo;
     }
     

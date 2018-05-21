@@ -5,11 +5,13 @@
  */
 package edd.urban.servidor;
 
+import java.io.Serializable;
+
 /**
  *
  * @author ciberveliz
  */
-public class ListaAristas {
+public class ListaAristas implements Serializable{
     public NodoArista primero;
     public NodoArista ultimo;
     int size;

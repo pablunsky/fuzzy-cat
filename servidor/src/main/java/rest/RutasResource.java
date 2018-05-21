@@ -54,6 +54,7 @@ public class RutasResource {
             return "\"Código de ruta repetido.\"";
         ruta.setGrafo(new Grafo());
         this.tablaHash.insertar(ruta);
+        this.tablaHash.save();
         return "\"Ruta agregada!\"";
     }
 
@@ -77,6 +78,7 @@ public class RutasResource {
         
         rutaT.getGrafo().agregarEstacion(new NodoGrafo(nE1.getNomEstacion(),nE1.getCodEstacion(),nE1.getLatitud(),nE1.getLongitud()));
         rutaT.getGrafo().agregarEstacion(new NodoGrafo(nE2.getNomEstacion(),nE2.getCodEstacion(),nE2.getLatitud(),nE2.getLongitud()));
+        this.tablaHash.save();
         return rutaT.getGrafo().agregarRecorrido(v.getCodOrigen(), v.getCodDestino(), v.getDistancia(),v.getTrafico());
     }
     
@@ -122,7 +124,7 @@ public class RutasResource {
 
             try {
                 bw = new BufferedWriter(new FileWriter(temp));
-                bw.write("digraph lista{ rankdir=TB; concentrate=true; node [shape = cricle, style=\"filled\",fillcolor=\"gray\",fontsize=\"8\",margin=\"0\",fontname=\"Raleway\"];");
+                bw.write("digraph lista{ rankdir=TB; concentrate=false; node [shape = cricle, style=\"filled\",fillcolor=\"gray\",fontsize=\"8\",margin=\"0\",fontname=\"Raleway\"];");
                 this.textDot = "";
                 if(!ruta.getGrafo().vertices.isEmpty())
                     generarGrafo(ruta.getGrafo().vertices.primero, ruta.getColorRuta());

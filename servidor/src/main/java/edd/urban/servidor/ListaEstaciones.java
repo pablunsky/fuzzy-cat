@@ -15,7 +15,8 @@ import java.io.IOException;
  *
  * @author ciberveliz
  */
-public class ListaEstaciones {
+public class ListaEstaciones 
+{
     
     private final String pathJson = "/home/ciberveliz/NetBeansProjects/servidor/src/main/java/edd/urban/servidor/estaciones.json";
     
@@ -64,8 +65,18 @@ public class ListaEstaciones {
         }
         else
         {
-            this.ultimo.sig = estacion;
-            this.ultimo = estacion;
+            int res = estacion.getCodEstacion().compareTo(this.primero.getCodEstacion());
+        
+            if(res < 0)
+                agregarAlInicio(estacion);
+            else 
+            {
+                res = this.ultimo.getCodEstacion().compareTo(estacion.getCodEstacion());
+                if(res < 0 )
+                    agregarAlFinal(estacion);
+                else
+                    insercionB(this.primero.sig,this.primero,estacion);
+            }
         }
         save();
         generarGrafico();
@@ -95,15 +106,17 @@ public class ListaEstaciones {
     }
     
     @Override
-    public String toString() {
+    public String toString() 
+    {
         StringBuilder sb = new StringBuilder("[\n");
         NodoEstacion temporal = primero;
-        while(temporal != null) {
+        while(temporal != null) 
+        {
             sb.append("\t{\n");
-            sb.append("\t\t\"codEstacion\": "+"\""+temporal.getCodEstacion()+"\",\n");
-            sb.append("\t\t\"nomEstacion\": "+"\""+temporal.getNomEstacion()+"\",\n");
-            sb.append("\t\t\"latitud\": "+"\""+temporal.getLatitud()+"\",\n");
-            sb.append("\t\t\"longitud\": "+"\""+temporal.getLongitud()+"\"\n");
+            sb.append("\t\t\"codEstacion\": \"").append(temporal.getCodEstacion()).append("\",\n");
+            sb.append("\t\t\"nomEstacion\": \"").append(temporal.getNomEstacion()).append("\",\n");
+            sb.append("\t\t\"latitud\": \"").append(temporal.getLatitud()).append("\",\n");
+            sb.append("\t\t\"longitud\": \"").append(temporal.getLongitud()).append("\"\n");
             sb.append("\t}");
             temporal = temporal.sig;
             if(temporal!=null) {
@@ -116,11 +129,13 @@ public class ListaEstaciones {
     
     private void save()
     {
-        try{
+        try
+        {
             File file = new File(pathJson);
             String json = this.toString();
             
-            try (FileWriter fw = new FileWriter(file)) {
+            try (FileWriter fw = new FileWriter(file)) 
+            {
                 fw.write(json);
             }
         }
@@ -130,13 +145,17 @@ public class ListaEstaciones {
     private void load()
     {
         ObjectMapper mapper = new ObjectMapper();
-        try{
+        try
+        {
             NodoEstacion[] estaciones = mapper.readValue(new File(pathJson),NodoEstacion[].class);
-            for(NodoEstacion nE : estaciones){
+            for(NodoEstacion nE : estaciones)
+            {
                 this.agregarEstacion(nE);
             }
         }
-        catch(IOException e){ }
+        catch(IOException e)
+        { 
+        }
     }
     //---------------------------GRAPHVIZ---------------------------------------
     private void generarGrafico()
@@ -157,7 +176,9 @@ public class ListaEstaciones {
             String[] cmd = {"dot","-Tpng",fileIn,"-o",fileOut};
             Runtime.getRuntime().exec(cmd);
         }
-        catch(IOException e){  }
+        catch(IOException e)
+        { 
+        }
     }
     
     private void generarLista()
@@ -177,5 +198,32 @@ public class ListaEstaciones {
             this.textDot += "\"node"+t+"\"->"+"\"node"+(t+1)+"\";";
             t++;
         }
+    }
+    
+    private void agregarAlInicio(NodoEstacion estacion)
+    {
+        estacion.sig = this.primero;
+        this.primero = estacion;
+    }
+    
+    private void agregarAlFinal(NodoEstacion estacion)
+    {
+        this.ultimo.sig = estacion;
+        this.ultimo = estacion;
+    }
+    
+    private void agregarDespuesDe(NodoEstacion pivote,NodoEstacion estacion)
+    {
+        estacion.sig = pivote.sig;
+        pivote.sig = estacion;
+    }
+    private void insercionB(NodoEstacion inicio,NodoEstacion aux,NodoEstacion estacion)
+    {
+        int res = estacion.getCodEstacion().compareTo(inicio.getCodEstacion());
+        
+        if(res > 0)
+            insercionB(inicio.sig,inicio,estacion);
+        else
+            agregarDespuesDe(aux,estacion);
     }
 }
