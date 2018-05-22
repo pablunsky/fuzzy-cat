@@ -93,9 +93,7 @@ void ClienteTickets::on_pushButton_9_clicked()
 
 void ClienteTickets::on_pushButton_3_clicked()
 {
-
     QString json = tr("{\"valor\":%1,\"codigo\":\"\"}").arg(valor);
-
     QEventLoop eventLoop;
 
     QNetworkAccessManager mgr;

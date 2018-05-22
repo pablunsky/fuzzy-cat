@@ -5,6 +5,8 @@
  */
 package edd.urban.servidor;
 
+import com.sun.org.apache.xerces.internal.impl.dv.util.Base64;
+import java.io.BufferedInputStream;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
@@ -22,7 +24,7 @@ import java.io.Serializable;
  */
 public class TablaHash implements Serializable
 {
-    int m;
+    public int m;
     ListaHash[] tabla;
     
     private static final String pathTxt = "/home/pablunsky/Documents/TAREAS/ESTRUCTURAS DE DATOS/Proyecto2/servidor/src/main/java/edd/urban/servidor/rutas.dat";
@@ -213,5 +215,93 @@ public class TablaHash implements Serializable
         }
         barra += "\", height=2.0];";
         
+    }
+    
+    
+    public String graficarRuta(Ruta ruta) 
+    {        
+        String base64 = "";
+        String path = "/home/pablunsky/Documents/TAREAS/ESTRUCTURAS DE DATOS/Proyecto2/servidor/src/main/webapp/CLIENTE/assets/img";
+        String fileIn = path + "/Ruta-"+ruta.getCodigoRuta()+".txt";
+        String fileOut = path + "/Ruta-"+ruta.getCodigoRuta()+".png";
+        File temp = new File(fileIn);
+        try
+        {
+            BufferedWriter bw;
+
+            try {
+                bw = new BufferedWriter(new FileWriter(temp));
+                bw.write("digraph lista{ rankdir=TB; concentrate=false; node [shape = cricle, style=\"filled\",fillcolor=\"gray\",fontsize=\"8\",margin=\"0\",fontname=\"Raleway\"];");
+                this.textDot = "";
+                if(!ruta.getGrafo().vertices.isEmpty())
+                    generarGrafo(ruta.getGrafo().vertices.primero, ruta.getColorRuta());
+                bw.write(this.textDot + "}");
+                bw.close();
+                String[] cmd = {"dot","-Tpng",fileIn,"-o",fileOut};
+                Runtime.getRuntime().exec(cmd);
+                /*
+                File f = new File(fileOut);
+                FileInputStream fis = new FileInputStream(f);
+                byte[] bytes = new byte[(int)f.length()];
+                int numbytes = fis.read(bytes);
+                if(numbytes!=-1){
+                    //ERROR
+                }
+                base64 = java.util.Base64.getEncoder().encodeToString(bytes);
+                return base64;
+                */
+                return fileOut;
+            } catch (IOException ex) {
+                //Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        catch(Exception e){
+        }
+        return base64;
+    }
+    
+    private void generarGrafo(NodoVertice vertice, String color)
+    {
+        this.textDot += "nodo" + vertice.vertice.hashCode() + "[label=\"" + vertice.vertice.getNombre()+"\", shape=\"circle\"]; \n";
+        NodoArista nodeA = vertice.vertice.aristas.primero;
+        while(nodeA != null)
+        {
+            textDot += "\"nodo" + vertice.vertice.hashCode() + "\"-> \"nodo" + nodeA.arista.getDestino().hashCode() + "\" [ label= \""+nodeA.arista.getDistancia()+" m\",style=\"vee\",color =\""+color+"\",fontsize=\"6\"] \n";
+            
+            nodeA = nodeA.sig;
+        }
+        if(vertice.sig != null)
+            generarGrafo(vertice.sig, color);
+    }
+    
+    public String getJsonRutas()
+    {
+        StringBuilder sb = new StringBuilder();
+        sb.append("[");
+        for(int i = 0; i<this.m; i++)
+        {   
+            ListaHash list = this.tabla[i];
+            if(list.isEmpty())
+                continue;
+            
+            NodoHash nodoT = list.primero;
+            while(nodoT != null)
+            {
+                String path = "assets/img/Ruta-";
+                sb.append("{\n");
+                sb.append("\"nombre\":\"").append(nodoT.ruta.getNombreRuta()).append("\",\n");
+                sb.append("\"precio\":").append(nodoT.ruta.getValorRuta()).append(",\n");
+                sb.append("\"img\":\"").append(path+nodoT.ruta.getCodigoRuta()).append(".png\"\n");
+                sb.append("}");
+                nodoT = nodoT.sig;
+                if(nodoT != null) sb.append(",");
+            }
+            if(i+1 < this.m && !tabla[i+1].isEmpty())
+                sb.append(",");
+        }
+        sb.append("]");
+        
+        
+        return sb.toString();
     }
 }

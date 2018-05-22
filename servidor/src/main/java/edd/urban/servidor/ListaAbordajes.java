@@ -8,6 +8,8 @@ package edd.urban.servidor;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.File;
 import java.io.FileWriter;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 /**
  *
@@ -35,7 +37,10 @@ public class ListaAbordajes {
     private void Load(){
         ObjectMapper mapper = new ObjectMapper();
         try{
-            Abordaje[] abordajes = mapper.readValue(new File(pathofJSON),Abordaje[].class);
+            String file = new String(Files.readAllBytes(Paths.get(pathofJSON)));
+            String json = Cifrador.cifrar(file);
+            
+            Abordaje[] abordajes = mapper.readValue(json,Abordaje[].class);
             
             for(Abordaje r : abordajes){
                 agregarAbordaje(new NodoAbordaje().setValor(r.toString()));
@@ -51,7 +56,9 @@ public class ListaAbordajes {
             File f = new File(pathofJSON);
             
             FileWriter fw = new FileWriter(f);
-            fw.write(toString());
+            
+            String json = Cifrador.cifrar(toString());
+            fw.write(json);
             fw.close();
             
         }

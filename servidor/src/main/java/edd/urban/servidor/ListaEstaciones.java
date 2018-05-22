@@ -10,6 +10,8 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 /**
  *
@@ -134,6 +136,8 @@ public class ListaEstaciones
             File file = new File(pathJson);
             String json = this.toString();
             
+            json = Cifrador.cifrar(json);
+            
             try (FileWriter fw = new FileWriter(file)) 
             {
                 fw.write(json);
@@ -147,7 +151,10 @@ public class ListaEstaciones
         ObjectMapper mapper = new ObjectMapper();
         try
         {
-            NodoEstacion[] estaciones = mapper.readValue(new File(pathJson),NodoEstacion[].class);
+            String file = new String(Files.readAllBytes(Paths.get(pathJson)));
+            String json = Cifrador.cifrar(file);
+            
+            NodoEstacion[] estaciones = mapper.readValue(json,NodoEstacion[].class);
             for(NodoEstacion nE : estaciones)
             {
                 this.agregarEstacion(nE);

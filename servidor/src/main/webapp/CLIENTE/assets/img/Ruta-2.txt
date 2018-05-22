@@ -1,0 +1,4 @@
+digraph lista{ rankdir=TB; concentrate=false; node [shape = cricle, style="filled",fillcolor="gray",fontsize="8",margin="0",fontname="Raleway"];nodo1276629770[label="DON BOSCO", shape="circle"]; 
+"nodo1276629770"-> "nodo401277835" [ label= "189.0 m",style="vee",color ="#ff0000",fontsize="6"] 
+nodo401277835[label="TERMINAL", shape="circle"]; 
+}

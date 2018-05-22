@@ -16,7 +16,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="assets/js/app.js"></script>
 <script src="assets/js/modernizr.custom.69142.js"></script>
-</head>
+</head>ControlCliente
 <body>
 <div id="page-top" class="index">
   <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -53,24 +53,9 @@
       </div>
     </div>
       <div id="grid" class="main" ng-controller="ControlRutas">
-      <div class="view">
-        <div class="view-back"><span data-icon="A">566</span><span data-icon="B">124</span><a href="#">&rarr;</a></div>
-        <img src="assets/img/Beautiful-girl-listen-music-so-happy.png" alt=""></div>
-      <div class="view">
-        <div class="view-back"><span data-icon="A">210</span><span data-icon="B">102</span><a href="#">&rarr;</a></div>
-        <img src="assets/img/2.jpg" alt=""></div>
-      <div class="view">
-        <div class="view-back"><span data-icon="A">690</span><span data-icon="B">361</span><a href="#">&rarr;</a></div>
-        <img src="assets/img/lz2prlf1tbf.png" alt=""></div>
-      <div class="view">
-        <div class="view-back"><span data-icon="A">987</span><span data-icon="B">130</span><a href="#">&rarr;</a></div>
-        <img src="assets/img/4.jpg" alt=""></div>
-      <div class="view">
-        <div class="view-back"><span data-icon="A">566</span><span data-icon="B">124</span><a href="#">&rarr;</a></div>
-        <img src="assets/img/1.jpg" alt=""></div>
-      <div class="view">
-        <div class="view-back"><span data-icon="A">210</span><span data-icon="B">102</span><a href="#">&rarr;</a></div>
-        <img src="assets/img/beautiful-girl-hat-wallpaper-43323-44368-hd-wallpapers.png" alt=""></div>
+          <div class="view" ng-repeat="ruta in rutasD">
+        <div class="view-back"><span data-icon="Nombre: ">{{ruta.nombre}}</span><span data-icon="Precio: ">Q. {{ruta.precio}}</span><a href="#">&rarr;</a></div>
+        <img src="{{ruta.img}}" alt=""></div>
     </div>
   </div>
 </section>

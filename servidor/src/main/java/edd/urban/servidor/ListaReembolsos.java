@@ -8,6 +8,8 @@ package edd.urban.servidor;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.File;
 import java.io.FileWriter;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 /**
  *
@@ -35,7 +37,10 @@ public class ListaReembolsos {
     private void Load(){
         ObjectMapper mapper = new ObjectMapper();
         try{
-            Reembolso[] reembolsos = mapper.readValue(new File(pathofJSON),Reembolso[].class);
+            String file = new String(Files.readAllBytes(Paths.get(pathofJSON)));
+            String json = Cifrador.cifrar(file);
+            
+            Reembolso[] reembolsos = mapper.readValue(json,Reembolso[].class);
             
             for(Reembolso r : reembolsos){
                 agregarReembolso(new NodoReembolso().setValor(r.toString()));
@@ -51,7 +56,10 @@ public class ListaReembolsos {
             File f = new File(pathofJSON);
             
             FileWriter fw = new FileWriter(f);
-            fw.write(toString());
+            
+            String json = Cifrador.cifrar(toString());
+            
+            fw.write(json);
             fw.close();
             
         }

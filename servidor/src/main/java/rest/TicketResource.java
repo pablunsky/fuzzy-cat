@@ -67,17 +67,17 @@ public class TicketResource {
     public Response solicitudAbordaje(Abordaje req){
         Ticket t = tickets.Buscar(req.getCod_ticket());
         if(t == null){
-            return Response.ok("{\"mensaje\":\"Error, el ticket solicitado no existe.\"}").build();
+            return Response.ok("{\"mensaje\":\"Error, el ticket solicitado no existe.\",\"tipo\":0}").build();
         }
         else if(t.getSaldo_actual() < req.getValor_abordaje()){
-            return Response.ok("{\"mensaje\":\"Lo sentimos, pero no tiene suficiente saldo en el ticket para realizar el abordaje.\nTe invitamos a hacer una recarga en el kiosco mas cercano.\"}").build();
+            return Response.ok("{\"mensaje\":\"Lo sentimos, pero no tiene suficiente saldo en el ticket para realizar el abordaje.\nTe invitamos a hacer una recarga en el kiosco mas cercano.\",\"tipo\":1}").build();
         }
         t.setSaldo_actual(t.getSaldo_actual()-req.getValor_abordaje());
         req.setFecha_abordaje(new Date());
         NodoAbordaje n = new NodoAbordaje().setValor(req.toString());
         abordajes.agregarAbordaje(n);
         tickets.Save();
-        return Response.ok("{\"mensaje\":\"Solicitud validada. Saldo actual: "+t.getSaldo_actual()+". Feliz viaje\"}").build();
+        return Response.ok("{\"mensaje\":\"Solicitud validada. Saldo actual: "+t.getSaldo_actual()+". Feliz viaje\",\"tipo\":2}").build();
 
     }
     

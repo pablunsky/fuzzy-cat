@@ -87,45 +87,4 @@ void VentanaEstacion::on_pushButton_back_clicked()
 
 void VentanaEstacion::verificarRuta()
 {
-    ui->label_incorrect->setEnabled(false);
-    QString codTicket = ui->lineEdit_ticket->text();
-    if(codTicket.isEmpty()) return;
-
-    infoTransbordo->setCod_ticket(codTicket.toInt()); //set del cod_ticket
-    QPushButton* button = qobject_cast<QPushButton*>(sender());
-    QString codRuta = button->text().replace("Ruta ","");
-    Ruta *rutaT = this->rutas->getRuta(codRuta);
-
-    this->infoTransbordo->setCodRuta(codRuta); //set del cod_ruta
-    this->infoTransbordo->setValor_abordaje(rutaT->precio); //set del valor_abordaje
-    this->infoTransbordo->setNombre_ruta(rutaT->nombre); //set del nombre_ruta
-
-    QString json = infoTransbordo->json();
-
-    QEventLoop eventLoop;
-
-    QNetworkAccessManager mgr;
-    QObject::connect(&mgr, SIGNAL(finished(QNetworkReply*)), &eventLoop, SLOT(quit()));
-    QNetworkRequest req( QUrl( BASE + QString("/ticket/abordajes") ) );
-    req.setRawHeader("Content-Type", "application/json");
-    QNetworkReply *reply = mgr.post(req, json.toUtf8());
-    eventLoop.exec();
-
-    if (reply->error() == QNetworkReply::NoError)
-    {
-        QByteArray response = reply->readAll();
-        QString temp = QString::fromUtf8(response);
-        QStringList list = temp.split("$$");
-        delete reply;
-        if(list.at(0) == "true")
-        {
-
-        }
-    }
-    else
-    {
-        delete reply;
-    }
-
-
 }

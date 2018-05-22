@@ -7,9 +7,11 @@ package rest;
 
 import edd.urban.servidor.Grafo;
 import edd.urban.servidor.ListaEstaciones;
+import edd.urban.servidor.ListaHash;
 import edd.urban.servidor.NodoArista;
 import edd.urban.servidor.NodoEstacion;
 import edd.urban.servidor.NodoGrafo;
+import edd.urban.servidor.NodoHash;
 import edd.urban.servidor.NodoVertice;
 import edd.urban.servidor.Ruta;
 import edd.urban.servidor.TablaHash;
@@ -79,6 +81,7 @@ public class RutasResource {
         rutaT.getGrafo().agregarEstacion(new NodoGrafo(nE1.getNomEstacion(),nE1.getCodEstacion(),nE1.getLatitud(),nE1.getLongitud()));
         rutaT.getGrafo().agregarEstacion(new NodoGrafo(nE2.getNomEstacion(),nE2.getCodEstacion(),nE2.getLatitud(),nE2.getLongitud()));
         this.tablaHash.save();
+        tablaHash.graficarRuta(tablaHash.getRuta(rutaT.getCodigoRuta()));
         return rutaT.getGrafo().agregarRecorrido(v.getCodOrigen(), v.getCodDestino(), v.getDistancia(),v.getTrafico());
     }
     
@@ -87,9 +90,8 @@ public class RutasResource {
     public String generarGrafo(Ruta rutaT)
     {
         Ruta rutaO = this.tablaHash.getRuta(rutaT.getCodigoRuta());
-        graficarRuta(rutaO);
-        return "\"images/grafo.png\"";
-
+        //this.tablaHash.graficarRuta(rutaO);
+        return "\"CLIENTE/assets/img/Ruta-"+rutaT.getCodigoRuta()+".png\"";
     }
     
     @POST 
@@ -102,56 +104,24 @@ public class RutasResource {
             return Response.ok("false$$").build();
         }
         return Response.ok("true$$"+nodoT.getNomEstacion()).build();
-    } 
+    }
     
     @POST 
     @Path("disponibles")
     public Response getRutasDisponibles(NodoEstacion nE)
     {   
         return Response.ok(this.tablaHash.getJsonRutasDisponibles(nE.getCodEstacion())).build();
-    } 
-    //--------------------------GRAFICA------------------------------
-    
-    private void graficarRuta(Ruta ruta) 
-    {        
-        String path = "/home/ciberveliz/NetBeansProjects/servidor/src/main/webapp/images";
-        String fileIn = path + "/grafo.txt";
-        String fileOut = path + "/grafo.png";
-        File temp = new File(fileIn);
-        try
-        {
-            BufferedWriter bw;
-
-            try {
-                bw = new BufferedWriter(new FileWriter(temp));
-                bw.write("digraph lista{ rankdir=TB; concentrate=false; node [shape = cricle, style=\"filled\",fillcolor=\"gray\",fontsize=\"8\",margin=\"0\",fontname=\"Raleway\"];");
-                this.textDot = "";
-                if(!ruta.getGrafo().vertices.isEmpty())
-                    generarGrafo(ruta.getGrafo().vertices.primero, ruta.getColorRuta());
-                bw.write(this.textDot + "}");
-                bw.close();
-                String[] cmd = {"dot","-Tpng",fileIn,"-o",fileOut};
-                Runtime.getRuntime().exec(cmd);
-            } catch (IOException ex) {
-                //Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-        catch(Exception e){
-        }
-        
     }
     
-    private void generarGrafo(NodoVertice vertice, String color)
+   
+    
+    @GET
+    @Path("clientes")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getRutasClientes()
     {
-        this.textDot += "nodo" + vertice.vertice.hashCode() + "[label=\"" + vertice.vertice.getNombre()+"\", shape=\"circle\"]; \n";
-        NodoArista nodeA = vertice.vertice.aristas.primero;
-        while(nodeA != null)
-        {
-            textDot += "\"nodo" + vertice.vertice.hashCode() + "\"-> \"nodo" + nodeA.arista.getDestino().hashCode() + "\" [ label= \""+nodeA.arista.getDistancia()+" m\",style=\"vee\",color =\""+color+"\",fontsize=\"6\"] \n";
-            
-            nodeA = nodeA.sig;
-        }
-        if(vertice.sig != null)
-            generarGrafo(vertice.sig, color);
+        return Response.ok(this.tablaHash.getJsonRutas()).build();
     }
+    //--------------------------GRAFICA------------------------------
+
 }

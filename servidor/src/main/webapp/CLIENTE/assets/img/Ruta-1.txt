@@ -1,0 +1,9 @@
+digraph lista{ rankdir=TB; concentrate=false; node [shape = cricle, style="filled",fillcolor="gray",fontsize="8",margin="0",fontname="Raleway"];nodo245811564[label="TERMINAL", shape="circle"]; 
+"nodo245811564"-> "nodo385214917" [ label= "1532.0 m",style="vee",color ="null",fontsize="6"] 
+nodo385214917[label="CHINAUTLA", shape="circle"]; 
+"nodo385214917"-> "nodo456929854" [ label= "231.0 m",style="vee",color ="null",fontsize="6"] 
+"nodo385214917"-> "nodo245811564" [ label= "1234.0 m",style="vee",color ="null",fontsize="6"] 
+nodo456929854[label="TREBOL", shape="circle"]; 
+"nodo456929854"-> "nodo1393216860" [ label= "566.0 m",style="vee",color ="null",fontsize="6"] 
+nodo1393216860[label="FLORIDA", shape="circle"]; 
+}
