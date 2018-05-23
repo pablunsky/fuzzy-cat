@@ -16,6 +16,7 @@ import edd.urban.servidor.NodoVertice;
 import edd.urban.servidor.Ruta;
 import edd.urban.servidor.TablaHash;
 import edd.urban.servidor.VerificacionRecorrido;
+import edd.urban.servidor.solicitudCritico;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -88,6 +89,13 @@ public class RutasResource
         tablaHash.graficarRuta(tablaHash.getRuta(rutaT.getCodigoRuta()));
         this.tablaHash.graficarMapa();
         return ans;
+    }
+    
+    @POST
+    @Path("critico")
+    public Response getCritica(solicitudCritico sol){
+        tablaHash.graficarRutaMinima(sol.getCodOrigen(), sol.getCodDestino(), tablaHash.getGrafoGeneral());
+        return Response.ok().build();
     }
     
     @POST

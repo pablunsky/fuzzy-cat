@@ -33,4 +33,8 @@ nodoT3[label="FLORIDA", shape="circle",pos="5.0,10.0!"];
 nodoT4[label="CHINAUTLA", shape="circle",pos="15.0,10.0!"];
 "nodoT4"-> "nodoT6" [ label= "143.0 m",color ="#ff00b0",fontsize="8"] 
 
-nodoT6[label="CHIQUIMULILLA", shape="circle",pos="31.4,49.3!"];}
+nodoT6[label="CHIQUIMULILLA", shape="circle",pos="31.4,49.3!"];
+
+"nodoT1"-> "nodoT2" [color ="#58D039", penwidth="5", style="dotted"] 
+
+}

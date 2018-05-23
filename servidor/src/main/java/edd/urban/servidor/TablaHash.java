@@ -185,8 +185,8 @@ public class TablaHash implements Serializable
     
     public void graficarTabla()
     {
-        //String path = "/home/pablunsky/Documents/TAREAS/ESTRUCTURAS DE DATOS/Proyecto2/servidor/src/main/webapp/images";
-        String path = "/home/ciberveliz/Escritorio/[EDD]UltimaMod/fuzzy-cat/servidor/src/main/webapp/images";
+        String path = "/home/pablunsky/Documents/TAREAS/ESTRUCTURAS DE DATOS/Proyecto2/servidor/src/main/webapp/images";
+        //String path = "/home/ciberveliz/Escritorio/[EDD]UltimaMod/fuzzy-cat/servidor/src/main/webapp/images";
         String fileIn = path+"/tabla.txt";
         String fileOut = path + "/tabla.png";
         File temp = new File(fileIn);
@@ -332,7 +332,7 @@ public class TablaHash implements Serializable
     
     public void graficarMapa() 
     {        
-        String path = "/home/ciberveliz/Escritorio/[EDD]UltimaMod/fuzzy-cat/servidor/src/main/webapp/images";
+        String path = "/home/pablunsky/Documents/TAREAS/ESTRUCTURAS DE DATOS/Proyecto2/servidor/src/main/webapp/images";
         String fileIn = path + "/mapa.txt";
         String fileOut = path + "/mapa.png";
         File temp = new File(fileIn);
@@ -363,6 +363,9 @@ public class TablaHash implements Serializable
                 bw.close();
                 String[] cmd = {"neato","-Tpng",fileIn,"-o",fileOut};
                 Runtime.getRuntime().exec(cmd);
+                fileOut = "/home/pablunsky/Documents/TAREAS/ESTRUCTURAS DE DATOS/Proyecto2/servidor/src/main/webapp/CLIENTE/assets/img/mapa.png";
+                String[] cmd2 = {"neato","-Tpng",fileIn,"-o",fileOut};
+                Runtime.getRuntime().exec(cmd2);
             } 
             catch (IOException ex) 
             {
@@ -392,9 +395,10 @@ public class TablaHash implements Serializable
     
     public void graficarRutaMinima(String codOrigen,String codDestino, Grafo g)
     {
-        String path = "/home/ciberveliz/Escritorio/[EDD]UltimaMod/fuzzy-cat/servidor/src/main/webapp/images";
-        String fileIn = path + "/RutaMinima.txt";
-        String fileOut = path + "/RutaMinima.png";
+        String path = "/home/pablunsky/Documents/TAREAS/ESTRUCTURAS DE DATOS/Proyecto2/servidor/src/main/webapp/CLIENTE/assets/img";
+        
+        String fileIn = path + "/mapa.txt";
+        String fileOut = path + "/mapa.png";
         File temp = new File(fileIn);
         try
         {

@@ -15,7 +15,7 @@ ClienteTickets::ClienteTickets(QWidget *parent) :
     ui->label_20->setAlignment(Qt::AlignRight);
 
 
-    QPixmap bkgnd("/home/pablunsky/Documents/TAREAS/ESTRUCTURAS DE DATOS/Proyecto2/ClienteTickets/Welcome.jpeg");
+    QPixmap bkgnd("/home/ciberveliz/Escritorio/[EDD]UltimaMod/fuzzy-cat/ClienteTickets/Welcome.jpeg");
     bkgnd = bkgnd.scaled(this->size(), Qt::IgnoreAspectRatio);
     QPalette palette;
     palette.setBrush(QPalette::Background, bkgnd);
@@ -32,7 +32,7 @@ ClienteTickets::~ClienteTickets()
 void ClienteTickets::on_pushButton_clicked()
 {
 
-    QPixmap bkgnd("/home/pablunsky/Documents/TAREAS/ESTRUCTURAS DE DATOS/Proyecto2/ClienteTickets/Transaction.jpeg");
+    QPixmap bkgnd("/home/ciberveliz/Escritorio/[EDD]UltimaMod/fuzzy-cat/ClienteTickets/Transaction.jpeg");
     bkgnd = bkgnd.scaled(this->size(), Qt::IgnoreAspectRatio);
     QPalette palette;
     palette.setBrush(QPalette::Background, bkgnd);
@@ -44,7 +44,7 @@ void ClienteTickets::on_pushButton_clicked()
 
 void ClienteTickets::on_pushButton_2_clicked()
 {
-    QPixmap bkgnd("/home/pablunsky/Documents/TAREAS/ESTRUCTURAS DE DATOS/Proyecto2/ClienteTickets/Devolution.jpg");
+    QPixmap bkgnd("/home/ciberveliz/Escritorio/[EDD]UltimaMod/fuzzy-cat/ClienteTickets/Devolution.jpg");
     bkgnd = bkgnd.scaled(this->size(), Qt::IgnoreAspectRatio);
     QPalette palette;
     palette.setBrush(QPalette::Background, bkgnd);
@@ -56,7 +56,7 @@ void ClienteTickets::on_pushButton_2_clicked()
 
 void ClienteTickets::on_pushButton_4_clicked()
 {
-    QPixmap bkgnd("/home/pablunsky/Documents/TAREAS/ESTRUCTURAS DE DATOS/Proyecto2/ClienteTickets/Welcome.jpeg");
+    QPixmap bkgnd("/home/ciberveliz/Escritorio/[EDD]UltimaMod/fuzzy-cat/ClienteTickets/Welcome.jpeg");
     bkgnd = bkgnd.scaled(this->size(), Qt::IgnoreAspectRatio);
     QPalette palette;
     palette.setBrush(QPalette::Background, bkgnd);
@@ -121,7 +121,7 @@ void ClienteTickets::on_pushButton_3_clicked()
 
 void ClienteTickets::on_pushButton_10_clicked()
 {
-    QPixmap bkgnd("/home/pablunsky/Documents/TAREAS/ESTRUCTURAS DE DATOS/Proyecto2/ClienteTickets/Welcome.jpeg");
+    QPixmap bkgnd("/home/ciberveliz/Escritorio/[EDD]UltimaMod/fuzzy-cat/ClienteTickets/Welcome.jpeg");
     bkgnd = bkgnd.scaled(this->size(), Qt::IgnoreAspectRatio);
     QPalette palette;
     palette.setBrush(QPalette::Background, bkgnd);
