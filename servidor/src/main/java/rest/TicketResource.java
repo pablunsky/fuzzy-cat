@@ -87,6 +87,12 @@ public class TicketResource {
         return Response.ok(abordajes.toString()).build();
     }
     
+    @Path("descarga")
+    @PUT
+    public Response getCSV(){
+        return Response.ok(abordajes.genCSV()).build();
+    }
+    
     @PUT
     public Response reembolsoTicket(SolicitudTicket content) {
         Ticket t = tickets.Buscar(content.getCodigo());

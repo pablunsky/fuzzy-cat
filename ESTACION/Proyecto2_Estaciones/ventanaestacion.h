@@ -3,6 +3,7 @@
 #include "listarutas.h"
 #include <QWidget>
 #include "transbordo.h"
+#include <QListWidgetItem>
 
 namespace Ui {
 class VentanaEstacion;
@@ -20,13 +21,16 @@ private slots:
 
     void on_pushButton_back_clicked();
     void verificarRuta();
+    void on_listaWidget_itemDoubleClicked(QListWidgetItem *item);
+
 private:
+
     Ui::VentanaEstacion *ui;
     void agregarRutas(ListaRutas *rutas);
     Transbordo *infoTransbordo;
     ListaRutas *rutas;
-
     const QString BASE = "http://localhost:8080/UrbanEDD/webresources";
+
 
 };
 

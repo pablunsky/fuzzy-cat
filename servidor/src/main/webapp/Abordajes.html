@@ -64,10 +64,13 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
     <ul class="w3-ul w3-card-4 w3-white" ng-repeat="a in abordajes">
       <li class="w3-padding-16">
         <img src="W3.CSS%20Template_files/gato.png" class="w3-left w3-circle w3-margin-right" style="width:35px">
-        <span class="w3-xlarge">Codigo de ticket: {{a.cod_ticket}} | Estacion: {{a.nombre_estacion}} | Hora: {{a.fecha_abordaje}} | Valor: Q.{{a.valor_abordaje}}</span><br>
+        <span class="w3-xlarge">Codigo de ticket: {{a.cod_ticket}} Estacion: {{a.nombre_estacion}} Hora: {{a.fecha_abordaje}} Valor: Q.{{a.valor_abordaje}}</span><br>
       </li>
     </ul>
+    <br>
+    <a class="w3-button w3-dark-grey" ng-click="Download()" href="images/Abordajes.csv">Descargar reporte &nbsp;<i class="fa fa-download"></i></a>
   </div>
+  
   <hr>
   
 

@@ -21,6 +21,7 @@ public class ListaAbordajes {
     private NodoAbordaje ultimo;
     int size;
     private String pathofJSON = "/home/pablunsky/Documents/TAREAS/ESTRUCTURAS DE DATOS/Proyecto2/servidor/src/main/java/edd/urban/servidor/Abordajes.json";
+    private String pathofCSV = "/home/pablunsky/Documents/TAREAS/ESTRUCTURAS DE DATOS/Proyecto2/servidor/src/main/webapp/images/Abordajes.csv";
     
     
     private static ListaAbordajes listaST;
@@ -84,6 +85,39 @@ public class ListaAbordajes {
     public Boolean isEmpty()
     {
         return this.primero == null || this.size == 0;
+    }
+    
+    public String genCSV(){
+        
+        ObjectMapper mapper = new ObjectMapper();
+        String json = toString();
+        try{
+            Abordaje[] abordajes = mapper.readValue(json,Abordaje[].class);
+            StringBuilder sb = new StringBuilder();
+            sb.append("Reporte de abordajes\n");
+            sb.append("Codigo de estacion,Nombre de estacion,Codigo de ruta,Nombre de ruta,Codigo de ticket,Valor de abordaje,Fecha\n");
+            
+            double total = 0;
+            
+            for(Abordaje a : abordajes){
+                sb.append(a.getCod_estacion()).append(","+a.getNombre_estacion()).append(","+a.getCod_ruta()).append(","+a.getNombre_ruta()).append(","+a.getCod_ticket()).append(","+a.getValor_abordaje()).append(","+a.getFecha_abordaje()).append("\n");
+                total+=a.getValor_abordaje();
+            }
+            
+            sb.append("Total: ").append(total).append("\n");
+            
+            File f = new File(pathofCSV);
+            
+            FileWriter fw = new FileWriter(f);
+            fw.write(sb.toString());
+            fw.close();
+            
+            return "{\"mensaje\":\"CORRECTO\"}";
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+        return "{\"mensaje\":\"ERROR\"}";
     }
     
     public void agregarAbordaje(NodoAbordaje abordaje)

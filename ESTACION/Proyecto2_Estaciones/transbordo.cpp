@@ -30,6 +30,18 @@ void Transbordo::setCodRuta(const QString &value)
     codRuta = value;
 }
 
+QString Transbordo::json(){
+    QString json = "{\"cod_estacion\":\"";
+    json += this->codEstacion + "\",\"cod_ruta\":\"";
+    json += this->codRuta + "\",\"nombre_ruta\":\"";
+    json += this->nombre_ruta + "\",\"nombre_estacion\":\"";
+    json += this->nombre_estacion + "\",\"cod_ticket\":\"";
+    json += QString::number(cod_ticket) + "\",\"valor_abordaje\":\"";
+    json += QString::number(valor_abordaje) + "\"}";
+    return json;
+}
+
+
 QString Transbordo::getNombre_ruta() const
 {
     return nombre_ruta;
@@ -63,18 +75,6 @@ void Transbordo::setCod_ticket(int value)
 double Transbordo::getValor_abordaje() const
 {
     return valor_abordaje;
-}
-
-QString Transbordo::json(){
-    QString json = "{";
-    json += "\"cod_estacion\":\""+this->codEstacion+"\"";
-    json += ",\"cod_ruta\":\""+this->codRuta+"\"";
-    json += ",\"nombre_estacion\":\""+this->nombre_estacion+"\"";
-    json += ",\"nombre_ruta\":\""+this->nombre_ruta+"\"";
-    json += ",\"cod_ticket\":"+QString::number(this->cod_ticket);
-    json += ",\"valor_abordaje\":"+QString::number(this->valor_abordaje);
-    json += "}";
-    return json;
 }
 
 void Transbordo::setValor_abordaje(double value)

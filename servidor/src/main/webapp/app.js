@@ -62,10 +62,21 @@ app.controller('ControlReembolsos',function($scope,$http,$log){
 
 app.controller('ControlAbordajes',function($scope,$http,$log){
     $scope.abordajes = [];
+    
+    $scope.Download = () => {
+        $http.put(base+'/ticket/descarga').then(function(response)
+        {
+            
+        }
+    )};
+    
     $http.get(base+'/ticket/abordajes').then(function(response){
             $scope.abordajes = response.data;
          });
     }
+    
+    
+        
 );
 
 

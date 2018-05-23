@@ -25,10 +25,9 @@ public:
 
     double getValor_abordaje() const;
     void setValor_abordaje(double value);
-
+    QString json();
     void clean();
 
-    QString json();
 private:
     QString codEstacion;
     QString codRuta;
