@@ -5,9 +5,18 @@
  */
 package rest;
 
+
+import edd.urban.servidor.Abordaje;
 import edd.urban.servidor.ArbolB;
+import edd.urban.servidor.ListaAbordajes;
+import edd.urban.servidor.ListaReembolsos;
+import edd.urban.servidor.NodoAbordaje;
+import edd.urban.servidor.NodoReembolso;
+import edd.urban.servidor.Reembolso;
 import edd.urban.servidor.SolicitudTicket;
 import edd.urban.servidor.Ticket;
+import java.text.Format;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
@@ -32,6 +41,8 @@ import javax.ws.rs.core.Response;
 public class TicketResource {
     
     private ArbolB tickets = ArbolB.getArbolTickets();
+    private ListaReembolsos reembolsos = ListaReembolsos.getListaIncial();
+    private ListaAbordajes abordajes = ListaAbordajes.getListaIncial();
     
     @GET
     public Response getCount() {
@@ -42,20 +53,65 @@ public class TicketResource {
     public Response crearTicket(SolicitudTicket req){
         Ticket t = new Ticket();
         t.setValor(req.getValor());
+        t.setSaldo_actual(req.getValor());
+        
         tickets.Add(t);
+        tickets.Graficar();
+        tickets.Save();
+
         return Response.ok(t).build();
+    }
+    
+    @Path("abordajes")
+    @PUT
+    public Response solicitudAbordaje(Abordaje req){
+        Ticket t = tickets.Buscar(req.getCod_ticket());
+        if(t == null){
+            return Response.ok("{\"mensaje\":\"Error, el ticket solicitado no existe.\",\"tipo\":0}").build();
+        }
+        else if(t.getSaldo_actual() < req.getValor_abordaje()){
+            return Response.ok("{\"mensaje\":\"Lo sentimos, pero no tiene suficiente saldo en el ticket para realizar el abordaje.\nTe invitamos a hacer una recarga en el kiosco mas cercano.\",\"tipo\":1}").build();
+        }
+        t.setSaldo_actual(t.getSaldo_actual()-req.getValor_abordaje());
+        req.setFecha_abordaje(new Date());
+        NodoAbordaje n = new NodoAbordaje().setValor(req.toString());
+        abordajes.agregarAbordaje(n);
+        tickets.Save();
+        return Response.ok("{\"mensaje\":\"Solicitud validada. Saldo actual: "+t.getSaldo_actual()+". Feliz viaje\",\"tipo\":2}").build();
+
+    }
+    
+    @Path("abordajes")
+    @GET
+    public Response getAbordajes(){
+        return Response.ok(abordajes.toString()).build();
+    }
+    
+    @Path("descarga")
+    @PUT
+    public Response getCSV(){
+        return Response.ok(abordajes.genCSV()).build();
     }
     
     @PUT
     public Response reembolsoTicket(SolicitudTicket content) {
         Ticket t = tickets.Buscar(content.getCodigo());
         if(t!=null){
+            
+            t.setFecha_devolucion(new Date());
+            Format f = new SimpleDateFormat("yyyy-MM-dd");
+            double saldo_debitado = t.getSaldo_actual();
+            double valor_original = t.getValor();
+            int codigo_t = t.getCodigo();
+            Reembolso r = new Reembolso(saldo_debitado, valor_original,codigo_t,f.format(new Date()),t.getCodigo_devolucion());
+            reembolsos.agregarReembolso(new NodoReembolso().setValor(r.toString()));
+            
             t.setSaldo_actual(0);
+            
             return Response.ok("{\"mensaje\":\"El valor del ticket ha sido compensado.\"}").build();
         }
+        tickets.Save();
         return Response.ok("{\"mensaje\":\"Error, el ticket solicitado no existe.\"}").build();
     }
-    
-    
     
 }

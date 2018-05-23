@@ -1,0 +1,14 @@
+digraph lista{ rankdir=LR; concentrate=false; node [shape = cricle, style="filled",fillcolor="gray",fontsize="8",margin="0",fontname="Raleway"];nodo884006503[label="TERMINAL", shape="circle"]; 
+"nodo884006503"-> "nodo767540429" [ label= "100.0 m",style="vee",color ="#dbb100",fontsize="6"] 
+"nodo884006503"-> "nodo1123261326" [ label= "100.0 m",style="vee",color ="#dbb100",fontsize="6"] 
+nodo767540429[label="TREBOL", shape="circle"]; 
+"nodo767540429"-> "nodo930950808" [ label= "150.0 m",style="vee",color ="#dbb100",fontsize="6"] 
+nodo930950808[label="CHINAUTLA", shape="circle"]; 
+"nodo930950808"-> "nodo884006503" [ label= "150.0 m",style="vee",color ="#dbb100",fontsize="6"] 
+"nodo930950808"-> "nodo767540429" [ label= "150.0 m",style="vee",color ="#dbb100",fontsize="6"] 
+"nodo930950808"-> "nodo1511360955" [ label= "150.0 m",style="vee",color ="#dbb100",fontsize="6"] 
+nodo1511360955[label="FLORIDA", shape="circle"]; 
+"nodo1511360955"-> "nodo767540429" [ label= "150.0 m",style="vee",color ="#dbb100",fontsize="6"] 
+"nodo1511360955"-> "nodo884006503" [ label= "150.0 m",style="vee",color ="#dbb100",fontsize="6"] 
+nodo1123261326[label="CHIQUIMULILLA", shape="circle"]; 
+}

@@ -5,11 +5,13 @@
  */
 package edd.urban.servidor;
 
+import java.io.Serializable;
+
 /**
  *
  * @author ciberveliz
  */
-public class NodoHash {
+public class NodoHash implements Serializable{
     Ruta ruta;
     NodoHash sig;
     

@@ -5,11 +5,13 @@
  */
 package edd.urban.servidor;
 
+import java.io.Serializable;
+
 /**
  *
  * @author ciberveliz
  */
-public class NodoVertice {
+public class NodoVertice implements Serializable{
     public NodoVertice sig;
     public NodoGrafo vertice;
     

@@ -1,0 +1,40 @@
+digraph G {
+concentrate=false;
+splines="spline";
+splines="true";
+node [shape = cricle, style="filled",fillcolor="gray",fontsize="8",margin="0",fontname="Raleway"];
+nodoT1[label="TERMINAL", shape="circle",pos="1.2,1.0!"];
+"nodoT1"-> "nodoT2" [ label= "150.0 m",color ="#27ff00",fontsize="8"] 
+
+nodoT2[label="TREBOL", shape="circle",pos="1.4,5.4!"];
+"nodoT2"-> "nodoT3" [ label= "150.0 m",color ="#27ff00",fontsize="8"] 
+
+nodoT3[label="FLORIDA", shape="circle",pos="5.0,10.0!"];
+"nodoT3"-> "nodoT4" [ label= "150.0 m",color ="#27ff00",fontsize="8"] 
+
+nodoT4[label="CHINAUTLA", shape="circle",pos="15.0,10.0!"];
+"nodoT4"-> "nodoT5" [ label= "150.0 m",color ="#27ff00",fontsize="8"] 
+
+nodoT5[label="DON BOSCO", shape="circle",pos="67.3,50.0!"];
+"nodoT5"-> "nodoT6" [ label= "150.0 m",color ="#27ff00",fontsize="8"] 
+
+nodoT6[label="CHIQUIMULILLA", shape="circle",pos="31.4,49.3!"];
+"nodoT6"-> "nodoT1" [ label= "150.0 m",color ="#27ff00",fontsize="8"] 
+
+nodoT1[label="TERMINAL", shape="circle",pos="1.2,1.0!"];
+"nodoT1"-> "nodoT2" [ label= "143.0 m",color ="#ff00b0",fontsize="8"] 
+
+nodoT2[label="TREBOL", shape="circle",pos="1.4,5.4!"];
+"nodoT2"-> "nodoT3" [ label= "143.0 m",color ="#ff00b0",fontsize="8"] 
+
+nodoT3[label="FLORIDA", shape="circle",pos="5.0,10.0!"];
+"nodoT3"-> "nodoT4" [ label= "143.0 m",color ="#ff00b0",fontsize="8"] 
+
+nodoT4[label="CHINAUTLA", shape="circle",pos="15.0,10.0!"];
+"nodoT4"-> "nodoT6" [ label= "143.0 m",color ="#ff00b0",fontsize="8"] 
+
+nodoT6[label="CHIQUIMULILLA", shape="circle",pos="31.4,49.3!"];
+
+"nodoT1"-> "nodoT2" [color ="#58D039", penwidth="5", style="dotted"] 
+
+}

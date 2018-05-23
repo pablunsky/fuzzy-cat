@@ -7,8 +7,11 @@ package edd.urban.servidor;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 /**
  *
@@ -42,7 +45,11 @@ public class ArbolB {
     private void Load(){
         ObjectMapper mapper = new ObjectMapper();
         try{
-            Ticket[] tickets = mapper.readValue(new File(pathofJSON),Ticket[].class);
+            
+            String file = new String(Files.readAllBytes(Paths.get(pathofJSON)));
+            String json = Cifrador.cifrar(file);
+            
+            Ticket[] tickets = mapper.readValue(json,Ticket[].class);
             for(Ticket t : tickets){
                 Add(t);
             }
@@ -52,19 +59,45 @@ public class ArbolB {
         }
     }
     
-    private void Save(){
+    public void Save(){
         try{
             File f = new File(pathofJSON);
             String json = "[";
             
+            json += ToJSon(raiz,"");
+            
             json += "]";
+            
             FileWriter fw = new FileWriter(f);
+            
+            json = Cifrador.cifrar(json);
+            
             fw.write(json);
             fw.close();
+            
         }
         catch(Exception e){
             e.printStackTrace();
         }
+    }
+    
+    private String ToJSon(NodoArbolB actual, String previo){
+        
+        for(int i = 0; i<orden*2-1; i++){
+            if(actual.getContenidos()[i]!=null){
+                previo += actual.getContenidos()[i].toString();
+            }
+            if(i+1 != orden*2-1 && actual.getContenidos()[i+1] != null)
+                previo+=",\n";
+        }
+        
+        for(int i = 0; i<orden*2; i++){
+            if(actual.getHijos()[i]!=null){
+                previo += ",\n"+ToJSon(actual.getHijos()[i], "");
+            }
+        }
+        
+        return previo;
     }
     
     private static ArbolB singletonArbolTickets;
@@ -123,7 +156,8 @@ public class ArbolB {
         return previo;
     }
     
-    private void Graficar(){
+    public void Graficar(){
+
         String grafica="digraph arbol{\nArbolB [shape=record, fontname=\"Raleway\", label=ArbolB]";
         grafica += graficar("ArbolB",raiz,"");
         grafica += "}";
@@ -134,7 +168,7 @@ public class ArbolB {
             FileWriter fw = new FileWriter(file);
             fw.write(grafica);
             fw.close();
-            String[] cmd = {"dot","-Tpng",path+"arbol.dot","-o",path+"arbol.jpg"};
+            String[] cmd = {"dot","-Tpng",path+"arbol.dot","-o",path+"arbol.png"};
             Runtime.getRuntime().exec(cmd);
         }catch(IOException e){
             e.printStackTrace();
@@ -184,6 +218,51 @@ public class ArbolB {
         return null;
     }
     
+    
+    public Ticket Buscar(int codigo){
+        NodoArbolB actual = raiz;
+        
+        for(int i = 0; i<orden*2-1; i++){
+            if(actual.getContenidos()[i]!=null){
+                Ticket t = actual.getContenidos()[i];
+                if(t.getCodigo()==codigo)
+                    return t;
+            }
+        }
+        
+        for(int i = 0; i<orden*2; i++){
+            if(actual.getHijos()[i]!=null){
+                Ticket t = Buscar(codigo, actual.getHijos()[i]);
+                if(t!=null)
+                    return t;
+            }
+        }
+        
+        return null;
+    }
+    
+    public Ticket Buscar(int codigo, NodoArbolB hijo){
+        NodoArbolB actual = hijo;
+        for(int i = 0; i<orden*2-1; i++){
+            if(actual.getContenidos()[i]!=null){
+                Ticket t = actual.getContenidos()[i];
+                if(t.getCodigo()==codigo)
+                    return t;
+            }
+        }
+        
+        for(int i = 0; i<orden*2; i++){
+            if(actual.getHijos()[i]!=null){
+                Ticket t = Buscar(codigo, actual.getHijos()[i]);
+                if(t!=null)
+                    return t;
+            }
+        }
+        
+        return null;
+    }
+    
+
     public void Add(Ticket t){
         if(raiz.Llena()){
             dividirRaiz();
@@ -191,7 +270,6 @@ public class ArbolB {
         }
         raiz.insertarTicket(t);
         checkout(t);
-        Graficar();
     }
     
     private void dividirRaiz(){

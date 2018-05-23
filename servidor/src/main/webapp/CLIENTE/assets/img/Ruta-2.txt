@@ -1,0 +1,12 @@
+digraph lista{ rankdir=LR; concentrate=false; node [shape = cricle, style="filled",fillcolor="gray",fontsize="8",margin="0",fontname="Raleway"];nodo1916745203[label="DON BOSCO", shape="circle"]; 
+"nodo1916745203"-> "nodo1403279666" [ label= "500.0 m",style="vee",color ="#00ff0a",fontsize="6"] 
+nodo1403279666[label="CHINAUTLA", shape="circle"]; 
+"nodo1403279666"-> "nodo255387140" [ label= "200.0 m",style="vee",color ="#00ff0a",fontsize="6"] 
+nodo255387140[label="TREBOL", shape="circle"]; 
+nodo328596276[label="TERMINAL", shape="circle"]; 
+"nodo328596276"-> "nodo1712575379" [ label= "100.0 m",style="vee",color ="#00ff0a",fontsize="6"] 
+"nodo328596276"-> "nodo255387140" [ label= "100.0 m",style="vee",color ="#00ff0a",fontsize="6"] 
+"nodo328596276"-> "nodo1879434126" [ label= "100.0 m",style="vee",color ="#00ff0a",fontsize="6"] 
+nodo1712575379[label="FLORIDA", shape="circle"]; 
+nodo1879434126[label="CHIQUIMULILLA", shape="circle"]; 
+}

@@ -33,12 +33,11 @@ private slots:
     void on_pushButton_3_clicked();
 
     void on_pushButton_10_clicked();
-
     void on_pushButton_11_clicked();
 
 private:
     double valor;
-    const QString BASE = "http://localhost:8080/servidor-1.0-SNAPSHOT/webresources";
+    const QString BASE = "http://localhost:8080/UrbanEDD/webresources";
     Ui::ClienteTickets *ui;
 };
 

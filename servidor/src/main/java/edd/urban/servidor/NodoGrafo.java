@@ -5,11 +5,14 @@
  */
 package edd.urban.servidor;
 
+import java.io.Serializable;
+
 /**
  *
  * @author ciberveliz
  */
-public class NodoGrafo {
+public class NodoGrafo implements Serializable
+{
     private String nombre;
     private String codigo;
     private Double latitud;
@@ -25,35 +28,43 @@ public class NodoGrafo {
         aristas = new ListaAristas();
     }
 
-    public String getNombre() {
+    public String getNombre() 
+    {
         return nombre;
     }
 
-    public String getCodigo() {
+    public String getCodigo() 
+    {
         return codigo;
     }
 
-    public Double getLatitud() {
+    public Double getLatitud() 
+    {
         return latitud;
     }
 
-    public Double getLongitud() {
+    public Double getLongitud() 
+    {
         return longitud;
     }
 
-    public void setNombre(String nombre) {
+    public void setNombre(String nombre) 
+    {
         this.nombre = nombre;
     }
 
-    public void setCodigo(String codigo) {
+    public void setCodigo(String codigo) 
+    {
         this.codigo = codigo;
     }
 
-    public void setLatitud(Double latitud) {
+    public void setLatitud(Double latitud) 
+    {
         this.latitud = latitud;
     }
 
-    public void setLongitud(Double longitud) {
+    public void setLongitud(Double longitud) 
+    {
         this.longitud = longitud;
     }
     
@@ -65,5 +76,15 @@ public class NodoGrafo {
             aux = aux.sig;
         }
         return aux != null;
+    }
+    
+    public Arista getAristaRepetida(NodoGrafo destino)
+    {
+        NodoArista aux = this.aristas.primero;
+        while(aux != null && aux.arista.getDestino() != destino)
+        {
+            aux = aux.sig;
+        }
+        return aux.arista;
     }
 }

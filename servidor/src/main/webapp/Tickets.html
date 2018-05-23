@@ -38,10 +38,11 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
     <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>&nbsp; Close Menu</a>
     <a class="w3-bar-item w3-button w3-padding" ng-click="redireccionHome()"><i class="fa fa-globe fa-fw"></i>&nbsp; Vista general</a>
     <a class="w3-bar-item w3-button w3-padding w3-blue" ng-click="redireccionTickets()"><i class="fa fa-ticket fa-fw"></i>&nbsp; Tickets</a>
-    <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-subway fa-fw"></i>&nbsp; Estaciones</a>
-    <a href="#" class="w3-bar-item w3-button w3-padding" ng-click="redireccionRutas()"><i class="fa fa-code-fork fa-fw"></i>&nbsp; Rutas</a>
-    <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-eraser fa-fw"></i>&nbsp; Reembolso</a>
-    <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-info fa-fw"></i>&nbsp; Acerca de...</a>
+    <a class="w3-bar-item w3-button w3-padding" ng-click="redireccionEstaciones()"><i class="fa fa-subway fa-fw"></i>&nbsp; Estaciones</a>
+    <a class="w3-bar-item w3-button w3-padding" ng-click="redireccionRutas()"><i class="fa fa-code-fork fa-fw"></i>&nbsp; Rutas</a>
+    <a class="w3-bar-item w3-button w3-padding" ng-click="redireccionReembolsos()"><i class="fa fa-eraser fa-fw"></i>&nbsp; Reembolsos</a>
+    <a class="w3-bar-item w3-button w3-padding" ng-click="redireccionAbordajes()"><i class="fa fa-bus fa-fw"></i>&nbsp; Abordajes</a>
+    <a class="w3-bar-item w3-button w3-padding"><i class="fa fa-info fa-fw"></i>&nbsp; Acerca de...</a>
   </div>
 </nav>
 
@@ -104,15 +105,11 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
     <h3><b><i class="fa fa-eye"></i> Vista de almacenamiento</b></h3>
 </header>
 
-<div ng-controller="ControlPrincipal" class="ex1">
-    <img src="W3.CSS%20Template_files/arbol.jpg" alt="arbol">
+
+<div class="ex1">
+    <img src="W3.CSS%20Template_files/arbol.png" alt="arbol">
 </div>
   
-  <!-- Footer -->
-  <footer class="w3-container w3-padding-16 w3-light-grey">
-    <h4>FOOTER</h4>
-    <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
-  </footer>
 
   <!-- End page content -->
 </div>
@@ -121,7 +118,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="app.js"></script>
-<!--
+
 <script>
     
 // Get the Sidebar
@@ -147,6 +144,6 @@ function w3_close() {
     overlayBg.style.display = "none";
 }
 </script>
--->
+
 
 </body></html>

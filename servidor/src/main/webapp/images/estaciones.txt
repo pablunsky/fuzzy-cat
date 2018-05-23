@@ -1,18 +1,11 @@
 digraph lista{
 rankdir=LR;
 node [shape=record,fontname="Raleway"];
-node1[label = "{<ant>|Nombre: Prueba\nCodigo: 20|<sig>}"]; 
-node2[label = "{<ant>|Nombre: Terminal\nCodigo: 21|<sig>}"]; 
-node3[label = "{<ant>|Nombre: Trebol\nCodigo: 22|<sig>}"]; 
-node4[label = "{<ant>|Nombre: USAC_Final\nCodigo: 100|<sig>}"]; 
-node5[label = "{<ant>|Nombre: Prueba_Lista\nCodigo: 120|<sig>}"]; 
-node6[label = "{<ant>|Nombre: 012\nCodigo: 1|<sig>}"]; 
-node7[label = "{<ant>|Nombre: Estacion_Final\nCodigo: 2|<sig>}"]; 
-node8[label = "{<ant>|Nombre: 1\nCodigo: a|<sig>}"]; 
-node9[label = "{<ant>|Nombre: 112\nCodigo: 1232|<sig>}"]; 
-node10[label = "{<ant>|Nombre: c\nCodigo: c|<sig>}"]; 
-node11[label = "{<ant>|Nombre: funka\nCodigo: ufff|<sig>}"]; 
-node12[label = "{<ant>|Nombre: 100\nCodigo: 100|<sig>}"]; 
-node13[label = "{<ant>|Nombre: 12\nCodigo: a2|<sig>}"]; 
-"node1"->"node2";"node2"->"node3";"node3"->"node4";"node4"->"node5";"node5"->"node6";"node6"->"node7";"node7"->"node8";"node8"->"node9";"node9"->"node10";"node10"->"node11";"node11"->"node12";"node12"->"node13";
+node1[label = "{<ant>|Nombre: TERMINAL\nCodigo: T1|<sig>}"]; 
+node2[label = "{<ant>|Nombre: TREBOL\nCodigo: T2|<sig>}"]; 
+node3[label = "{<ant>|Nombre: FLORIDA\nCodigo: T3|<sig>}"]; 
+node4[label = "{<ant>|Nombre: CHINAUTLA\nCodigo: T4|<sig>}"]; 
+node5[label = "{<ant>|Nombre: DON BOSCO\nCodigo: T5|<sig>}"]; 
+node6[label = "{<ant>|Nombre: CHIQUIMULILLA\nCodigo: T6|<sig>}"]; 
+"node1"->"node2";"node2"->"node3";"node3"->"node4";"node4"->"node5";"node5"->"node6";
 }

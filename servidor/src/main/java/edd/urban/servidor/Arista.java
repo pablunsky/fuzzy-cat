@@ -5,17 +5,21 @@
  */
 package edd.urban.servidor;
 
+import java.io.Serializable;
+
 /**
  *
  * @author ciberveliz
  */
-public class Arista {
+public class Arista implements Serializable
+{
     private NodoGrafo origen;
     private NodoGrafo destino;
     private Double distancia;
     private Double trafico;
             
-    public Arista(NodoGrafo origen, NodoGrafo destino, Double distancia, Double trafico) {
+    public Arista(NodoGrafo origen, NodoGrafo destino, Double distancia, Double trafico) 
+    {
         this.origen = origen;
         this.destino = destino;
         this.distancia = distancia;
@@ -23,35 +27,43 @@ public class Arista {
     }
     
 
-    public NodoGrafo getOrigen() {
+    public NodoGrafo getOrigen() 
+    {
         return origen;
     }
 
-    public void setOrigen(NodoGrafo origen) {
+    public void setOrigen(NodoGrafo origen) 
+    {
         this.origen = origen;
     }
 
-    public NodoGrafo getDestino() {
+    public NodoGrafo getDestino() 
+    {
         return destino;
     }
 
-    public void setDestino(NodoGrafo destino) {
+    public void setDestino(NodoGrafo destino) 
+    {
         this.destino = destino;
     }
 
-    public Double getDistancia() {
+    public Double getDistancia() 
+    {
         return distancia;
     }
 
-    public void setDistancia(Double distancia) {
+    public void setDistancia(Double distancia) 
+    {
         this.distancia = distancia;
     }
 
-    public Double getTrafico() {
+    public Double getTrafico() 
+    {
         return trafico;
     }
 
-    public void setTrafico(Double trafico) {
+    public void setTrafico(Double trafico) 
+    {
         this.trafico = trafico;
     }
     

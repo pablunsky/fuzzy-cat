@@ -6,7 +6,6 @@
 <link rel="stylesheet" href="W3.CSS%20Template_files/w3.css">
 <link rel="stylesheet" href="W3.CSS%20Template_files/css.css">
 <link rel="stylesheet" href="W3.CSS%20Template_files/font-awesome.css">
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
 <style>
 html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
 </style>
@@ -39,10 +38,11 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
     <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>&nbsp; Close Menu</a>
     <a class="w3-bar-item w3-button w3-padding w3-blue" ng-click="redireccionHome()"><i class="fa fa-globe fa-fw"></i>&nbsp; Vista general</a>
     <a class="w3-bar-item w3-button w3-padding" ng-click="redireccionTickets()"><i class="fa fa-ticket fa-fw"></i>&nbsp; Tickets</a>
-    <a href="#" class="w3-bar-item w3-button w3-padding" ng-click="redireccionEstaciones()"><i class="fa fa-subway fa-fw"></i>&nbsp; Estaciones</a>
-    <a href="#" class="w3-bar-item w3-button w3-padding" ng-click="redireccionRutas()"><i class="fa fa-code-fork fa-fw"></i>&nbsp; Rutas</a>
-    <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-eraser fa-fw"></i>&nbsp; Reembolso</a>
-    <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-info fa-fw"></i>&nbsp; Acerca de...</a>
+    <a class="w3-bar-item w3-button w3-padding" ng-click="redireccionEstaciones()"><i class="fa fa-subway fa-fw"></i>&nbsp; Estaciones</a>
+    <a class="w3-bar-item w3-button w3-padding" ng-click="redireccionRutas()"><i class="fa fa-code-fork fa-fw"></i>&nbsp; Rutas</a>
+    <a class="w3-bar-item w3-button w3-padding" ng-click="redireccionReembolsos()"><i class="fa fa-eraser fa-fw"></i>&nbsp; Reembolsos</a>
+    <a class="w3-bar-item w3-button w3-padding" ng-click="redireccionAbordajes()"><i class="fa fa-bus fa-fw"></i>&nbsp; Abordajes</a>
+    <a href="acercade.html" class="w3-bar-item w3-button w3-padding"><i class="fa fa-info fa-fw"></i>&nbsp; Acerca de...</a>
   </div>
 </nav>
 
@@ -105,7 +105,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
     <div class="w3-row-padding" style="margin:0 -16px" ng-init="getRutas()">
       <div class="w3-third">
         <h2>Mapa general</h2>
-        <img src="W3.CSS%20Template_files/region.jpg" style="width:100%" alt="Google Regional Map">
+        <img src="images/mapa.png" style="width:100%" alt="Google Regional Map">
       </div>
       <div class="w3-twothird">
         <h2>Rutas disponibles</h2>
@@ -137,68 +137,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
     </div>
   </div>
   <hr>
-  <div class="w3-container">
-    <h5>Datos generales</h5>
-    <p>Tickets emitidos</p>
-    <div class="w3-grey">
-      <div class="w3-container w3-center w3-padding w3-green" style="width:25%">+25%</div>
-    </div>
-
-    <p>Rutas disponibles</p>
-    <div class="w3-grey">
-      <div class="w3-container w3-center w3-padding w3-orange" style="width:50%">50%</div>
-    </div>
-
-    <p>Estaciones disponibles</p>
-    <div class="w3-grey">
-      <div class="w3-container w3-center w3-padding w3-red" style="width:75%">75%</div>
-    </div>
-  </div>
-  <hr>
-
-  <div class="w3-container">
-    <h5>Rutas mas populares</h5>
-    <table class="w3-table w3-striped w3-bordered w3-border w3-hoverable w3-white">
-      <tbody><tr>
-        <td>203</td>
-        <td>65%</td>
-      </tr>
-      <tr>
-        <td>204</td>
-        <td>15.7%</td>
-      </tr>
-      <tr>
-        <td>101</td>
-        <td>5.6%</td>
-      </tr>
-      <tr>
-        <td>666</td>
-        <td>2.1%</td>
-      </tr>
-    </tbody></table><br>
-    <button class="w3-button w3-dark-grey">Mas informacion &nbsp;<i class="fa fa-arrow-right"></i></button>
-  </div>
-  <hr>
-  <!--
-  <div class="w3-container">
-    <h5>Recent Users</h5>
-    <ul class="w3-ul w3-card-4 w3-white">
-      <li class="w3-padding-16">
-        <img src="W3.CSS%20Template_files/avatar2.png" class="w3-left w3-circle w3-margin-right" style="width:35px">
-        <span class="w3-xlarge">Mike</span><br>
-      </li>
-      <li class="w3-padding-16">
-        <img src="W3.CSS%20Template_files/avatar5.png" class="w3-left w3-circle w3-margin-right" style="width:35px">
-        <span class="w3-xlarge">Jill</span><br>
-      </li>
-      <li class="w3-padding-16">
-        <img src="W3.CSS%20Template_files/avatar6.png" class="w3-left w3-circle w3-margin-right" style="width:35px">
-        <span class="w3-xlarge">Jane</span><br>
-      </li>
-    </ul>
-  </div>
-  <hr>
-  -->
+  
   <div class="w3-container">
     <h5>Comentarios</h5>
     <div class="w3-row">
@@ -218,41 +157,13 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
         <img class="w3-circle" src="W3.CSS%20Template_files/avatar1.png" style="width:96px;height:96px">
       </div>
       <div class="w3-col m10 w3-container">
-        <h4>Bo <span class="w3-opacity w3-medium">Sep 28, 2014, 10:15 PM</span></h4>
-        <p>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p><br>
+        <h4>José Veliz (CiberVeliz) <span class="w3-opacity w3-medium">Mayo 22, 2018, 3:15 AM</span></h4>
+        <p>Estoy muy satisfecho con las facilidades que proporciona esta appWeb para el uso del trasporte público, sin duda es una idea revolucionaria que nos ayuda como país y ayuda a que habilidades y capacidades salgan a flote con la creación e implementacion de proyectos como este. Arriba Guate!</p><br>
       </div>
     </div>
   </div>
   <br>
-  <div class="w3-container w3-dark-grey w3-padding-32">
-    <div class="w3-row">
-      <div class="w3-container w3-third">
-        <h5 class="w3-bottombar w3-border-green">Demographic</h5>
-        <p>Language</p>
-        <p>Country</p>
-        <p>City</p>
-      </div>
-      <div class="w3-container w3-third">
-        <h5 class="w3-bottombar w3-border-red">System</h5>
-        <p>Browser</p>
-        <p>OS</p>
-        <p>More</p>
-      </div>
-      <div class="w3-container w3-third">
-        <h5 class="w3-bottombar w3-border-orange">Target</h5>
-        <p>Users</p>
-        <p>Active</p>
-        <p>Geo</p>
-        <p>Interests</p>
-      </div>
-    </div>
-  </div>
 
-  <!-- Footer -->
-  <footer class="w3-container w3-padding-16 w3-light-grey">
-    <h4>FOOTER</h4>
-    <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
-  </footer>
 
   <!-- End page content -->
 </div>
@@ -261,7 +172,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="app.js"></script>
-<!--
+
 <script>
     
 // Get the Sidebar
@@ -287,6 +198,5 @@ function w3_close() {
     overlayBg.style.display = "none";
 }
 </script>
--->
 
 </body></html>

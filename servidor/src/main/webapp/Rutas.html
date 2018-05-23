@@ -6,7 +6,6 @@
 <link rel="stylesheet" href="W3.CSS%20Template_files/w3.css">
 <link rel="stylesheet" href="W3.CSS%20Template_files/css.css">
 <link rel="stylesheet" href="W3.CSS%20Template_files/font-awesome.css">
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
 <style>
 html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
 </style>
@@ -40,7 +39,8 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
     <a class="w3-bar-item w3-button w3-padding" ng-click="redireccionTickets()"><i class="fa fa-ticket fa-fw"></i>&nbsp; Tickets</a>
     <a class="w3-bar-item w3-button w3-padding" ng-click="redireccionEstaciones()"><i class="fa fa-subway fa-fw"></i>&nbsp; Estaciones</a>
     <a class="w3-bar-item w3-button w3-padding w3-blue" ng-click="redireccionRutas()"><i class="fa fa-code-fork fa-fw"></i>&nbsp; Rutas</a>
-    <a class="w3-bar-item w3-button w3-padding"><i class="fa fa-eraser fa-fw"></i>&nbsp; Reembolso</a>
+    <a class="w3-bar-item w3-button w3-padding" ng-click="redireccionReembolsos()"><i class="fa fa-eraser fa-fw"></i>&nbsp; Reembolsos</a>
+    <a class="w3-bar-item w3-button w3-padding" ng-click="redireccionAbordajes()"><i class="fa fa-bus fa-fw"></i>&nbsp; Abordajes</a>
     <a class="w3-bar-item w3-button w3-padding"><i class="fa fa-info fa-fw"></i>&nbsp; Acerca de...</a>
   </div>
 </nav>
@@ -89,14 +89,12 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
       <br>
       <br>
     <h3><b><i class="fa fa-plus-square"></i> Agregar Recorrido</b></h3>
-
     <div style="display: inline-block; position: relative; margin-left: 30px;">
       <h5>Cod Ruta:</h5>
       <input type="number" ng-model="ruta">  
     </div>
     <br>
     <br>
-
     <div style="display: inline-block; position: relative; margin-left: 30px;">
       <h5>Cod. Estación origen:</h5>
       <input type="text" ng-model="inputCodOrigen">  
@@ -121,12 +119,11 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
     <button class="btn btn-primary" ng-click="agregarRecorrido(ruta,inputCodOrigen,inputCodDestino,inputDistancia,inputTrafico)">Agregar Recorrido</button>
     <br>
     <br>
-    <input type="checkbox" ng-model="checked" ng-init="checked=false"> Visualizar Grafo<br>
+      <input type="checkbox" ng-model="checked" ng-init="checked=false"> Visualizar Tabla Hash<br>
       
       <span ng-if="checked">
-        <img ng-src="images/grafo.png">
+        <img ng-src="images/tabla.png" style="max-width: 950px;">
       </span>
-
 </div>
     <br>
     <br>

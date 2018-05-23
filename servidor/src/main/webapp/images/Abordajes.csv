@@ -1,0 +1,9 @@
+Reporte de abordajes
+Codigo de estacion,Nombre de estacion,Codigo de ruta,Nombre de ruta,Codigo de ticket,Valor de abordaje,Fecha
+T1,TERMINAL,1,USAC,1,2.0,Sat May 05 11:04:21 CST 2018
+T4,CHINAUTLA,2,NARANJO,5,3.0,Sat May 05 17:22:34 CST 2018
+T4,CHINAUTLA,2,NARANJO,3,3.0,Sat May 05 17:23:15 CST 2018
+T4,CHINAUTLA,6,&LaOtraRuta,5,19.0,Sat May 19 04:06:26 CST 2018
+T4,CHINAUTLA,1,&SuperRuton,60,3.0,Sat May 19 04:07:44 CST 2018
+T6,CHIQUIMULILLA,2,Ruteron,46,5.0,Sat May 19 04:46:26 CST 2018
+Total: 35.0

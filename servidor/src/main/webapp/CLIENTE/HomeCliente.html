@@ -1,0 +1,146 @@
+<!DOCTYPE HTML>
+<html ng-app="UrbanEDD">
+<head>
+<title>UrbanEDD</title>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+<link rel="stylesheet" type="text/css" href="assets/css/boot.css">
+<link rel="stylesheet" type="text/css" href="assets/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="assets/css/bootstrap.css">
+<link rel="stylesheet" type="text/css" href="assets/css/style_common.css">
+<link rel="stylesheet" type="text/css" href="assets/css/style1.css">
+<link href="https://fonts.googleapis.com/css?family=Julius+Sans+One|Michroma" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="assets/js/app.js"></script>
+<script src="assets/js/modernizr.custom.69142.js"></script>
+</head>
+<body>
+<div id="page-top" class="index">
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
+        <a class="navbar-brand page-scroll" href="#page-top">UrbanEDD</a></div>
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-right">
+          <li><a class="page-scroll" href="#page-top">Bienvenido</a></li>
+          <li><a class="page-scroll" href="#port">Rutas</a></li>
+          <li><a class="page-scroll" href="#team">Mapa</a></li>
+        </ul>
+      </div>
+    </div><!-- /.container-fluid -->
+  </nav>
+  <!-- Header -->
+  <header style="background-image:url(assets/img/Welcome.jpeg)">
+    <div class="container">
+      <div class="intro-text">
+        <div class="intro-heading">UrbanEDD</div>
+        <div class="intro-lead-in">Viaja al futuro, hoy</div>
+        <a href="#services" class="page-scroll btn btn-primary">> Descubrir</a></div>
+    </div>
+  </header>
+</div>
+<!-- ===== Team Section ===== -->
+<section id="port" class="bg-light-gray" ng-controller="ControlRutas">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 text-center">
+        <h2 class="section-heading" style="color:#3680C1">Rutas disponibles</h2>
+        <h3 class="section-subheading text-muted">Da un vistazo hasta donde podemos llevarte. Encuentra tu camino antes que nadie.</h3>
+      </div>
+    </div>
+    <div id="grid" class="main">
+        <div class="view" ng-repeat="ruta in rutasD">
+            <div class="view-back"><a onclick='mostrarInfo()' ng-click="mostrarInfo(ruta.precio, ruta.nombre, ruta.codigo)">&rarr;</a></div>
+        <img src="{{ruta.img}}" alt="{{ruta.img}}" ></div>
+    </div>
+  </div>
+
+<div id="myModal" class="modal">
+    <!-- Modal content -->
+    <div class="modal-content">
+        <div class="modal-header">
+          <span class="close">&times;</span>
+          <h2>Ruta {{currentName}}</h2>
+        </div>
+        <div class="modal-body">
+          <p>Precio: Q.{{currentPrice}}</p>
+          <p>Codigo: {{currentCode}}</p>
+        </div>
+</div>
+</div>
+
+    
+</section>
+
+
+<script>	
+Modernizr.load({
+    test: Modernizr.csstransforms3d && Modernizr.csstransitions,
+    yep: ['assets/js/jquery-1.10.1.min.js', 'assets/js/jquery.hoverfold.js'],
+    nope: '',
+    callback: function(url, result, key) {
+        if (url === 'assets/js/jquery.hoverfold.js') {
+            $('#grid').hoverfold();
+        }
+    }
+});
+</script> 
+
+<script>
+var modal = document.getElementById('myModal');
+var span = document.getElementsByClassName("close")[0];
+
+mostrarInfo = function() {
+    modal.style.display = "block";
+}
+
+span.onclick = function() {
+    modal.style.display = "none";
+}
+
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+</script>
+
+<!-- ===== Team Section ===== -->
+
+<section id="team" class="bg-success" ng-controller="ControlMapa">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 text-center">
+        <h2 class="section-heading" style="color:#3680C1">Mapa general</h2>
+        <h3 class="section-subheading text-muted">El mundo es chico. O asi parece, cuando viajas con nosotros.</h3>
+        <img src="assets/img/mapa.png"/>
+      </div>
+      <br>
+
+    </div>
+      <br>
+    <i>Origen: <input type="text" ng-model="eOrigen"></i>
+    <i>Destino: <input type="text" ng-model="eDestino"></i>
+    <button class="btn btn-primary" ng-click="generarRutaMinima(eOrigen,eDestino)" >Obtener Recomendacion</button>
+  </div>
+</section>
+<div>
+</div>
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3"></div>
+      <div class="col-md-6">
+        <h3 style="color:#3680C1">Gracias por visitarnos.</h3>
+        <h3 style="color:#3680C1">Copyright &copy; 2018 Derechos reservados... ¿para quien?</h3>
+      </div>
+      <div class="col-md-3"></div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
