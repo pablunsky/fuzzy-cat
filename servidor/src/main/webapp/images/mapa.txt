@@ -1,0 +1,29 @@
+digraph G {
+concentrate=false;
+splines="spline";
+splines="true";
+node [shape = cricle, style="filled",fillcolor="gray",fontsize="8",margin="0",fontname="Raleway"];
+nodoe1[label="Trebol", shape="circle",pos="0.0,0.0!"];
+"nodoe1"-> "nodoe2" [ label= "100.0 m",color ="#859f74",fontsize="8"] 
+
+"nodoe1"-> "nodoe4" [ label= "70.0 m",color ="#859f74",fontsize="8"] 
+
+"nodoe1"-> "nodoe6" [ label= "200.0 m",color ="#859f74",fontsize="8"] 
+
+nodoe2[label="VillaBuena", shape="circle",pos="-1.0,-1.0!"];
+"nodoe2"-> "nodoe5" [ label= "80.0 m",color ="#859f74",fontsize="8"] 
+
+"nodoe2"-> "nodoe4" [ label= "50.0 m",color ="#859f74",fontsize="8"] 
+
+nodoe4[label="Vivar", shape="circle",pos="3.0,0.0!"];
+"nodoe4"-> "nodoe3" [ label= "20.0 m",color ="#859f74",fontsize="8"] 
+
+"nodoe4"-> "nodoe5" [ label= "50.0 m",color ="#859f74",fontsize="8"] 
+
+nodoe6[label="Paraiso", shape="circle",pos="2.0,-2.0!"];
+"nodoe6"-> "nodoe3" [ label= "30.0 m",color ="#859f74",fontsize="8"] 
+
+nodoe5[label="Viila", shape="circle",pos="0.0,3.0!"];
+nodoe3[label="Granja", shape="circle",pos="3.0,3.0!"];
+"nodoe3"-> "nodoe5" [ label= "20.0 m",color ="#859f74",fontsize="8"] 
+}

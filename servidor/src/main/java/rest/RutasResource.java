@@ -35,7 +35,8 @@ import javax.ws.rs.core.Response;
 
 @Path("rutas")
 
-public class RutasResource {
+public class RutasResource 
+{
     
     private TablaHash tablaHash = TablaHash.getTablaInicial();
     private String textDot = "";
@@ -57,6 +58,8 @@ public class RutasResource {
         ruta.setGrafo(new Grafo());
         this.tablaHash.insertar(ruta);
         this.tablaHash.save();
+        this.tablaHash.graficarTabla();
+        this.tablaHash.graficarMapa();
         return "\"Ruta agregada!\"";
     }
 
@@ -83,6 +86,7 @@ public class RutasResource {
         String ans = rutaT.getGrafo().agregarRecorrido(v.getCodOrigen(), v.getCodDestino(), v.getDistancia(),v.getTrafico());
         this.tablaHash.save();
         tablaHash.graficarRuta(tablaHash.getRuta(rutaT.getCodigoRuta()));
+        this.tablaHash.graficarMapa();
         return ans;
     }
     

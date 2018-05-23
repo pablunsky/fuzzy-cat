@@ -1,0 +1,15 @@
+digraph G {
+concentrate=false;
+splines="spline";
+splines="true";
+node [shape = cricle, style="filled",fillcolor="gray",fontsize="8",margin="0",fontname="Raleway"];
+nodoe1[label="Paraiso", shape="circle",pos="3.0,3.0!"];
+"nodoe1"-> "nodoe2" [ label= "100.0 m",color ="#a8e584",fontsize="8"] 
+
+"nodoe1"-> "nodoe4" [ label= "70.0 m",color ="#a8e584",fontsize="8"] 
+
+"nodoe1"-> "nodoe6" [ label= "200.0 m",color ="#a8e584",fontsize="8"] 
+
+nodoe2[label="Florida", shape="circle",pos="3.0,0.0!"];
+nodoe4[label="Rondel", shape="circle",pos="2.0,-2.0!"];
+nodoe6[label="Fugaz", shape="circle",pos="-4.0,4.0!"];}

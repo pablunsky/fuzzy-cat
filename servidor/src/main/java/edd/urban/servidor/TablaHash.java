@@ -183,9 +183,10 @@ public class TablaHash implements Serializable
         }        
     }
     
-    private void graficarTabla()
+    public void graficarTabla()
     {
-        String path = "/home/pablunsky/Documents/TAREAS/ESTRUCTURAS DE DATOS/Proyecto2/servidor/src/main/webapp/images";
+        //String path = "/home/pablunsky/Documents/TAREAS/ESTRUCTURAS DE DATOS/Proyecto2/servidor/src/main/webapp/images";
+        String path = "/home/ciberveliz/Escritorio/[EDD]UltimaMod/fuzzy-cat/servidor/src/main/webapp/images";
         String fileIn = path+"/tabla.txt";
         String fileOut = path + "/tabla.png";
         File temp = new File(fileIn);
@@ -193,7 +194,7 @@ public class TablaHash implements Serializable
         {
             BufferedWriter bw;
             bw = new BufferedWriter(new FileWriter(temp));
-            bw.write("digraph lista{\nrankdir=LR;\nnodesep=0.05; \nnode[shape=record,fontname=\"Raleway\"];\n");
+            bw.write("digraph G {\nrankdir=LR;\nnodesep=0.05; \nnode[shape=\"record\",fontname=\"Raleway\", width=\".1\",height=\"0.1\"];\n");
             this.textDot = "";
             generarTabla();
             bw.write(this.textDot + "\n}");
@@ -208,19 +209,44 @@ public class TablaHash implements Serializable
     
     private void generarTabla()
     {
-        String barra = "node[label=\"";
+        String barra = "nodeP[label=\"";
         for(int i = 0; i < this.m; i++)
         {
-            barra += i+"|";
+            barra += "<f"+i+"> " + i;
+            if(i+1 < this.m)
+                barra += "|";
         }
-        barra += "\", height=2.0];";
+        barra += "\", height=3.0];";
         
+        barra += "\nnode [width = 1.5];";
+        for(int i = 0; i < this.m; i++)
+        {
+            String temp;
+            ListaHash listaT = this.tabla[i];
+            if(listaT.isEmpty())
+                continue;
+            
+            temp = "node"+i+"[label = \"{<n>";
+            
+            NodoHash nodeT = listaT.primero;
+            while(nodeT != null)
+            {
+                temp += "Cod: "+nodeT.ruta.getCodigoRuta()+" -- Nom: "+nodeT.ruta.getNombreRuta();
+                nodeT = nodeT.sig;
+                if(nodeT != null)
+                    temp += " | ";
+            }
+            temp += "}\"];\n";
+           
+            barra +="\n"+temp;
+            barra += "nodeP:f"+i+"-> node"+i+":n;\n";
+        }
+        this.textDot = barra;
     }
     
     
     public String graficarRuta(Ruta ruta) 
     {        
-        String base64 = "";
         String path = "/home/pablunsky/Downloads/wildfly-12.0.0.Final/standalone/deployments/servidor-1.0-SNAPSHOT.war/CLIENTE/assets/img";
         String fileIn = path + "/Ruta-"+ruta.getCodigoRuta()+".txt";
         String fileOut = path + "/Ruta-"+ruta.getCodigoRuta()+".png";
@@ -248,7 +274,6 @@ public class TablaHash implements Serializable
             catch (IOException ex) 
             {
                 //Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
-                
             }
         }
         catch(Exception e)
@@ -260,7 +285,7 @@ public class TablaHash implements Serializable
     
     private void generarGrafo(NodoVertice vertice, String color)
     {
-        this.textDot += "nodo" + vertice.vertice.hashCode() + "[label=\"" + vertice.vertice.getNombre()+"\", shape=\"circle\"]; \n";
+        this.textDot += "nodo" + vertice.vertice.hashCode() + "[label=\"" + vertice.vertice.getNombre()+"\", shape=\"circle\",pos=\""+(vertice.vertice.getLongitud()/10)+","+(vertice.vertice.getLatitud()/10)+"!\"]; \n";
         NodoArista nodeA = vertice.vertice.aristas.primero;
         while(nodeA != null)
         {
@@ -303,4 +328,185 @@ public class TablaHash implements Serializable
         
         return sb.toString();
     }
+    
+    
+    public void graficarMapa() 
+    {        
+        String path = "/home/ciberveliz/Escritorio/[EDD]UltimaMod/fuzzy-cat/servidor/src/main/webapp/images";
+        String fileIn = path + "/mapa.txt";
+        String fileOut = path + "/mapa.png";
+        File temp = new File(fileIn);
+        try
+        {
+            BufferedWriter bw;
+
+            try {
+                bw = new BufferedWriter(new FileWriter(temp));
+                bw.write("digraph G {\nconcentrate=false;\nsplines=\"spline\";\nsplines=\"true\";\nnode [shape = cricle, style=\"filled\",fillcolor=\"gray\",fontsize=\"8\",margin=\"0\",fontname=\"Raleway\"];");
+                this.textDot = "";
+                for(int i = 0; i<this.m; i++)
+                {   
+                    ListaHash list = this.tabla[i];
+                    if(list.isEmpty())
+                        continue;
+            
+                    NodoHash nodoT = list.primero;
+                    while(nodoT != null)
+                    {
+                        Ruta rutaT = nodoT.ruta;
+                        if(!rutaT.getGrafo().vertices.isEmpty())
+                            generarMapa(rutaT.getGrafo().vertices.primero, rutaT.getColorRuta());
+                        nodoT = nodoT.sig;
+                    }   
+                }
+                bw.write(this.textDot + "}");
+                bw.close();
+                String[] cmd = {"neato","-Tpng",fileIn,"-o",fileOut};
+                Runtime.getRuntime().exec(cmd);
+            } 
+            catch (IOException ex) 
+            {
+                //Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        catch(Exception e)
+        {
+        }
+    }
+    
+    private void generarMapa(NodoVertice vertice, String color)
+    {
+        this.textDot += "\nnodo" + vertice.vertice.getCodigo() + "[label=\"" + vertice.vertice.getNombre()+"\", shape=\"circle\",pos=\""+(vertice.vertice.getLongitud()/10)+","+(vertice.vertice.getLatitud()/10)+"!\"];";
+        NodoArista nodeA = vertice.vertice.aristas.primero;
+        while(nodeA != null)
+        {
+            textDot += "\n\"nodo" + vertice.vertice.getCodigo() + "\"-> \"nodo" + nodeA.arista.getDestino().getCodigo() + "\" [ label= \""+nodeA.arista.getDistancia()+" m\",color =\""+color+"\",fontsize=\"8\"] \n";
+            
+            nodeA = nodeA.sig;
+        }
+        if(vertice.sig != null)
+            generarMapa(vertice.sig, color);
+    }
+    
+    
+    
+    public void graficarRutaMinima(String codOrigen,String codDestino, Grafo g)
+    {
+        String path = "/home/ciberveliz/Escritorio/[EDD]UltimaMod/fuzzy-cat/servidor/src/main/webapp/images";
+        String fileIn = path + "/RutaMinima.txt";
+        String fileOut = path + "/RutaMinima.png";
+        File temp = new File(fileIn);
+        try
+        {
+            BufferedWriter bw;
+
+            try {
+                bw = new BufferedWriter(new FileWriter(temp));
+                bw.write("digraph G {\nconcentrate=false;\nsplines=\"spline\";\nsplines=\"true\";\nnode [shape = cricle, style=\"filled\",fillcolor=\"gray\",fontsize=\"8\",margin=\"0\",fontname=\"Raleway\"];");
+                this.textDot = "";
+                for(int i = 0; i<this.m; i++)
+                {   
+                    ListaHash list = this.tabla[i];
+                    if(list.isEmpty())
+                        continue;
+            
+                    NodoHash nodoT = list.primero;
+                    while(nodoT != null)
+                    {
+                        Ruta rutaT = nodoT.ruta;
+                        if(!rutaT.getGrafo().vertices.isEmpty())
+                            generarMapa(rutaT.getGrafo().vertices.primero, rutaT.getColorRuta());
+                        nodoT = nodoT.sig;
+                    }   
+                }
+                bw.write(this.textDot+"\n");
+                this.textDot = "";
+                
+
+                if(!g.vertices.isEmpty())
+                {
+                    Dijkstra d = new Dijkstra(codOrigen,codDestino,g);
+                    ListaMini lista = d.obtenerRutaMinima();
+                    generarRutaMinima(lista);
+                    bw.write(this.textDot);
+                }
+                bw.write("\n}");
+
+                bw.close();
+                String[] cmd = {"neato","-Tpng",fileIn,"-o",fileOut};
+                Runtime.getRuntime().exec(cmd);
+            } 
+            catch (IOException ex) {
+                //Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        catch(Exception e)
+        {
+        }
+    }
+    
+    private void generarRutaMinima(ListaMini lista)
+    {
+        while(!lista.isEmpty())
+        {
+            textDot += "\n\"nodo" + lista.primero.codEstacion + "\"-> \"nodo" + lista.primero.sig.codEstacion + "\" [color =\"#58D039\", penwidth=\"5\", style=\"dotted\"] \n";
+            lista.eliminarAlInicio();
+            if(lista.size == 1)
+                lista = new ListaMini();
+        }
+    }
+    
+    
+    public Grafo getGrafoGeneral()
+    {
+        Grafo g = new Grafo();
+        for(int i = 0; i<this.m; i++)
+        {   
+            ListaHash list = this.tabla[i];
+            if(list.isEmpty())
+                continue;
+
+            NodoHash nodoT = list.primero;
+            while(nodoT != null)
+            {
+                Ruta rutaT = nodoT.ruta;
+                if(!rutaT.getGrafo().vertices.isEmpty())
+                {
+                    NodoVertice nodeV = rutaT.getGrafo().vertices.primero;
+                    while(nodeV != null)
+                    {
+                        String nombre = nodeV.vertice.getNombre();
+                        String codigo = nodeV.vertice.getCodigo();
+                        double latitud = nodeV.vertice.getLatitud();
+                        double longitud = nodeV.vertice.getLongitud();
+                        if(!g.vertices.estacionReptida(codigo))
+                        {
+                            NodoGrafo nodoG = new NodoGrafo(nombre,codigo,latitud,longitud);
+                            g.agregarEstacion(nodoG);
+                        }
+
+                        
+                        NodoArista nodeA = nodeV.vertice.aristas.primero;
+                        
+                        while(nodeA != null)
+                        {
+                            String codOrigen = nodeA.arista.getOrigen().getCodigo();
+                            String codDestino = nodeA.arista.getDestino().getCodigo();
+                            double trafico = nodeA.arista.getTrafico();
+                            double distancia = nodeA.arista.getDistancia();
+                            
+                            g.agregarRecorridoMapa(codigo, codDestino, distancia, trafico);
+                                
+                            nodeA = nodeA.sig;
+                        }
+                        
+                        nodeV = nodeV.sig;
+                    }
+                }
+                nodoT = nodoT.sig;
+            }   
+        }
+        return g;
+    }
+    
 }

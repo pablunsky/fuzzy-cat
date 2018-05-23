@@ -49,4 +49,29 @@ public class Grafo implements Serializable
         origen.aristas.agregarArista(ruta);
         return "\"Recorrido registrado\"";
     }
+    
+    public void agregarRecorridoMapa(String codEstacionInicial,String codEstacionFinal,Double distancia,Double trafico)
+    {
+        NodoGrafo origen = this.vertices.getNodoEstacion(codEstacionInicial);
+        NodoGrafo destino = this.vertices.getNodoEstacion(codEstacionFinal);
+        if(origen == null || destino == null)
+        {
+            return;
+        }
+        if(origen.aristaRepetida(destino))
+        {
+            Arista aristaT = origen.getAristaRepetida(destino);
+            double val = trafico * distancia;
+            double valA = aristaT.getDistancia() * aristaT.getTrafico();
+            if(val > valA)
+                return;
+            
+            aristaT.setTrafico(trafico);
+            aristaT.setDistancia(distancia);
+            return;
+        }
+        
+        Arista ruta = new Arista(origen, destino, distancia, trafico);
+        origen.aristas.agregarArista(ruta);
+    }
 }

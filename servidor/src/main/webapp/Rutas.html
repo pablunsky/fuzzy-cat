@@ -119,7 +119,11 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
     <button class="btn btn-primary" ng-click="agregarRecorrido(ruta,inputCodOrigen,inputCodDestino,inputDistancia,inputTrafico)">Agregar Recorrido</button>
     <br>
     <br>
-    
+      <input type="checkbox" ng-model="checked" ng-init="checked=false"> Visualizar Tabla Hash<br>
+      
+      <span ng-if="checked">
+        <img ng-src="images/tabla.png" style="max-width: 950px;">
+      </span>
 </div>
     <br>
     <br>

@@ -11,6 +11,7 @@ app.controller('ControlMapa', function($scope,$http,$log) {
 
 app.controller('ControlRutas',function($scope,$http){
     $scope.rutasD = [];
+
     $http.get(base+'/rutas/clientes').then(function(response){
             $scope.rutasD = response.data;
          });
@@ -24,6 +25,22 @@ app.controller('ControlRutas',function($scope,$http){
         $scope.currentPrice = ""+precio;
         $scope.currentCode = ""+codigo;
         
+    };
+
+    $scope.generarRutaMinima = (codigoOrigen,codigoDestino) => {
+        $http.get(
+            base + '/rutas',
+            {
+                codOrigen: codigoOrigen,
+                codigoDestino: codigoDestino
+            }
+        ).then(
+            (response) => 
+            {
+                alert(response.data);
+            },
+            (error) => alert(error)
+        )
     };
     
 }

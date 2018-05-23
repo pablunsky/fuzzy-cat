@@ -110,16 +110,25 @@ window.onclick = function(event) {
 </script>
 
 <!-- ===== Team Section ===== -->
-<section id="team" class="bg-success">
+
+<section id="team" class="bg-success" ng-controller="ControlMapa">
   <div class="container">
     <div class="row">
       <div class="col-lg-12 text-center">
         <h2 class="section-heading" style="color:#3680C1">Mapa general</h2>
         <h3 class="section-subheading text-muted">El mundo es chico. O asi parece, cuando viajas con nosotros.</h3>
+        <img src="assets/img/mapa.png"/>
       </div>
+      <br>
+
     </div>
   </div>
 </section>
+<div>
+        <i>Origen: <input type="text" ng-model="eOrigen"></i>
+        <i>Destino: <input type="text" ng-model="eDestino"></i>
+        <button class="btn btn-primary" ng-click="generarRutaMinima(eOrigen,eDestino);" >Obtener Recomendacion</button>
+</div>
 <footer>
   <div class="container">
     <div class="row">
