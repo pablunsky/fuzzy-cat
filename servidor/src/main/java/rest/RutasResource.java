@@ -80,9 +80,10 @@ public class RutasResource {
         
         rutaT.getGrafo().agregarEstacion(new NodoGrafo(nE1.getNomEstacion(),nE1.getCodEstacion(),nE1.getLatitud(),nE1.getLongitud()));
         rutaT.getGrafo().agregarEstacion(new NodoGrafo(nE2.getNomEstacion(),nE2.getCodEstacion(),nE2.getLatitud(),nE2.getLongitud()));
+        String ans = rutaT.getGrafo().agregarRecorrido(v.getCodOrigen(), v.getCodDestino(), v.getDistancia(),v.getTrafico());
         this.tablaHash.save();
         tablaHash.graficarRuta(tablaHash.getRuta(rutaT.getCodigoRuta()));
-        return rutaT.getGrafo().agregarRecorrido(v.getCodOrigen(), v.getCodDestino(), v.getDistancia(),v.getTrafico());
+        return ans;
     }
     
     @POST
@@ -91,7 +92,8 @@ public class RutasResource {
     {
         Ruta rutaO = this.tablaHash.getRuta(rutaT.getCodigoRuta());
         //this.tablaHash.graficarRuta(rutaO);
-        return "\"CLIENTE/assets/img/Ruta-"+rutaT.getCodigoRuta()+".png\"";
+        //return "\"CLIENTE/assets/img/Ruta-"+rutaT.getCodigoRuta()+".png\"";
+        return this.tablaHash.graficarRuta(rutaO);
     }
     
     @POST 

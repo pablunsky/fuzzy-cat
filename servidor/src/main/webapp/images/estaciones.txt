@@ -6,5 +6,6 @@ node2[label = "{<ant>|Nombre: TREBOL\nCodigo: T2|<sig>}"];
 node3[label = "{<ant>|Nombre: FLORIDA\nCodigo: T3|<sig>}"]; 
 node4[label = "{<ant>|Nombre: CHINAUTLA\nCodigo: T4|<sig>}"]; 
 node5[label = "{<ant>|Nombre: DON BOSCO\nCodigo: T5|<sig>}"]; 
-"node1"->"node2";"node2"->"node3";"node3"->"node4";"node4"->"node5";
+node6[label = "{<ant>|Nombre: CHIQUIMULILLA\nCodigo: T6|<sig>}"]; 
+"node1"->"node2";"node2"->"node3";"node3"->"node4";"node4"->"node5";"node5"->"node6";
 }

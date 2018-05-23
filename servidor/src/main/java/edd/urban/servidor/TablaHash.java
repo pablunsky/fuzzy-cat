@@ -221,7 +221,7 @@ public class TablaHash implements Serializable
     public String graficarRuta(Ruta ruta) 
     {        
         String base64 = "";
-        String path = "/home/pablunsky/Documents/TAREAS/ESTRUCTURAS DE DATOS/Proyecto2/servidor/src/main/webapp/CLIENTE/assets/img";
+        String path = "/home/pablunsky/Downloads/wildfly-12.0.0.Final/standalone/deployments/servidor-1.0-SNAPSHOT.war/CLIENTE/assets/img";
         String fileIn = path + "/Ruta-"+ruta.getCodigoRuta()+".txt";
         String fileOut = path + "/Ruta-"+ruta.getCodigoRuta()+".png";
         File temp = new File(fileIn);
@@ -231,7 +231,7 @@ public class TablaHash implements Serializable
 
             try {
                 bw = new BufferedWriter(new FileWriter(temp));
-                bw.write("digraph lista{ rankdir=TB; concentrate=false; node [shape = cricle, style=\"filled\",fillcolor=\"gray\",fontsize=\"8\",margin=\"0\",fontname=\"Raleway\"];");
+                bw.write("digraph lista{ rankdir=LR; ratio=fill; size=\"3,2\"; dpi=100; concentrate=false; node [shape = cricle, style=\"filled\",fillcolor=\"gray\",fontsize=\"8\",margin=\"0\",fontname=\"Raleway\"];");
                 this.textDot = "";
                 if(!ruta.getGrafo().vertices.isEmpty())
                     generarGrafo(ruta.getGrafo().vertices.primero, ruta.getColorRuta());
@@ -239,25 +239,23 @@ public class TablaHash implements Serializable
                 bw.close();
                 String[] cmd = {"dot","-Tpng",fileIn,"-o",fileOut};
                 Runtime.getRuntime().exec(cmd);
-                /*
-                File f = new File(fileOut);
-                FileInputStream fis = new FileInputStream(f);
-                byte[] bytes = new byte[(int)f.length()];
-                int numbytes = fis.read(bytes);
-                if(numbytes!=-1){
-                    //ERROR
-                }
-                base64 = java.util.Base64.getEncoder().encodeToString(bytes);
-                return base64;
-                */
-                return fileOut;
-            } catch (IOException ex) {
+                
+                String[] cmd2 = {"convert",fileOut,"-gravity","center","-background","white","-extent","300x200",fileOut};
+                Runtime.getRuntime().exec(cmd2);
+                
+                return "{\"R\":\"CORRECTO\"}";
+            } 
+            catch (IOException ex) 
+            {
                 //Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
+                
             }
         }
-        catch(Exception e){
+        catch(Exception e)
+        {
+            
         }
-        return base64;
+        return "{\"R\":\"ERROR\"}";
     }
     
     private void generarGrafo(NodoVertice vertice, String color)
@@ -291,6 +289,7 @@ public class TablaHash implements Serializable
                 sb.append("{\n");
                 sb.append("\"nombre\":\"").append(nodoT.ruta.getNombreRuta()).append("\",\n");
                 sb.append("\"precio\":").append(nodoT.ruta.getValorRuta()).append(",\n");
+                sb.append("\"codigo\":").append(nodoT.ruta.getCodigoRuta()).append(",\n");
                 sb.append("\"img\":\"").append(path+nodoT.ruta.getCodigoRuta()).append(".png\"\n");
                 sb.append("}");
                 nodoT = nodoT.sig;

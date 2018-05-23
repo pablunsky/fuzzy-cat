@@ -168,7 +168,7 @@ public class ArbolB {
             FileWriter fw = new FileWriter(file);
             fw.write(grafica);
             fw.close();
-            String[] cmd = {"dot","-Tpng",path+"arbol.dot","-o",path+"arbol.jpg"};
+            String[] cmd = {"dot","-Tpng",path+"arbol.dot","-o",path+"arbol.png"};
             Runtime.getRuntime().exec(cmd);
         }catch(IOException e){
             e.printStackTrace();

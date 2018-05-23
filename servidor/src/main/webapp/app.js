@@ -127,7 +127,7 @@ app.controller('ControlRutas', function($scope,$http,$log) {
                 grafo: null
             }
         ).then(
-            (data) => console.log("Grafo generado"), 
+            (response) => console.log(response.R), 
             (error) => $log.error(error)
         );
     }
